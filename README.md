@@ -1,7 +1,4 @@
-# 📊 Analista de Dados | Business Intelligence
-
-**🚀 Transformando dados em decisões estratégicas**
-
+# 🚀 Transformando dados em decisões estratégicas
 ## 👨‍💻 Sobre Mim
 
 Comecei minha jornada como **Desossador**, evolui para **Almoxarife**, depois **Técnico de Desenvolvimento** e finalmente me tornei o **primeiro Analista de Dados** da empresa. Minha trajetória única me proporcionou um entendimento profundo dos processos operacionais, que agora transformo em insights valiosos através de dados.
