@@ -1,0 +1,96 @@
+table dCalendario
+	lineageTag: 8cc8d479-a160-424e-9be5-d36be8e17d64
+
+	column Data
+		formatString: Short Date
+		lineageTag: 81c624ca-03e5-44ad-adc1-772fb3dab2f6
+		summarizeBy: none
+		sourceColumn: [Date]
+		sortByColumn: Mês
+
+		variation Variation
+			isDefault
+			relationship: 6b770b0e-b509-417b-a9aa-909c3b7ff21a
+			defaultHierarchy: LocalDateTable_c4b1984b-84e1-4ba1-83c2-9fc00788a2f6.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		displayFolder: Granularidades
+		lineageTag: 86cabd0b-dc23-4a72-a1b0-7493ac46f71a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano]
+
+		variation Variation
+			isDefault
+			relationship: b6d99527-f19b-496c-8c6b-eea4214bd5d9
+			defaultHierarchy: LocalDateTable_1a815bb7-00dc-403d-be57-11dc8e9c0a5a.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Mês
+		dataType: int64
+		formatString: 0
+		displayFolder: Granularidades
+		lineageTag: 51169dc1-d9c5-4ff8-af26-ead40496deb0
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Mês]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomeMês
+		dataType: string
+		displayFolder: Granularidades
+		lineageTag: 80027f54-184e-4552-9060-e7ae392adbe5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NomeMês]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		formatString: 0
+		displayFolder: Granularidades
+		lineageTag: 4b5c84c7-3140-4d06-82f1-5db4a0fbe9ed
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMês
+		dataType: string
+		displayFolder: Granularidades
+		lineageTag: 053e3777-b855-47ab-8c5b-e3400acec4c9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AnoMês]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS(
+				    CALENDAR(
+				        MIN(MIN(fctFaturamento[DATA_DE_EMISSAO]), MIN('fDevolucoes'[DATA_DE_DEVOLUCAO])),
+				        MAX(MAX(fctFaturamento[DATA_DE_EMISSAO]),MAX('fDevolucoes'[DATA_DE_DEVOLUCAO]))
+				    ),
+				    "Ano", YEAR([Date]),
+				    "Mês", MONTH([Date]),
+				    "NomeMês", FORMAT(MONTH([Date]), "mmmm"),
+				    "Trimestre", QUARTER([Date]),
+				    "AnoMês", FORMAT([Date], "YYYY-MM")
+				)
+
+	annotation PBI_Id = e99b9a6aac924beca76c83bccfd9a0b2
+

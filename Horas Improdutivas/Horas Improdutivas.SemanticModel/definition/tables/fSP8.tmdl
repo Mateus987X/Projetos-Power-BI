@@ -1,0 +1,183 @@
+table fSP8
+	lineageTag: 2d77a21c-ce20-4011-b627-a70a20cddbe7
+
+	measure TotalFponto5 = SUM('fSP8(MarcacaoImpar)'[Segundos_referencia])
+		lineageTag: f8463886-e065-46a8-9be1-620fd1f1d7be
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure HorasSP8(MarcacaoPar) = ```
+			
+			VAR _Total = SUM(fSP8[HORAS_TRABALHADAS_SEGUNDOS])
+			-- Calcula a soma total de segundos da coluna Segundos_referencia
+			VAR _Horas = INT(DIVIDE(_Total, 3600))
+			-- Converte o total de segundos em horas (dividindo por 3600 segundos/hora)
+			-- A função INT pega apenas a parte inteira
+			VAR _Modulo = MOD(_Total, 3600)
+			-- Calcula o restante dos segundos após extrair as horas completas
+			VAR _Minutos = INT(DIVIDE(_Modulo, 60))
+			-- Converte o restante em minutos (dividindo por 60 segundos/minuto)
+			-- Novamente usando INT para pegar apenas minutos completos
+			VAR _Segundos = MOD(_Total, 60)
+			-- Calcula os segundos restantes após extrair horas e minutos
+			
+			RETURN
+			_Horas * 10000 +
+			_Minutos * 100 +
+			_Segundos
+			-- Combina horas, minutos e segundos em um número no formato HHMMSS
+			-- Exemplo: 2 horas, 30 minutos e 15 segundos → 2*10000 + 30*100 + 15 = 23015
+			
+			```
+		formatString: 00:00:00
+		lineageTag: 4044f4f4-0d58-43bd-818c-67aa7370f2d1
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Numero_Linha
+		dataType: int64
+		formatString: 0
+		lineageTag: 64421a7a-09aa-462f-a657-75555af9ad10
+		summarizeBy: sum
+		sourceColumn: Numero_Linha
+
+		annotation SummarizationSetBy = Automatic
+
+	column P8_CC
+		dataType: string
+		lineageTag: a4110f9c-5a85-466e-9dbd-43a8dff543f0
+		summarizeBy: none
+		sourceColumn: P8_CC
+
+		annotation SummarizationSetBy = Automatic
+
+	column P8_MAT
+		dataType: string
+		lineageTag: 3ee62faf-caeb-4437-93cd-be8473b2d298
+		summarizeBy: none
+		sourceColumn: P8_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column P8_DATAAPO
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: c375a49c-24c7-4301-a1a9-51c801fca650
+		summarizeBy: none
+		sourceColumn: P8_DATAAPO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column P8_FILIAL
+		dataType: string
+		lineageTag: cb20438f-2f6d-49ef-999f-fe4ab56ac0a9
+		summarizeBy: none
+		sourceColumn: P8_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column P8_ORDEM
+		dataType: string
+		lineageTag: c443c007-a377-4f6b-b92a-6fe54a35a55a
+		summarizeBy: none
+		sourceColumn: P8_ORDEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: cdccc6d0-29d7-40b3-8594-2cd601273f08
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Marcacoes
+		dataType: int64
+		formatString: 0
+		lineageTag: 22150ac8-0365-4ef8-8b7b-02fc7dac35e2
+		summarizeBy: sum
+		sourceColumn: Total_Marcacoes
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_MAT
+		dataType: string
+		lineageTag: a4ffa6a2-15e1-4efd-81cd-68e70605be20
+		summarizeBy: none
+		sourceColumn: FK_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column P8_HORA
+		dataType: double
+		lineageTag: 2b8b23c6-9aac-4e7f-b279-225a93d2f5a4
+		summarizeBy: sum
+		sourceColumn: P8_HORA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column P8_HORA_SEGUNDOS
+		dataType: double
+		lineageTag: 44e47ee7-9700-4128-9d87-2d05ac69f6b0
+		summarizeBy: sum
+		sourceColumn: P8_HORA_SEGUNDOS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Hora_Anterior_Segundos
+		dataType: double
+		lineageTag: 06f42483-0c3c-40c8-bb26-2d4939eceb1d
+		summarizeBy: sum
+		sourceColumn: Hora_Anterior_Segundos
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HORAS_TRABALHADAS_SEGUNDOS
+		dataType: int64
+		lineageTag: fbfd7153-f9fe-48eb-a615-5f2255936d1a
+		summarizeBy: sum
+		sourceColumn: HORAS_TRABALHADAS_SEGUNDOS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDENADOR
+		dataType: string
+		lineageTag: f5c07260-d0dc-49ed-9195-7cd7049fa354
+		summarizeBy: none
+		sourceColumn: ORDENADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column P8_MOTIVRG
+		dataType: string
+		lineageTag: 3ebc6ea0-0549-4028-b241-2080c8543455
+		summarizeBy: none
+		sourceColumn: P8_MOTIVRG
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fSP8 = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="WITH Ponto AS (#(lf)    SELECT #(lf)        CAST(P8_DATA AS varchar)  + '|' + FORMAT(P8_HORA, '00') ORDENADOR,#(lf)        P8_CC,#(lf)        P8_MOTIVRG,#(lf)        P8_MAT,#(lf)        P8_DATAAPO,#(lf)        P8_HORA,#(lf)        -- Convertendo P8_HORA para segundos#(lf)        (FLOOR(P8_HORA) * 3600) + ((P8_HORA - FLOOR(P8_HORA)) * 100 * 60) AS P8_HORA_SEGUNDOS,#(lf)        P8_FILIAL,#(lf)        P8_ORDEM,#(lf)        P8_TPMARCA,#(lf)        LAG((FLOOR(P8_HORA) * 3600) + ((P8_HORA - FLOOR(P8_HORA)) * 100 * 60)) #(lf)            OVER (PARTITION BY P8_MAT, P8_DATAAPO ORDER BY CAST(P8_DATA AS varchar)  + '|' + FORMAT(P8_HORA, '00')) #(lf)        AS Hora_Anterior_Segundos, -- Convertendo Hora_Anterior para segundos#(lf)        ROW_NUMBER() OVER (PARTITION BY P8_MAT, P8_DATAAPO ORDER BY CAST(P8_DATA AS varchar)  + '|' + FORMAT(P8_HORA, '00')) #(lf)        AS Numero_Linha,#(lf)        COUNT(*) OVER (PARTITION BY P8_MAT, P8_DATAAPO) AS Total_Marcacoes#(lf)    FROM #(lf)        SP8010#(lf)    WHERE #(lf)        D_E_L_E_T_ = '' #(lf)        AND P8_DATAAPO >= '20230101' #(lf)        AND P8_MOTIVRG NOT IN ('REJEICAO AUTOMATICA', 'EXCLUSAO MANUAL')#(lf)),#(lf)#(lf)Temp AS (#(lf)    SELECT #(lf)        ORDENADOR,#(lf)        P8_CC,#(lf)        P8_MOTIVRG,#(lf)        P8_FILIAL,#(lf)        P8_MAT,#(lf)        P8_DATAAPO,#(lf)        P8_HORA,#(lf)        P8_HORA_SEGUNDOS,#(lf)        Hora_Anterior_Segundos,#(lf)        -- Cálculo correto de horas trabalhadas usando segundos#(lf)        CASE #(lf)            WHEN P8_HORA_SEGUNDOS < Hora_Anterior_Segundos #(lf)            THEN Hora_Anterior_Segundos - P8_HORA_SEGUNDOS#(lf)            ELSE P8_HORA_SEGUNDOS - Hora_Anterior_Segundos#(lf)        END AS HORAS_TRABALHADAS_SEGUNDOS,#(lf)        P8_ORDEM,#(lf)        P8_TPMARCA,#(lf)        Numero_Linha,#(lf)        Total_Marcacoes#(lf)    FROM Ponto#(lf)),#(lf)#(lf)Temp2 AS (#(lf)    SELECT #(lf)        ORDENADOR,#(lf)        P8_CC,#(lf)        P8_FILIAL,#(lf)        P8_MOTIVRG,#(lf)        P8_MAT,#(lf)        P8_DATAAPO,#(lf)        P8_HORA,#(lf)        P8_HORA_SEGUNDOS,#(lf)        Hora_Anterior_Segundos,#(lf)        -- Ajustando erro de cálculo caso seja maior que 10 horas (convertido para segundos)#(lf)        CASE #(lf)            WHEN HORAS_TRABALHADAS_SEGUNDOS > (10 * 3600) #(lf)            THEN (24 * 3600) - HORAS_TRABALHADAS_SEGUNDOS #(lf)            ELSE HORAS_TRABALHADAS_SEGUNDOS #(lf)        END AS HORAS_TRABALHADAS_SEGUNDOS,#(lf)        P8_ORDEM,#(lf)        P8_TPMARCA,#(lf)        Numero_Linha,#(lf)        Total_Marcacoes#(lf)    FROM Temp#(lf))#(lf)#(lf)SELECT #(lf)    P8_CC,#(lf)    P8_MAT,#(lf)    P8_DATAAPO, #(lf)    P8_FILIAL,#(lf)    P8_HORA, -- Mantendo o formato original#(lf)    P8_HORA_SEGUNDOS, -- Agora em segundos#(lf)    Hora_Anterior_Segundos, -- Agora em segundos#(lf)    HORAS_TRABALHADAS_SEGUNDOS, -- Agora em segundos#(lf)    P8_ORDEM,#(lf)    Numero_Linha,#(lf)    CASE#(lf)        WHEN Numero_Linha % 2 = 0 THEN 'DENTRO'#(lf)        WHEN Numero_Linha = 1 THEN 'INICIO'#(lf)        ELSE 'FORA'#(lf)    END AS STATUS,#(lf)    Total_Marcacoes,#(lf)    P8_FILIAL + '|' + P8_MAT AS FK_MAT,#(lf)    ORDENADOR,#(lf)    P8_MOTIVRG#(lf)FROM Temp2#(lf)WHERE #(lf)     Total_Marcacoes <  5#(lf)#(lf)   #(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"P8_DATAAPO", type date}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"HORAS_TRABALHADAS_SEGUNDOS", Int64.Type}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

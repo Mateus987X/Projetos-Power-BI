@@ -1,0 +1,399 @@
+table 'Medidas - Marketing'
+	lineageTag: d00efa44-ddb7-42ad-a437-4350ba6edd96
+
+	measure '# Total Clientes/Métricas' = CALCULATE(COUNT(dCliente[COD_CLIENTE]), dCliente[SEGMENTACAO_ATIVIDADE_8] = "000907", dTES[GERA_DUPLICATA_TES] = "S", YEAR(dCliente[PRIMEIRA_COMPRA]) >= 2023)
+		formatString: 0
+		displayFolder: Clientes
+		lineageTag: e86913e5-5172-4cbd-9d3e-61954fd5e3a8
+
+	measure '# Clientes Inativos' = CALCULATE([Qtd Clientes], dCliente[ULTIMA_COMPRA] <= TODAY() -90 && YEAR(dCliente[PRIMEIRA_COMPRA]) >= 2023)
+		formatString: 0
+		displayFolder: Clientes Ativos/ Inativos
+		lineageTag: ff7d28cb-b328-498a-beed-cedd75d60e01
+
+	measure '# Clientes Ativos' = CALCULATE([Qtd Clientes], dCliente[ULTIMA_COMPRA] >= TODAY() -90, YEAR(dCliente[PRIMEIRA_COMPRA]) >= 2023)
+		formatString: 0
+		displayFolder: Clientes Ativos/ Inativos
+		lineageTag: 6e4716b2-091c-491d-bf5d-af71d4b3c1ca
+
+	measure '# Clientes Positivados' =
+			
+			CALCULATE(
+			    [Qtd Clientes],
+			    USERELATIONSHIP(dCalendario[Data], dCliente[PRIMEIRA_COMPRA])
+			)
+		formatString: 0
+		displayFolder: Clientes Positivados/Repositivados/Inativados
+		lineageTag: 469da8c8-fe8a-4889-98a6-f991802526d5
+
+	measure 'Qtd Clientes' = CALCULATE(DISTINCTCOUNT(fctFaturamento[PK_CLIENTE]), YEAR(dCliente[PRIMEIRA_COMPRA]) >= 2023, dCliente[SEGMENTACAO_ATIVIDADE_8] = "000907", dTES[GERA_DUPLICATA_TES] = "S")
+		formatString: 0
+		displayFolder: Clientes
+		lineageTag: bbfdb4c0-6d43-4df6-8d3b-c7a4a86a70ed
+
+	measure '# Clientes repositivados' = CALCULATE(COUNT(fctFaturamento[PK_CLIENTE]), fctFaturamento[COMPRAS_DIFERENCA_DIA] >= 90, dCliente[SEGMENTACAO_ATIVIDADE_8] = "000907")
+		formatString: 0
+		displayFolder: Clientes Positivados/Repositivados/Inativados
+		lineageTag: 46e898a0-6d58-4595-9447-9d03512c2f8f
+
+	measure 'Qtd Clientes Perdidos' =
+			
+			VAR _DataContexto = MAX(dCalendario[Data])
+			VAR _DataCorteFinal = EDATE(_DataContexto, -3) -1
+			VAR _DataCorteInicial = EDATE(_DataContexto, -6)
+			RETURN
+			    CALCULATE(
+			        [Qtd Clientes],
+			        USERELATIONSHIP(dCalendario[Data], dCliente[ULTIMA_COMPRA]),
+			        USERELATIONSHIP(dVendedor[PK_VENDEDOR], dCliente[ULTIMO_VENDEDOR]),
+			        DATESBETWEEN(dCalendario[Data], _DataCorteInicial, _DataCorteFinal)
+			    )
+		formatString: 0
+		displayFolder: Churn
+		lineageTag: 754b5d17-0e36-40d1-9619-c0bdde51a11c
+
+	measure '% Churn' = DIVIDE([# Inativados], [Qtd Clientes])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Churn
+		lineageTag: 90a548de-9cbc-4b6f-b064-5095b81bd02a
+
+	measure '$ Faturamento Clientes Positivados' =
+			
+			CALCULATE(
+			    [$ Valor Líquido de Mercadoria Duplic S],
+			    USERELATIONSHIP(dCalendario[Data], dCliente[PRIMEIRA_COMPRA]),
+			    TREATAS(VALUES(dCalendario[Data]), fctFaturamento[DATA_DE_EMISSAO])
+			)
+		displayFolder: Clientes Positivados/Repositivados/Inativados
+		lineageTag: d023debd-11bc-4c91-a245-3ded56b3470e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Clientes Recorrentes' =
+			
+			[Qtd Clientes] - [# Clientes Positivados] - [# Clientes repositivados]
+		formatString: 0
+		displayFolder: Clientes Recorrentes
+		lineageTag: 5d755de0-1873-42ff-900d-263af5ed5528
+
+	measure '$ Faturamento Clientes Recorrente' = [$ Valor Líquido de Mercadoria Duplic S] - [$ Faturamento Clientes Positivados] - 'Medidas - Impostos'[Impostos]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Clientes Recorrentes
+		lineageTag: 1cb56c8e-41e1-4af1-b77d-00800c426246
+
+	measure Investimento = SUM(Investimentos[Valor usado (BRL)])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: CaC
+		lineageTag: 2d58b48f-bd7f-4a8b-b4af-075f453d1e6a
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CaC = DIVIDE([Investimento], [# Clientes Positivados])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: CaC
+		lineageTag: 59225d5c-35b6-4b43-a124-08b5d739e87d
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure TaxaRetencao = ```
+			
+			VAR _DataContexto = 
+			EOMONTH(
+			    MAX(dCalendario[Data]),
+			    -1
+			) 
+			
+			VAR _ClientesPeriodoAnterior = 
+			CALCULATETABLE(
+			    VALUES(fctFaturamento[PK_CLIENTE]),  YEAR(dCliente[PRIMEIRA_COMPRA]) >= 2023, dCliente[SEGMENTACAO_ATIVIDADE_8] = "000907", dTES[GERA_DUPLICATA_TES] = "S",
+			    dCalendario[Data] <= _DataContexto
+			)
+			 VAR _ContagemClientesPeriodoAnterior = COUNTROWS(_ClientesPeriodoAnterior)
+			
+			 VAR _Resultado = DIVIDE([Qtd Clientes] - [# Clientes Positivados], _ContagemClientesPeriodoAnterior)
+			
+			
+			RETURN
+			    _Resultado
+			```
+		formatString: 0%;-0%;0%
+		displayFolder: Retenção
+		lineageTag: 5ff6ff21-1895-4e6d-9628-771147a64052
+
+	measure '# Inativados' = ```
+			
+			
+			VAR _ClientesInativos =   CALCULATETABLE(
+			        VALUES(dCliente[COD_CLIENTE]),
+			        USERELATIONSHIP(dCliente[MES_INATIVO], dCalendario[Data]),
+			        dCliente[STATUS] = "INATIVO"
+			    )
+			RETURN
+			    COUNTROWS(_ClientesInativos)
+			        
+			```
+		formatString: 0
+		displayFolder: Churn
+		lineageTag: a1c10022-2347-45d4-834e-aa8130b1685c
+
+	measure _ClientesPeriodoAnterior = ```
+			
+			
+			VAR _DataContexto = 
+			EOMONTH(
+			    MAX(dCalendario[Data]),
+			    -1
+			) 
+			
+			VAR _ContagemClientesPeriodoAnterior = CALCULATETABLE(
+			    VALUES(fctFaturamento[PK_CLIENTE]),  YEAR(dCliente[PRIMEIRA_COMPRA]) >= 2023, dCliente[SEGMENTACAO_ATIVIDADE_8] = "000907", dTES[GERA_DUPLICATA_TES] = "S",
+			    dCalendario[Data] <= _DataContexto)
+			
+			    RETURN
+			    COUNTROWS(_ContagemClientesPeriodoAnterior)
+			```
+		formatString: 0
+		displayFolder: Retenção
+		lineageTag: 95118790-fcbb-40a5-b408-dcef90052802
+
+	measure 'Faturamento Recorrente Médio Mensal' =
+			
+			AVERAGEX(
+			    VALUES(dCalendario[AnoMês]),
+			    [$ Faturamento Clientes Recorrente]
+			)
+		displayFolder: Clientes Recorrentes
+		lineageTag: 26b85f71-c523-4595-a8b0-31e15a98df8b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Taxa de Recorrência' = ```
+			
+			VAR _DataContexto = MAX(dCalendario[Data])
+			
+			
+			VAR _ClientesAcumulado = 
+			CALCULATETABLE(
+			    VALUES(fctFaturamento[PK_CLIENTE]),  YEAR(dCliente[PRIMEIRA_COMPRA]) >= 2023, dCliente[SEGMENTACAO_ATIVIDADE_8] = "000907", dTES[GERA_DUPLICATA_TES] = "S",
+			    dCalendario[Data] <= _DataContexto
+			)
+			
+			   RETURN DIVIDE([Clientes Recorrentes],COUNTROWS(_ClientesAcumulado))
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Clientes Recorrentes
+		lineageTag: 565cb109-8ea2-4e09-9476-30e1786826d3
+
+	measure ROI = DIVIDE([$ Valor Líquido de Mercadoria Duplic S] - [Investimento], [Investimento])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: ROI
+		lineageTag: 21c7008d-27fb-4799-adb2-4e6c923bb5e5
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total Leads' = COUNT(Leads[Cliente])
+		formatString: 0
+		displayFolder: Leads
+		lineageTag: 10814ceb-afb4-4c21-bca9-d48ad862c71a
+
+	measure 'Taxa de conversão de Leads' = DIVIDE([# Clientes Positivados], [Total Leads])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Leads
+		lineageTag: d6b2b405-363f-41a7-9a1f-26ea632103a2
+
+	measure 'CPL(Custo por Lead)' = DIVIDE([Investimento],[Total Leads])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Leads
+		lineageTag: c368da9c-4343-4036-8082-b6ab57f000a2
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure MediaFaturamento =
+			AVERAGEX(
+			    SUMMARIZE(
+			        fctFaturamento,
+			        dCliente[COD_CLIENTE],
+			        dCalendario[AnoMês],
+			        "Faturamento Mensal", [$ Valor Líquido de Mercadoria Duplic S]
+			    ),
+			    [Faturamento Mensal]
+			)
+		lineageTag: f91709d6-bc1d-4484-b088-2d4911777ef8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Isfiltered % Taxa de Retencaos' =
+			
+			IF(
+			    ISFILTERED(dCalendario),
+			    [TaxaRetencao],
+			    [MediaTaxaRetencao]
+			)
+		formatString: 0%;-0%;0%
+		displayFolder: Retenção
+		lineageTag: 0e4ff524-b412-490f-a95e-daa3a1db6f4f
+
+	measure 'Isfiltred % Taxa de Recorrencia' = ```
+			
+			    IF(
+			        ISFILTERED(dCalendario),
+			        [% Taxa de Recorrência],
+			        [MediaTaxaRecorrencia]
+			    )
+			        
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Clientes Recorrentes
+		lineageTag: da214cf0-c7f0-452a-bfe7-b7eac13bcb8e
+
+	measure 'Isfiltred % Churn' = ```
+			
+			    IF(
+			        ISFILTERED(dCalendario),
+			        [% Churn],
+			        [MediaChurn]
+			    )
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Churn
+		lineageTag: e33b14be-8cd2-4355-9200-08e4da7483f9
+
+	measure 'Isfiltred ROI' = ```
+			
+			    IF(
+			        ISFILTERED(dCalendario),
+			        [ROI],
+			        [MediaROI]
+			    )
+			
+			```
+		formatString: 0.00
+		displayFolder: ROI
+		lineageTag: 9f1c581a-6a82-486a-938a-e3d6b51d9693
+
+	measure 'Isfiltred CaC' = ```
+			
+			    IF(
+			        ISFILTERED(dCalendario),
+			        [CaC],
+			        [MediaCAC]
+			    )
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: CaC
+		lineageTag: c65d40ac-3471-465f-96eb-62cbf526dc0d
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Isfiltred CPL' = ```
+			
+			    IF(
+			        ISFILTERED(dCalendario),
+			        [CPL(Custo por Lead)],
+			        [MediaCPL]
+			    )
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Leads
+		lineageTag: 7ad1beac-960f-4a3d-ae35-dadef3e047b9
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure MediaROI =
+			AVERAGEX(
+			    SUMMARIZE(
+			        fctFaturamento,
+			        dCalendario[AnoMês],
+			        "ROI",[ROI]
+			    ),
+			    [ROI]
+			)
+		displayFolder: ROI
+		lineageTag: d5a79d31-a363-45ae-8bdd-c8347fade9c0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MediaCPL =
+			AVERAGEX(
+			    SUMMARIZE(
+			        fctFaturamento,
+			        dCalendario[AnoMês],
+			        "CPL", [CPL(Custo por Lead)]
+			    ),
+			    [CPL]
+			)
+		displayFolder: Leads
+		lineageTag: dcf57fc7-3158-420d-94d4-8b93689ca255
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MediaCAC =
+			AVERAGEX(
+			    SUMMARIZE(
+				dCalendario,
+				dCalendario[AnoMês],
+				"CaC", [CaC]
+			),
+			    [CAC]
+			)
+		displayFolder: CaC
+		lineageTag: 13f94816-b668-4855-ac30-f99121ee8458
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MediaTaxaRecorrencia =
+			AVERAGEX(
+			    SUMMARIZE(
+			        dCalendario,
+			        dCalendario[AnoMês],
+			        "Taxa", [% Taxa de Recorrência]
+			    ),
+			    [Taxa]
+			)
+		displayFolder: Clientes Recorrentes
+		lineageTag: 09b61342-9d8f-4611-ad91-4e6a27d0a830
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MediaTaxaRetencao =
+			AVERAGEX(
+			    SUMMARIZE(
+			        dCalendario,
+			        dCalendario[AnoMês],
+			        "Taxa", [TaxaRetencao]
+			    ),
+			    [Taxa]
+			)
+		displayFolder: Retenção
+		lineageTag: 6cb29133-aeb5-4fe4-88ea-dfc4e8cab25f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MediaChurn =
+			AVERAGEX(
+			    SUMMARIZE(
+			        dCalendario,
+			        dCalendario[AnoMês],
+			        "Churn", [% Churn]
+			    ),
+			   [Churn]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Churn
+		lineageTag: 4b8af652-781c-455b-b200-b55e633ade9b
+
+	partition 'Medidas - Marketing' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

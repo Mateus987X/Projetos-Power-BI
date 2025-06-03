@@ -1,0 +1,89 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.61\",\"type\":2},\"customTheme\":{\"name\":\"Storm\",\"version\":\"5.61\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "Clean7642766497367781.jpg",
+            "path": "Clean7642766497367781.jpg",
+            "type": 100
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          },
+          {
+            "name": "Storm",
+            "path": "BuiltInThemes/Storm.json",
+            "type": 201
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"outspace\":[{\"properties\":{\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Clean.jpg'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Clean7642766497367781.jpg\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Normal'\"}}}}}}}]}}",
+      "displayName": "Página 2",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "58154b820734a1b8621a",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"16021b145050850eb709\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":64.19452887537994,\"z\":0,\"width\":1280,\"height\":655.5623100303951,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"dMatricula.RA_FILIAL\",\"active\":true},{\"queryRef\":\"dMatricula.RA_CC\"},{\"queryRef\":\"dCalendario.Date\"},{\"queryRef\":\"dMatricula.RA_MAT\"}],\"Values\":[{\"queryRef\":\"Medidas.SPGXSP8\"},{\"queryRef\":\"fPontoFechado.HorasPFechado (hh:mm:ss)\"},{\"queryRef\":\"fPontoAberto.HorasPAberto(Marcacao < 5)\"},{\"queryRef\":\"fPontoAberto(Marcacao > 4).HorasPAberto(Marcacao > 4)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dCalendario\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"Medidas\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"dMatricula\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fSPG\",\"Type\":0},{\"Name\":\"f1\",\"Entity\":\"fSP8(MarcacaoImpar)\",\"Type\":0},{\"Name\":\"f2\",\"Entity\":\"fSP8\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"},\"Name\":\"dCalendario.Date\",\"NativeReferenceName\":\"Data\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"SPGXSP8\"},\"Name\":\"Medidas.SPGXSP8\",\"NativeReferenceName\":\"SPGXSP8\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"RA_MAT\"},\"Name\":\"dMatricula.RA_MAT\",\"NativeReferenceName\":\"Matrícula - Colaborador\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"HorasSPG (hh:mm:ss)\"},\"Name\":\"fPontoFechado.HorasPFechado (hh:mm:ss)\",\"NativeReferenceName\":\"HorasSPG (hh:mm:ss)\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f1\"}},\"Property\":\"HorasSP8(MarcacaoImpar)\"},\"Name\":\"fPontoAberto(Marcacao > 4).HorasPAberto(Marcacao > 4)\",\"NativeReferenceName\":\"HorasSP8(MarcacaoImpar)\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f2\"}},\"Property\":\"HorasSP8(MarcacaoPar)\"},\"Name\":\"fPontoAberto.HorasPAberto(Marcacao < 5)\",\"NativeReferenceName\":\"HorasSP8(MarcacaoPar)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"RA_FILIAL\"},\"Name\":\"dMatricula.RA_FILIAL\",\"NativeReferenceName\":\"Filial\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"RA_CC\"},\"Name\":\"dMatricula.RA_CC\",\"NativeReferenceName\":\"Centro de Custo\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"SPGXSP8\"}}}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"dMatricula.RA_FILIAL\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dMatricula\"}},\"Property\":\"RA_FILIAL\"}}],\"isPinned\":true},{\"queryRefs\":[\"dMatricula.RA_CC\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dMatricula\"}},\"Property\":\"RA_CC\"}}],\"isPinned\":true},{\"queryRefs\":[\"dCalendario.Date\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dCalendario\"}},\"Property\":\"Date\"}}],\"isPinned\":true},{\"queryRefs\":[\"dMatricula.RA_MAT\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dMatricula\"}},\"Property\":\"RA_MAT\"}}],\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'05TR01'\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'512'\"}}],\"isToggled\":true}]}]}}],\"columnProperties\":{\"dMatricula.RA_FILIAL\":{\"displayName\":\"Filial\"},\"dMatricula.RA_CC\":{\"displayName\":\"Centro de Custo\"},\"dCalendario.Date\":{\"displayName\":\"Data\"},\"dMatricula.RA_MAT\":{\"displayName\":\"Matrícula - Colaborador\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"layout\":{\"expr\":{\"Literal\":{\"Value\":\"'Tabular'\"}}}}}],\"subTotals\":[{\"properties\":{\"rowSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"columnHeaders\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'''Segoe UI Light'', wf_segoe-ui_light, helvetica, arial, sans-serif'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"15D\"}}},\"backColor\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#061953'\"}}}}}}}],\"values\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'wf_standard-font_light, helvetica, arial, sans-serif'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"18D\"}}},\"backColorSecondary\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}}}}],\"rowHeaders\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'wf_standard-font_light, helvetica, arial, sans-serif'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"15D\"}}},\"backColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.6}}}}},\"fontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"102.50356207073087D\"}}}},\"selector\":{\"metadata\":\"dMatricula.RA_FILIAL\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"212.9452886443368D\"}}}},\"selector\":{\"metadata\":\"fPontoAberto.HorasPAberto(Marcacao < 5)\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"122.54407546943688D\"}}}},\"selector\":{\"metadata\":\"dMatricula.RA_MAT\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"119.12460746264529D\"}}}},\"selector\":{\"metadata\":\"Medidas.SPGXSP8\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"221.1519738095586D\"}}}},\"selector\":{\"metadata\":\"fPontoFechado.HorasPFechado (hh:mm:ss)\"}}],\"grid\":[{\"properties\":{\"gridHorizontalColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"gridVerticalColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"outlineStyle\":{\"expr\":{\"Literal\":{\"Value\":\"15D\"}}},\"outlineColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}}}],\"columnFormatting\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}},\"selector\":{\"metadata\":\"Medidas.SPGXSP8\"}},{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}},\"selector\":{\"metadata\":\"fPontoFechado.HorasPFechado (hh:mm:ss)\"}},{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}},\"selector\":{\"metadata\":\"fPontoAberto.HorasPAberto(Marcacao < 5)\"}},{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}},\"selector\":{\"metadata\":\"fPontoAberto(Marcacao > 4).HorasPAberto(Marcacao > 4)\"}}]},\"vcObjects\":{\"stylePreset\":[{\"properties\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Condensed'\"}}}}}],\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"bab5cec099c848206bb0\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dStatus\"}},\"Property\":\"STATUS\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dStatus\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"STATUS\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'INICIO'\"}}],[{\"Literal\":{\"Value\":\"'FORA'\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}]",
+          "height": 655.56,
+          "width": 1280.00,
+          "x": 0.00,
+          "y": 64.19,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"1fa9cb340fa5ed9745f7\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":9.72644376899696,\"z\":2000,\"width\":166.32218844984803,\"height\":44.74164133738602,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"FlowVisual_C29F1DCC_81F5_4973_94AD_0517D44CC06A\",\"drillFilterOtherVisuals\":true,\"objects\":{\"flowInfo\":[{\"properties\":{\"FlowId\":{\"expr\":{\"Literal\":{\"Value\":\"'/providers/Microsoft.ProcessSimple/environments/Default-b608623a-1e34-42d2-89f8-889061ad7e91/flows/fab40a5a-d1d0-4d28-a6fc-fe704be13d6c'\"}}},\"ManagementUri\":{\"expr\":{\"Literal\":{\"Value\":\"'https://southamerica.api.flow.microsoft.com/providers/Microsoft.ProcessSimple'\"}}},\"EnvironmentId\":{\"expr\":{\"Literal\":{\"Value\":\"'Default-b608623a-1e34-42d2-89f8-889061ad7e91'\"}}},\"EnvironmentLocation\":{\"expr\":{\"Literal\":{\"Value\":\"'southamerica'\"}}},\"EnvironmentRegion\":{\"expr\":{\"Literal\":{\"Value\":\"'brazilsouth'\"}}}}}],\"buttonText\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Atualizar dados'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 44.74,
+          "width": 166.32,
+          "x": 0.00,
+          "y": 9.73,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"b47f7b8982398d43d7e5\",\"layouts\":[{\"id\":0,\"position\":{\"x\":482.4316109422493,\"y\":0,\"z\":3000,\"width\":299.5744680851064,\"height\":56.413373860182375,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Gerência\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontFamily\":\"Segoe UI Light\",\"fontSize\":\"8pt\"}}],\"horizontalTextAlignment\":\"center\"},{\"textRuns\":[{\"value\":\"Horas Improdutivas\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontFamily\":\"Segoe UI Light\",\"fontSize\":\"16pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 56.41,
+          "width": 299.57,
+          "x": 482.43,
+          "y": 0.00,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"c9de2301715005e14988\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1018.3586626139818,\"y\":0,\"z\":1000,\"width\":261.6413373860182,\"height\":64.19452887537994,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dCalendario.Date\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dCalendario\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"},\"Name\":\"dCalendario.Date\",\"NativeReferenceName\":\"Date\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"startDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2025-05-01T00:00:00'\"}}},\"endDate\":{\"expr\":{\"Literal\":{\"Value\":\"datetime'2025-05-31T00:00:00'\"}}},\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Between'\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"slider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dCalendario\",\"Type\":0}],\"Where\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2025-05-01T00:00:00'\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"}},\"Right\":{\"Literal\":{\"Value\":\"datetime'2025-06-01T00:00:00'\"}}}}}}}]}}}}],\"date\":[{\"properties\":{\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'wf_standard-font_light, helvetica, arial, sans-serif'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"11D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Calendário'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'''Segoe UI Light'', wf_segoe-ui_light, helvetica, arial, sans-serif'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 64.19,
+          "width": 261.64,
+          "x": 1018.36,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "Storm"
+}

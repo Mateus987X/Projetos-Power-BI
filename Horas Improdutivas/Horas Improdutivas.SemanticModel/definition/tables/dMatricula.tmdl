@@ -1,0 +1,55 @@
+table dMatricula
+	lineageTag: 95176119-6c4e-477e-962f-31b14b8e2181
+
+	column RA_MAT
+		dataType: string
+		lineageTag: 9e82adde-5ef4-4568-94c5-81f766f1b1ac
+		summarizeBy: none
+		sourceColumn: RA_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column RA_CC
+		dataType: string
+		lineageTag: bebfbd0a-5e39-43f9-b7d1-83a40a4b4bef
+		summarizeBy: none
+		sourceColumn: RA_CC
+
+		annotation SummarizationSetBy = Automatic
+
+	column RA_NOME
+		dataType: string
+		lineageTag: 340c595c-8adc-4b51-a86b-97439aa7ff02
+		summarizeBy: none
+		sourceColumn: RA_NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_MAT
+		dataType: string
+		lineageTag: 36f91c6a-446b-4be7-8b83-24f0284a71bc
+		summarizeBy: none
+		sourceColumn: PK_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column RA_FILIAL
+		dataType: string
+		lineageTag: 86d71e9d-9e4d-4aa1-993a-7ceaaa14710f
+		summarizeBy: none
+		sourceColumn: RA_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMatricula = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT RA_FILIAL, RA_MAT, RA_CC, RA_NOME, RA_FILIAL + '|' + RA_MAT AS PK_MAT#(lf)FROM SRA010#(lf)WHERE D_E_L_E_T_ = ''"])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

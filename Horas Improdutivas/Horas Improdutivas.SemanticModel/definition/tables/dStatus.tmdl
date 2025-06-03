@@ -1,0 +1,30 @@
+table dStatus
+	lineageTag: 99e039e8-2951-4030-8b42-4b8ff2354530
+
+	column STATUS
+		dataType: string
+		lineageTag: f745451b-d7d9-4837-b594-bc2b1c4d3d50
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dStatus = m
+		mode: import
+		source =
+				let
+				    Fonte = let
+				    TabelaStatus = Table.FromRecords({
+				        [STATUS = "FORA"],
+				        [STATUS = "DENTRO"],
+				        [STATUS = "INICIO"]
+				    })
+				in
+				    TabelaStatus
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

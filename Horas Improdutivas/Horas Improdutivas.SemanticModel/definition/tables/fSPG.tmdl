@@ -1,0 +1,157 @@
+table fSPG
+	lineageTag: 1a9a27c6-e317-4f68-9e65-ece79070c755
+
+	measure 'HorasSPG (hh:mm:ss)' = ```
+			
+			VAR _Total = SUMX(fSPG,fSPG[HORAS_TRABALHADAS_SEGUNDOS])
+			VAR _Horas = INT(DIVIDE(_Total, 3600))
+			VAR _Modulo = MOD(_Total, 3600) 
+			VAR _Minutos = INT(DIVIDE(_Modulo, 60))
+			VAR _Segundos = MOD(_Total, 60)
+			RETURN
+			_Horas * 10000 +
+			_Minutos * 100 +
+			_Segundos
+			```
+		formatString: 00:00:00
+		lineageTag: 83054f41-15dc-41fb-872e-69e7b6a4a7ec
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column PG_CC
+		dataType: string
+		lineageTag: eebd1bb3-1d0d-4736-bd78-3d2eaa776aea
+		summarizeBy: none
+		sourceColumn: PG_CC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PG_MAT
+		dataType: string
+		lineageTag: aa0542a8-7a5c-44b4-9ebc-2bc223c15b6f
+		summarizeBy: none
+		sourceColumn: PG_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PG_DATAAPO
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 83b94523-cdde-444e-85f4-a08302102a4a
+		summarizeBy: none
+		sourceColumn: PG_DATAAPO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PG_FILIAL
+		dataType: string
+		lineageTag: 16fad500-1778-4030-b1ef-497d351df798
+		summarizeBy: none
+		sourceColumn: PG_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PG_ORDEM
+		dataType: string
+		lineageTag: f3c2d96d-200f-4304-928a-e5a94077e35a
+		summarizeBy: none
+		sourceColumn: PG_ORDEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Numero_Linha
+		dataType: int64
+		formatString: 0
+		lineageTag: 6cb05c86-4fed-40cf-806b-b005ec571bb6
+		summarizeBy: sum
+		sourceColumn: Numero_Linha
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: 30b6ebcf-d5fc-47ec-ad5e-d7efb00d40de
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_MAT
+		dataType: string
+		lineageTag: d1413fac-15a1-4e23-91a2-356b0b99bf69
+		summarizeBy: none
+		sourceColumn: FK_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PG_HORA
+		dataType: double
+		lineageTag: 42ba7f13-5941-407c-87d9-8cbe91c1be3f
+		summarizeBy: sum
+		sourceColumn: PG_HORA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDENADOR
+		dataType: string
+		lineageTag: 65d2f62e-ba3e-4556-85b8-e5f6e6379671
+		summarizeBy: none
+		sourceColumn: ORDENADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column PG_MOTIVRG
+		dataType: string
+		lineageTag: ea2c30b1-15f6-4893-81ae-c9536bfb29f7
+		summarizeBy: none
+		sourceColumn: PG_MOTIVRG
+
+		annotation SummarizationSetBy = Automatic
+
+	column PG_HORA_SEGUNDOS
+		dataType: double
+		lineageTag: 8e3ff243-8acb-4827-bcb7-47d67b964f3e
+		summarizeBy: sum
+		sourceColumn: PG_HORA_SEGUNDOS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Hora_Anterior_Segundos
+		dataType: double
+		lineageTag: 0253a9a1-9aa1-4e51-88e5-f46eeeef2514
+		summarizeBy: sum
+		sourceColumn: Hora_Anterior_Segundos
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HORAS_TRABALHADAS_SEGUNDOS
+		dataType: int64
+		lineageTag: 3e52c638-d2ab-419f-a04f-1b9a93a18b06
+		summarizeBy: sum
+		sourceColumn: HORAS_TRABALHADAS_SEGUNDOS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fSPG = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="DECLARE @DataLimite DATE = DATEADD(YEAR, -1, GETDATE());#(lf)#(lf)WITH Ponto AS (#(lf)    SELECT #(lf)        CAST(PG_DATA AS varchar)  + '|' + FORMAT(PG_HORA, '00') ORDENADOR,#(lf)        PG_CC,#(lf)        PG_MOTIVRG,#(lf)        PG_MAT,#(lf)        PG_DATAAPO,#(lf)        PG_HORA,#(lf)        -- Convertendo PG_HORA para segundos#(lf)        (FLOOR(PG_HORA) * 3600) + ((PG_HORA - FLOOR(PG_HORA)) * 100 * 60) AS PG_HORA_SEGUNDOS,#(lf)        PG_FILIAL,#(lf)        PG_ORDEM,#(lf)        PG_TPMARCA,#(lf)        LAG((FLOOR(PG_HORA) * 3600) + ((PG_HORA - FLOOR(PG_HORA)) * 100 * 60)) #(lf)            OVER (PARTITION BY PG_MAT, PG_DATAAPO ORDER BY CAST(PG_DATA AS varchar)  + '|' + FORMAT(PG_HORA, '00')) #(lf)        AS Hora_Anterior_Segundos, -- Convertendo Hora_Anterior para segundos#(lf)        ROW_NUMBER() OVER (PARTITION BY PG_MAT, PG_DATAAPO ORDER BY CAST(PG_DATA AS varchar)  + '|' + FORMAT(PG_HORA, '00')) #(lf)        AS Numero_Linha#(lf)        #(lf)    FROM #(lf)        SPG010#(lf)    WHERE #(lf)        D_E_L_E_T_ = '' #(lf)        AND PG_DATAAPO >= '20230101' #(lf)        AND PG_MOTIVRG NOT IN ('REJEICAO AUTOMATICA', 'EXCLUSAO MANUAL')#(lf)),#(lf)#(lf)Temp AS (#(lf)    SELECT #(lf)        ORDENADOR,#(lf)        PG_CC,#(lf)        PG_MOTIVRG,#(lf)        PG_FILIAL,#(lf)        PG_MAT,#(lf)        PG_DATAAPO,#(lf)        PG_HORA,#(lf)        PG_HORA_SEGUNDOS,#(lf)        Hora_Anterior_Segundos,#(lf)        -- Cálculo correto de horas trabalhadas usando segundos#(lf)        CASE #(lf)            WHEN PG_HORA_SEGUNDOS < Hora_Anterior_Segundos #(lf)            THEN Hora_Anterior_Segundos - PG_HORA_SEGUNDOS#(lf)            ELSE PG_HORA_SEGUNDOS - Hora_Anterior_Segundos#(lf)        END AS HORAS_TRABALHADAS_SEGUNDOS,#(lf)        PG_ORDEM,#(lf)        PG_TPMARCA,#(lf)        Numero_Linha#(lf)    FROM Ponto#(lf)),#(lf)#(lf)Temp2 AS (#(lf)    SELECT #(lf)        ORDENADOR,#(lf)        PG_CC,#(lf)        PG_FILIAL,#(lf)        PG_MOTIVRG,#(lf)        PG_MAT,#(lf)        PG_DATAAPO,#(lf)        PG_HORA,#(lf)        PG_HORA_SEGUNDOS,#(lf)        Hora_Anterior_Segundos,#(lf)        -- Ajustando erro de cálculo caso seja maior que 10 horas (convertido para segundos)#(lf)        CASE #(lf)            WHEN HORAS_TRABALHADAS_SEGUNDOS > (10 * 3600) #(lf)            THEN (24 * 3600) - HORAS_TRABALHADAS_SEGUNDOS #(lf)            ELSE HORAS_TRABALHADAS_SEGUNDOS #(lf)        END AS HORAS_TRABALHADAS_SEGUNDOS,#(lf)        PG_ORDEM,#(lf)        PG_TPMARCA,#(lf)        Numero_Linha#(lf)    FROM Temp#(lf))#(lf)#(lf)SELECT #(lf)    PG_CC,#(lf)    PG_MAT,#(lf)    PG_DATAAPO, #(lf)    PG_FILIAL,#(lf)    PG_HORA, -- Mantendo o formato original#(lf)    PG_HORA_SEGUNDOS, -- Agora em segundos#(lf)    Hora_Anterior_Segundos, -- Agora em segundos#(lf)    HORAS_TRABALHADAS_SEGUNDOS, -- Agora em segundos#(lf)    PG_ORDEM,#(lf)    Numero_Linha,#(lf)    CASE#(lf)        WHEN Numero_Linha % 2 = 0 THEN 'DENTRO'#(lf)        WHEN Numero_Linha = 1 THEN 'INICIO'#(lf)        ELSE 'FORA'#(lf)    END AS STATUS,#(lf)    PG_FILIAL + '|' + PG_MAT AS FK_MAT,#(lf)    ORDENADOR,#(lf)    PG_MOTIVRG#(lf)FROM Temp2#(lf)WHERE #(lf)    PG_DATAAPO >=  @DataLimite#(lf)   #(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"PG_DATAAPO", type date}, {"HORAS_TRABALHADAS_SEGUNDOS", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,28 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fSP8","fSP8(MarcacaoImpar)","dMatricula","fSPG","Medidas","dStatus"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fSP8
+ref table fSP8(MarcacaoImpar)
+ref table dMatricula
+ref table DateTableTemplate_734fd41b-dbcf-4a3f-b830-baf8c95d5355
+ref table dCalendario
+ref table LocalDateTable_0c78aa61-50a0-40e9-965c-a5693a9247b9
+ref table fSPG
+ref table Medidas
+ref table dStatus
+
+ref cultureInfo pt-BR
+

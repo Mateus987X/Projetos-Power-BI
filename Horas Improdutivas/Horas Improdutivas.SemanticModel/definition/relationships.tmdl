@@ -1,0 +1,47 @@
+relationship 3f1d4cb6-fd35-ef92-5a16-5e8fc945fd2a
+	toCardinality: many
+	fromColumn: fSP8(MarcacaoImpar).P8_MAT
+	toColumn: fSP8.P8_MAT
+
+relationship AutoDetected_cbdb9e6d-3b84-41ce-b3c4-d5e96c9ba18b
+	fromColumn: fSP8.FK_MAT
+	toColumn: dMatricula.PK_MAT
+
+relationship be3a77c6-0516-40cd-892d-141ff781d433
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendario.Date
+	toColumn: LocalDateTable_0c78aa61-50a0-40e9-965c-a5693a9247b9.Date
+
+relationship d30b0f61-3b5c-8a0e-b165-014b0493f3f4
+	fromColumn: fSP8(MarcacaoImpar).P8_DATAAPO
+	toColumn: dCalendario.Date
+
+relationship 6b28bdd8-5e4d-9e87-d051-aa6059cebc0d
+	fromColumn: fSP8.P8_DATAAPO
+	toColumn: dCalendario.Date
+
+relationship 6fb5874e-5c03-fd81-8399-dd027e63c90a
+	crossFilteringBehavior: bothDirections
+	fromColumn: fSP8(MarcacaoImpar).FK_MAT
+	toColumn: dMatricula.PK_MAT
+
+relationship AutoDetected_19e7c01e-bc9a-4051-81c9-6d5eecffcf26
+	fromColumn: fSPG.FK_MAT
+	toColumn: dMatricula.PK_MAT
+
+relationship 8d9b5c97-650d-0d4f-36c1-7c683bf21dc2
+	fromColumn: fSPG.PG_DATAAPO
+	toColumn: dCalendario.Date
+
+relationship AutoDetected_bdad9356-5033-4a8a-a5ad-a81dc5ce1a4a
+	fromColumn: fSP8.STATUS
+	toColumn: dStatus.STATUS
+
+relationship AutoDetected_dbc4597a-bda0-437a-b17f-83eb64a84be5
+	fromColumn: fSPG.STATUS
+	toColumn: dStatus.STATUS
+
+relationship 0b218ddb-225d-2d23-5139-c24f3372d89a
+	fromColumn: fSP8(MarcacaoImpar).Status
+	toColumn: dStatus.STATUS
+

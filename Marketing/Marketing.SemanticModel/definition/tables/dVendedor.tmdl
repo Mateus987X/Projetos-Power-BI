@@ -1,0 +1,60 @@
+table dVendedor
+	lineageTag: 237322d2-35cb-4a08-ab40-75b98daa2aa3
+
+	column PK_VENDEDOR
+		dataType: string
+		lineageTag: 3273a603-0747-4195-9360-0bde5a914796
+		summarizeBy: none
+		sourceColumn: PK_VENDEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column AJUDA_CUSTO
+		dataType: double
+		lineageTag: db2ecf66-20a3-44da-9396-b12601022c02
+		summarizeBy: none
+		sourceColumn: AJUDA_CUSTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMISSAO
+		dataType: double
+		lineageTag: 563ae4f9-acbf-4e56-b3f4-005b6adbafeb
+		summarizeBy: none
+		sourceColumn: COMISSAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COD_REPRESENTANTE
+		dataType: string
+		lineageTag: 08318999-77d6-4511-aed3-370bf83d6f35
+		summarizeBy: none
+		sourceColumn: COD_REPRESENTANTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REPRESENTANTE
+		dataType: string
+		lineageTag: 2bc6f42b-cc49-4ec2-830e-3972fdb1c284
+		summarizeBy: none
+		sourceColumn: REPRESENTANTE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dVendedor = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)    'P |01|SA3010|' + COALESCE(NULLIF(RTRIM(COALESCE(A3_FILIAL, ' ')) + '|' + RTRIM(COALESCE(A3_COD, ' ')), ' '), '|') AS PK_VENDEDOR,#(lf)    SA3.A3_COD AS COD_REPRESENTANTE,#(lf)    SA3.A3_NOME AS REPRESENTANTE,#(lf)    SA3.A3_AJCUSTO AS AJUDA_CUSTO,#(lf)    SA3.A3_COMIS AS COMISSAO#(lf)FROM SA3010 SA3 #(lf)WHERE  #(lf)    SA3.D_E_L_E_T_ = ' '#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|SA3010||',#(lf)    '01 - INDEFINIDO',#(lf)    '01 - INDEFINIDO',#(lf)     0,#(lf)     0"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"COMISSAO", type number}, {"AJUDA_CUSTO", type number}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

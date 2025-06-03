@@ -1,0 +1,21 @@
+table 'Medidas - Impostos'
+	lineageTag: 43e034d9-b956-454f-8b04-4bb3d75e6ea3
+
+	measure Impostos = CALCULATE(SUM(fctFaturamento[VL_ICMS_FATURAMENTO]) + SUM(fctFaturamento[VL_ICMS_SUBST_FATURAMENTO]) + SUM(fctFaturamento[VL_PIS_FATURAMENTO]) + SUM(fctFaturamento[VL_COFINS_FATURAMENTO]) + SUM(fctFaturamento[VL_IPI_FATURAMENTO]) + SUM(fctFaturamento[VL_ISS_FATURAMENTO]) + SUM(fctFaturamento[VL_IRF_FATURAMENTO]) + SUM(fctFaturamento[VL_INSS_FATURAMENTO]), dTES[GERA_DUPLICATA_TES] = "S")
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: c7bfc3d0-32bd-4c3c-bb53-6c97ef02cf19
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition 'Medidas - Impostos' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

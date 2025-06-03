@@ -1,0 +1,68 @@
+table 'Medidas - Faturamento'
+	lineageTag: bda78542-c213-4352-933d-81b3b59087c4
+
+	measure '$ Devolução Mercadoria Duplic S' = CALCULATE(SUM('fDevolucoes'[VL_DEVOLUCAO_MERCADORIA]), dTES[GERA_DUPLICATA_TES] = "S")
+		displayFolder: Valores Brutos
+		lineageTag: aed689d7-4b9d-480e-98ab-c985d910a72f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '$ Valor de Mercadoria Duplic S' = CALCULATE(SUM(fctFaturamento[VL_FATURAMENTO_MERCADORIA]), dTES[GERA_DUPLICATA_TES] = "S")
+		displayFolder: Valores Brutos
+		lineageTag: 1bce50b5-58fd-4e64-a6ec-dcc13bacdba1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '$ Valor Líquido de Mercadoria Duplic S' = [$ Valor de Mercadoria Duplic S] - [$ Devolução Mercadoria Duplic S]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Valores líquidos
+		lineageTag: fb4fbbd4-5f91-4ba9-b72e-05d2cf1ee356
+
+	measure '# Quantidade Faturamento' = CALCULATE(SUM(fctFaturamento[QTD_FATURADA_ITEM]), dTES[GERA_DUPLICATA_TES] = "S")
+		displayFolder: Quantidade/Peso
+		lineageTag: fc1be072-949a-4103-bc28-f325fca9fef4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '# Quantidade devolucao' = CALCULATE(SUM('fDevolucoes'[QTDE_DEVOLVIDA_ITEM]), dTES[GERA_DUPLICATA_TES] = "S")
+		displayFolder: Quantidade/Peso
+		lineageTag: 64050b27-0e7f-4195-9ccd-7bc2ab89d2cd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '# Peso Líquido' = [# Quantidade Faturamento] - [# Quantidade devolucao]
+		displayFolder: Quantidade/Peso
+		lineageTag: 7d24ce3f-ec75-47e9-8e03-9663c0436bb2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vl Liq S/Impostos' = [$ Valor Líquido de Mercadoria Duplic S] - 'Medidas - Impostos'[Impostos]
+		displayFolder: Valores líquidos
+		lineageTag: 29288bc9-a5ac-4166-aa91-ddaaae970a8e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Taxa de Crescimento' = ```
+			
+			VAR VendasPeriodoanterior = CALCULATE([$ Valor Líquido de Mercadoria Duplic S], PREVIOUSMONTH(dCalendario[Data]))
+			    RETURN
+			    DIVIDE([$ Valor Líquido de Mercadoria Duplic S] - VendasPeriodoanterior,[$ Valor Líquido de Mercadoria Duplic S],0)
+			
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: % Taxa de Crescimento
+		lineageTag: 66697fea-3c74-4fa9-93d4-e43c78c3a781
+
+	partition 'Medidas - Faturamento' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

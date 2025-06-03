@@ -1,0 +1,61 @@
+table dTES
+	lineageTag: 58020a99-5ef2-44a4-ac79-24039199d908
+
+	column PK_TES
+		dataType: string
+		lineageTag: 670a96b1-8639-4a1d-a034-f0a7b4006daa
+		summarizeBy: none
+		sourceColumn: PK_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	column COD_TES
+		dataType: string
+		lineageTag: f30c74fa-60ce-4b32-8e66-d8140b533ae8
+		summarizeBy: none
+		sourceColumn: COD_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_TES
+		dataType: string
+		lineageTag: 1fafe1b8-92ef-4836-8b62-326a71b67c42
+		summarizeBy: none
+		sourceColumn: DESC_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	column GERA_DUPLICATA_TES
+		dataType: string
+		lineageTag: 7d6fd002-dead-4556-bdac-cd5730200868
+		summarizeBy: none
+		sourceColumn: GERA_DUPLICATA_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	column GERA_ESTOQUE_TES
+		dataType: string
+		lineageTag: 9213cace-3390-4c4d-9c8b-3e1a11079d2e
+		summarizeBy: none
+		sourceColumn: GERA_ESTOQUE_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIPO_OPERACAO_TES
+		dataType: string
+		lineageTag: c7ac41cd-d0ac-4c39-b0ac-95b4c434de75
+		summarizeBy: none
+		sourceColumn: TIPO_OPERACAO_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dTES = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)    'P |01|SF4010|' +  #(lf)    COALESCE(NULLIF(RTRIM(COALESCE(F4_FILIAL, ' ')) + '|' + RTRIM(COALESCE(F4_CODIGO, ' ')), ' '), '|') AS PK_TES,#(lf)    SF4.F4_CODIGO AS COD_TES,#(lf)    SF4.F4_TEXTO AS DESC_TES,#(lf)    SF4.F4_DUPLIC AS GERA_DUPLICATA_TES,#(lf)    SF4.F4_ESTOQUE AS GERA_ESTOQUE_TES,#(lf)    SF4.F4_TIPOPER AS TIPO_OPERACAO_TES#(lf)FROM #(lf)    SF4010 SF4 #(lf)WHERE  #(lf)    SF4.D_E_L_E_T_ = ' '#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|SF4010||',#(lf)    '01 - INDEFINIDO',#(lf)    '01 - INDEFINIDO',#(lf)    '01 - INDEFINIDO',#(lf)    '01 - INDEFINIDO',#(lf)    '01 - INDEFINIDO'#(lf)"])
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,35 @@
+table dSegmentos
+	lineageTag: f46b5323-c9bc-49c9-9dd6-941de3d27782
+
+	column 'Cod. Segment'
+		dataType: int64
+		formatString: 0
+		lineageTag: e3201080-ac00-4a76-8b67-836a2479ae47
+		summarizeBy: none
+		sourceColumn: Cod. Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descricao
+		dataType: string
+		lineageTag: 82828e74-07ee-49c3-ac0b-3dcae7a94cdd
+		summarizeBy: none
+		sourceColumn: Descricao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dSegmentos = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("\\TROP-FS1\tropintranet$\Publico\Mateus Barboza\Segmentos (1).xlsx"), null, true),
+				    #"01-01IN01 - Listagem do Browse_Sheet" = Fonte{[Item="01-01IN01 - Listagem do Browse",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"01-01IN01 - Listagem do Browse_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Cod. Segment", Int64.Type}, {"Descricao", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

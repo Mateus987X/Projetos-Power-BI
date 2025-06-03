@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Horas Improdutivas"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "52eb697f-69c3-4765-baa9-d5ed6aa82a69"
+  }
+}

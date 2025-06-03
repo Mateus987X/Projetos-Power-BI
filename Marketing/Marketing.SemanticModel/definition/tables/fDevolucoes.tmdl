@@ -1,0 +1,257 @@
+table fDevolucoes
+	lineageTag: 3958def3-111f-48be-871e-52adc843d1ac
+
+	column PK_FILIAL
+		dataType: string
+		lineageTag: c070507c-7549-4e7e-b0c2-602d9d82d7d1
+		summarizeBy: none
+		sourceColumn: PK_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA_DE_DEVOLUCAO
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 831f9278-079c-4bfb-bc00-c929d77cdff0
+		summarizeBy: none
+		sourceColumn: DATA_DE_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SERIE_DOCUMENTO_CLIENTE
+		dataType: string
+		lineageTag: 911836dc-a3fa-4cdc-b6dd-c025f7ebda24
+		summarizeBy: none
+		sourceColumn: SERIE_DOCUMENTO_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_DOCUMENTO_CLIENTE
+		dataType: string
+		lineageTag: cf2c0ae5-423a-4287-88e3-ce45f39f4b0f
+		summarizeBy: none
+		sourceColumn: NUMERO_DOCUMENTO_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SERIE_NOTA_FISCAL
+		dataType: string
+		lineageTag: 13e1cac6-a33f-465d-aaa5-e0275d012626
+		summarizeBy: none
+		sourceColumn: SERIE_NOTA_FISCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_DA_NOTA_FISCAL
+		dataType: string
+		lineageTag: fdf0d95f-1e09-453b-834a-6e399a3daa6b
+		summarizeBy: none
+		sourceColumn: NUMERO_DA_NOTA_FISCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_DO_ITEM_DO_DOCUMENTO
+		dataType: string
+		lineageTag: 15c6093c-5869-4a86-9e16-34235e3d40b7
+		summarizeBy: none
+		sourceColumn: NUMERO_DO_ITEM_DO_DOCUMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_DO_ITEM_DA_NF
+		dataType: string
+		lineageTag: 09dd3ad6-394e-45ca-8bc2-9e6198674656
+		summarizeBy: none
+		sourceColumn: NUMERO_DO_ITEM_DA_NF
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_DO_REMITO
+		dataType: string
+		lineageTag: 1a33f82a-291d-42e4-984f-e7146c4a600b
+		summarizeBy: none
+		sourceColumn: NUMERO_DO_REMITO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SERIE_DO_REMITO
+		dataType: string
+		lineageTag: 72de3584-9bb4-4ad9-a550-5fcb9099598d
+		summarizeBy: none
+		sourceColumn: SERIE_DO_REMITO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_DO_REMITO
+		dataType: string
+		lineageTag: e72e5cef-61bf-4a2e-8bdf-1313d479dc0a
+		summarizeBy: none
+		sourceColumn: ITEM_DO_REMITO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_TES
+		dataType: string
+		lineageTag: d7d1406f-21b8-43fb-af0f-199efe7d1fbc
+		summarizeBy: none
+		sourceColumn: PK_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_VENDEDOR
+		dataType: string
+		lineageTag: 5d1a9d1b-62b4-408e-a538-b0fdbb48af95
+		summarizeBy: none
+		sourceColumn: PK_VENDEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_CLIENTE
+		dataType: string
+		lineageTag: 296ab718-44bf-4cbf-aef2-f57b14848b24
+		summarizeBy: none
+		sourceColumn: PK_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_REGIAO
+		dataType: string
+		lineageTag: 668fc7c7-3748-42ae-8806-d4c03292cdf4
+		summarizeBy: none
+		sourceColumn: PK_REGIAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column QTDE_DEVOLVIDA_ITEM
+		dataType: double
+		lineageTag: d2b62201-2487-40c0-aaf5-46cd07aaa860
+		summarizeBy: sum
+		sourceColumn: QTDE_DEVOLVIDA_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_DEVOLUCAO_TOTAL
+		dataType: double
+		lineageTag: f6ae57b8-f7dd-4516-8186-992d87a8d437
+		summarizeBy: sum
+		sourceColumn: VL_DEVOLUCAO_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_ICMS_DEVOLUCAO
+		dataType: double
+		lineageTag: 7a94d9e2-8448-4b0f-a2c8-442b122b0841
+		summarizeBy: sum
+		sourceColumn: VL_ICMS_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_IPI_DEVOLUCAO
+		dataType: double
+		lineageTag: c6ee7f7a-c232-4e89-9746-66597232a971
+		summarizeBy: sum
+		sourceColumn: VL_IPI_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_DEVOLUCAO_LIQUIDA
+		dataType: double
+		lineageTag: 6cb471c7-11ca-48bc-ab99-fa86332810dd
+		summarizeBy: sum
+		sourceColumn: VL_DEVOLUCAO_LIQUIDA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_DEVOLUCAO_MERCADORIA
+		dataType: double
+		lineageTag: eb60d5e2-1705-4b4a-b12b-e24d2564ca3f
+		summarizeBy: sum
+		sourceColumn: VL_DEVOLUCAO_MERCADORIA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_PIS_DEVOLUCAO
+		dataType: double
+		lineageTag: 0006db26-d7aa-4028-a825-b6fe41cf049a
+		summarizeBy: sum
+		sourceColumn: VL_PIS_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_COFINS_DEVOLUCAO
+		dataType: double
+		lineageTag: 522112a2-db80-4a0f-bff4-48a045357aa0
+		summarizeBy: sum
+		sourceColumn: VL_COFINS_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_ICMS_SUBST_DEVOLUCAO
+		dataType: double
+		lineageTag: 3dea3214-ca93-4ede-898d-4432fe259537
+		summarizeBy: sum
+		sourceColumn: VL_ICMS_SUBST_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_DESCONTO_DEVOLUCAO
+		dataType: double
+		lineageTag: e90adeaa-c1ea-4f9a-ab2d-071c8d9f1ece
+		summarizeBy: sum
+		sourceColumn: VL_DESCONTO_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_INSS_DEVOLUCAO
+		dataType: double
+		lineageTag: c804745a-6d16-4d32-9bdc-3e1ba5b0d5aa
+		summarizeBy: sum
+		sourceColumn: VL_INSS_DEVOLUCAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PK_PRODUTO
+		dataType: string
+		lineageTag: 0d2779ca-1d88-4adc-845d-3b2ca965ab31
+		summarizeBy: none
+		sourceColumn: PK_PRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fDevolucoes = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)    CASE #(lf)        WHEN D1_FILIAL IS NULL THEN 'P |01||' #(lf)        ELSE 'P |01|01' + CAST(D1_FILIAL AS CHAR(6)) #(lf)    END AS PK_FILIAL,#(lf)    D1_DTDIGIT AS DATA_DE_DEVOLUCAO,#(lf)    D1_SERIE AS SERIE_DOCUMENTO_CLIENTE,#(lf)    D1_DOC AS NUMERO_DOCUMENTO_CLIENTE,#(lf)    F2_SERIE AS SERIE_NOTA_FISCAL,#(lf)    F2_DOC AS NUMERO_DA_NOTA_FISCAL,#(lf)    D1_ITEM AS NUMERO_DO_ITEM_DO_DOCUMENTO,#(lf)    D1_DOC + D1_SERIE AS NUMERO_DO_ITEM_DA_NF,#(lf)    D1_REMITO AS NUMERO_DO_REMITO,#(lf)    D1_SERIREM AS SERIE_DO_REMITO,#(lf)    D1_ITEMREM AS ITEM_DO_REMITO,#(lf)    'P |01|SF4010|' + COALESCE(NULLIF(RTRIM(COALESCE(F4_FILIAL,' ')) + '|' + RTRIM(COALESCE(D1_TES,' ')), ' '), '|') AS PK_TES,#(lf)    'P |01|SB1010|' + COALESCE(NULLIF(RTRIM(COALESCE(B1_FILIAL,' ')) + '|' + RTRIM(COALESCE(D1_COD,' ')), ' '), '|') AS PK_PRODUTO,#(lf)    'P |01|SA3010|' + COALESCE(NULLIF(RTRIM(COALESCE(A3_FILIAL,' ')) + '|' + RTRIM(COALESCE(F2_VEND1,' ')), ' '), '|') AS PK_VENDEDOR,#(lf)    'P |01|SA1010|' + COALESCE(NULLIF(RTRIM(COALESCE(A1_FILIAL,' ')) + '|' + RTRIM(COALESCE(D1_FORNECE,' ')) + RTRIM(COALESCE(D1_LOJA,' ')), ' '), '|') AS PK_CLIENTE,#(lf)    CASE #(lf)        WHEN SA1.A1_COD_MUN = ' ' THEN 'P |01|CC2010|' + COALESCE(NULLIF(RTRIM(COALESCE(A1_EST,' ')), ' '), '|')#(lf)        ELSE 'P |01|CC2010|' + COALESCE(NULLIF(RTRIM(COALESCE(A1_EST,' ')) + RTRIM(COALESCE(A1_COD_MUN,' ')), ' '), '|')#(lf)    END AS PK_REGIAO,#(lf)    D1_QUANT AS QTDE_DEVOLVIDA_ITEM,#(lf)    D1_TOTAL + D1_VALIPI + D1_ICMSRET AS VL_DEVOLUCAO_TOTAL,#(lf)    D1_VALICM AS VL_ICMS_DEVOLUCAO,#(lf)    D1_VALIPI AS VL_IPI_DEVOLUCAO,#(lf)    (D1_TOTAL - (D1_VALICM + D1_VALIMP5 + D1_VALIMP6 + D1_VALDESC)) AS VL_DEVOLUCAO_LIQUIDA,#(lf)    D1_TOTAL - D1_VALDESC AS VL_DEVOLUCAO_MERCADORIA,#(lf)    D1_VALIMP6 AS VL_PIS_DEVOLUCAO,#(lf)    D1_VALIMP5 AS VL_COFINS_DEVOLUCAO,#(lf)    D1_ICMSRET AS VL_ICMS_SUBST_DEVOLUCAO,#(lf)    D1_VALDESC AS VL_DESCONTO_DEVOLUCAO,#(lf)    D1_VALINS AS VL_INSS_DEVOLUCAO#(lf)FROM #(lf)    SD1010 SD1#(lf)INNER JOIN #(lf)    SF2010 SF2 ON SF2.D_E_L_E_T_ = ' ' #(lf)               AND F2_FILIAL = D1_FILIAL #(lf)               AND F2_DOC = D1_NFORI #(lf)               AND F2_SERIE = D1_SERIORI #(lf)               AND F2_CLIENTE = D1_FORNECE #(lf)               AND F2_LOJA = D1_LOJA#(lf)INNER JOIN #(lf)    SB1010 SB1 ON B1_FILIAL = SUBSTRING(F2_FILIAL, 1, 2) #(lf)               AND SB1.B1_COD = D1_COD #(lf)               AND SB1.D_E_L_E_T_ = ' '#(lf)LEFT JOIN #(lf)    SF4010 SF4 ON F4_FILIAL = SUBSTRING(D1_FILIAL, 1, 2) #(lf)                AND D1_TES = F4_CODIGO #(lf)                AND SF4.D_E_L_E_T_ = ' '#(lf)LEFT JOIN #(lf)    SE4010 SE4 ON E4_FILIAL = SUBSTRING(D1_FILIAL, 1, 2) #(lf)                AND E4_CODIGO = F2_COND #(lf)                AND SE4.D_E_L_E_T_ = ' '#(lf)LEFT JOIN #(lf)    SA3010 SA3 ON A3_FILIAL = SUBSTRING(F2_FILIAL, 1, 2) #(lf)                AND A3_COD = SF2.F2_VEND1 #(lf)                AND SA3.D_E_L_E_T_ = ' '#(lf)LEFT JOIN #(lf)    SA1010 SA1 ON A1_FILIAL = SUBSTRING(F2_FILIAL, 1, 2) #(lf)                AND SA1.A1_COD = SF2.F2_CLIENTE #(lf)                AND SA1.A1_LOJA = SF2.F2_LOJA #(lf)                AND SA1.D_E_L_E_T_ = ' '#(lf)#(lf) #(lf)WHERE  #(lf)     D1_DTDIGIT >= '20230101' AND A1_SATIV8 = '000907'#(lf)    AND SD1.D_E_L_E_T_ = ' '#(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"DATA_DE_DEVOLUCAO", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

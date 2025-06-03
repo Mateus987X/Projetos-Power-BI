@@ -1,0 +1,96 @@
+relationship 97b6c2fa-222d-a623-eb48-324b3e92e7a3
+	fromColumn: fctFaturamento.PK_PRODUTO
+	toColumn: dProduto.PK_PRODUTO
+
+relationship AutoDetected_815e2a8f-e331-4ab0-abc9-731fd9c8f0f3
+	fromColumn: fDevolucoes.PK_PRODUTO
+	toColumn: dProduto.PK_PRODUTO
+
+relationship 0c24f9c1-fb33-4071-88a9-77abe1e9ab13
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fctFaturamento.DATA_SAIDA_NF
+	toColumn: LocalDateTable_0986e182-ff95-4e39-bea5-0f47f9a158c8.Date
+
+relationship AutoDetected_c882d42f-4ac1-4362-9aca-af4634202fbd
+	fromColumn: fctFaturamento.PK_TES
+	toColumn: dTES.PK_TES
+
+relationship AutoDetected_f29615d8-33b3-4514-9bae-78b3d4728103
+	fromColumn: fDevolucoes.PK_TES
+	toColumn: dTES.PK_TES
+
+relationship AutoDetected_f6d2cd2a-fd0e-45c6-810d-4215e7587feb
+	fromColumn: fctFaturamento.PK_FILIAL
+	toColumn: dFilial.PK_FILIAL
+
+relationship AutoDetected_a8971c79-896b-4ae4-8cfc-c7e7dfcd68cd
+	fromColumn: fDevolucoes.PK_FILIAL
+	toColumn: dFilial.PK_FILIAL
+
+relationship 6b770b0e-b509-417b-a9aa-909c3b7ff21a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendario.Data
+	toColumn: LocalDateTable_c4b1984b-84e1-4ba1-83c2-9fc00788a2f6.Date
+
+relationship aefaac92-97c9-db8f-5019-77cc8d1ad8cd
+	fromColumn: fDevolucoes.DATA_DE_DEVOLUCAO
+	toColumn: dCalendario.Data
+
+relationship b6d99527-f19b-496c-8c6b-eea4214bd5d9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendario.Ano
+	toColumn: LocalDateTable_1a815bb7-00dc-403d-be57-11dc8e9c0a5a.Date
+
+relationship fff72b08-c69a-f083-373b-e3ed344fca25
+	fromColumn: fctFaturamento.PK_CLIENTE
+	toColumn: dCliente.PK_CLIENTE
+
+relationship c8178062-5e31-9f0e-dae9-438ca42aa5ed
+	fromColumn: dCliente.COD_SEGMENTO
+	toColumn: dSegmentos.'Cod. Segment'
+
+relationship b072dd6a-67dc-cc70-dd07-3900ec1eed99
+	fromColumn: fDevolucoes.PK_CLIENTE
+	toColumn: dCliente.PK_CLIENTE
+
+relationship 558ff4ba-bdcd-d4a4-cc62-8dba8a127e5c
+	fromColumn: dCliente.PK_VENDEDOR
+	toColumn: dVendedor.PK_VENDEDOR
+
+relationship f5460778-0ddb-11cc-67d6-5af6cd883230
+	isActive: false
+	fromColumn: dCliente.ULTIMA_COMPRA
+	toColumn: dCalendario.Data
+
+relationship cdeff2b8-7933-5bd5-5a57-81a5a87707ff
+	isActive: false
+	fromColumn: dCliente.ULTIMO_VENDEDOR
+	toColumn: dVendedor.PK_VENDEDOR
+
+relationship 85e010ec-e2ae-a067-ca71-c26f5106a424
+	isActive: false
+	fromColumn: dCliente.PRIMEIRA_COMPRA
+	toColumn: dCalendario.Data
+
+relationship 7ec09c8d-6c55-4bcb-ac8b-15a4fa58e987
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Investimentos.'Início dos relatórios'
+	toColumn: LocalDateTable_e09104ee-a796-4011-850c-c09907b81805.Date
+
+relationship be7eef15-701e-027c-4676-d2383e47a2cb
+	fromColumn: Investimentos.'Término dos relatórios'
+	toColumn: dCalendario.Data
+
+relationship 49135267-f7aa-6401-53f3-47595d1efc46
+	fromColumn: fctFaturamento.DATA_DE_EMISSAO
+	toColumn: dCalendario.Data
+
+relationship 6e89637b-2bc9-d06c-e3b8-3b4ae0d44524
+	isActive: false
+	fromColumn: dCliente.MES_INATIVO
+	toColumn: dCalendario.Data
+
+relationship 702c9b2f-0e3c-dee6-21ea-595d9bebf51d
+	fromColumn: Leads.Data
+	toColumn: dCalendario.Data
+

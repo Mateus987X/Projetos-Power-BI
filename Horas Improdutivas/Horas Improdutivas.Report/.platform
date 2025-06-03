@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Horas Improdutivas"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d279cb04-a5c8-4d11-8790-4fe9697f32fd"
+  }
+}

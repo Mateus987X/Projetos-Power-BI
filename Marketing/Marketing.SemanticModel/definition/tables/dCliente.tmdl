@@ -1,0 +1,210 @@
+table dCliente
+	lineageTag: c6a9f7d6-c00f-4113-bde3-92ff2638a5bb
+
+	column PK_CLIENTE
+		dataType: string
+		lineageTag: 376640ea-79e1-4cc7-b54b-43af960c7a2f
+		summarizeBy: none
+		sourceColumn: PK_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOJA_CLIENTE
+		dataType: string
+		lineageTag: d9f85815-69e3-42e0-a8d4-3e22dbbc770d
+		summarizeBy: none
+		sourceColumn: LOJA_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEGMENTACAO_ATIVIDADE_1
+		dataType: string
+		lineageTag: 7573f401-b99a-4735-b559-8f3ca92a2ad6
+		summarizeBy: none
+		sourceColumn: SEGMENTACAO_ATIVIDADE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEGMENTACAO_ATIVIDADE_8
+		dataType: string
+		lineageTag: d0c84c68-c8fa-4ba4-a161-3e28df766e5e
+		summarizeBy: none
+		sourceColumn: SEGMENTACAO_ATIVIDADE_8
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIMEIRA_COMPRA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f5a53eaa-eb2c-406d-a94c-3c16ff2aaf75
+		summarizeBy: none
+		sourceColumn: PRIMEIRA_COMPRA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ULTIMA_COMPRA
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 8d70d049-d9dc-427d-afce-2b1617d3abe9
+		summarizeBy: none
+		sourceColumn: ULTIMA_COMPRA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column STATUS
+		dataType: string
+		lineageTag: bc259672-3b1c-469e-ba38-fe03e4b9cc88
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column MES_INATIVO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b5f0b426-d773-48d7-b30d-659652f6e130
+		summarizeBy: none
+		sourceColumn: MES_INATIVO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMISSAO
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2873eacf-c045-4fee-853d-c3784106f209
+		summarizeBy: sum
+		sourceColumn: COMISSAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column AJUDA_CUSTO
+		dataType: double
+		lineageTag: 4d630856-c4d0-40e9-83fc-c458fe290bcc
+		summarizeBy: sum
+		sourceColumn: AJUDA_CUSTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SEGMENTACAO_ATIVIDADE_5
+		dataType: string
+		lineageTag: 309a7c69-363e-4bad-b635-18d21d6d9023
+		summarizeBy: none
+		sourceColumn: SEGMENTACAO_ATIVIDADE_5
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_VENDEDOR
+		dataType: string
+		lineageTag: 8bad148a-a7b2-489c-8c17-84429c7ad92b
+		summarizeBy: none
+		sourceColumn: PK_VENDEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MUNICIPIO
+		dataType: string
+		lineageTag: 854f3569-2114-4c0e-b9c6-27ce0e0447c5
+		summarizeBy: none
+		sourceColumn: MUNICIPIO
+
+		annotation SummarizationSetBy = Automatic
+
+	column COD_SEGMENTO
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a5add8c-d268-409f-ad76-1b0977276e44
+		summarizeBy: none
+		sourceColumn: COD_SEGMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codigo-Nome Cliente'
+		dataType: string
+		lineageTag: 2e5e9c8d-bc63-4bbd-ada5-5e299d365eaf
+		summarizeBy: none
+		sourceColumn: Codigo-Nome Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column COD_CLIENTE
+		dataType: string
+		lineageTag: c8d15707-3311-432b-ad2d-06fa7059c9ad
+		summarizeBy: none
+		sourceColumn: COD_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME_CLIENTE
+		dataType: string
+		lineageTag: 23393900-0640-43cf-95e4-fa33ff8db0c3
+		summarizeBy: none
+		sourceColumn: NOME_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ULTIMO_VENDEDOR =
+			
+			VAR _UltimaData = dCliente[ULTIMA_COMPRA]
+			RETURN
+			   CALCULATE(MAX(fctFaturamento[PK_VENDEDOR]), fctFaturamento[DATA_DE_EMISSAO] = _UltimaData)
+		lineageTag: 742a87ca-f3c9-4ef0-8e03-8d161fb590c0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column CNPJ
+		dataType: string
+		lineageTag: 2b787b97-41a7-4343-9426-41e7b9c702ed
+		summarizeBy: none
+		sourceColumn: CNPJ
+
+		annotation SummarizationSetBy = Automatic
+
+	column TELEFONE
+		dataType: string
+		lineageTag: 77ebf51f-bf7e-428c-a172-76a3aefdfc70
+		summarizeBy: none
+		sourceColumn: TELEFONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bairro
+		dataType: string
+		lineageTag: dbe361b2-0ca8-45de-80b9-7d21c7c4282c
+		summarizeBy: none
+		sourceColumn: Bairro
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL
+		dataType: string
+		lineageTag: 5307f18a-dd8d-4ed7-90d0-ff145a575f32
+		summarizeBy: none
+		sourceColumn: EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCliente = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)    'P |01|SA1010|' + COALESCE(NULLIF(RTRIM(COALESCE(A1_FILIAL,' ')) + '|' + RTRIM(COALESCE(A1_COD,' ')) + RTRIM(COALESCE(A1_LOJA,' ')),' '), '|') AS PK_CLIENTE,#(lf)#(tab)A1_CGC CNPJ,#(lf)#(tab)A1_DDD + '-' + A1_TEL TELEFONE,#(lf)    SA1.A1_COD AS COD_CLIENTE,#(lf)    SA1.A1_LOJA AS LOJA_CLIENTE,#(lf)    SA1.A1_NOME AS NOME_CLIENTE,#(lf)#(tab)SA1.A1_COMIS AS COMISSAO,#(lf)#(tab)SA1.A1_AJCUSTO AS AJUDA_CUSTO,#(lf)    SA1.A1_SATIV1 AS SEGMENTACAO_ATIVIDADE_1,#(lf)    SA1.A1_SATIV5 AS SEGMENTACAO_ATIVIDADE_5,#(lf)    SA1.A1_SATIV8 AS SEGMENTACAO_ATIVIDADE_8,#(lf)#(tab)A1_CODSEG COD_SEGMENTO,#(lf)#(tab)A1_EMAIL EMAIL,#(lf)#(lf)    CASE#(lf)#(tab)WHEN LTRIM(RTRIM(A1_PRICOM)) = '' THEN ''#(lf)#(tab)ELSE A1_PRICOM#(lf)    END AS PRIMEIRA_COMPRA,#(lf)#(lf)    CASE#(lf)#(tab)WHEN LTRIM(RTRIM(A1_ULTCOM)) = '' THEN ''#(lf)#(tab)ELSE A1_ULTCOM#(lf)    END AS ULTIMA_COMPRA,#(lf)#(lf)    CASE #(lf)    #(tab)WHEN DATEDIFF(DAY, CAST(A1_ULTCOM AS DATE), CAST(GETDATE() AS DATE)) >= 90 THEN 'INATIVO'#(lf)   #(tab)ELSE 'ATIVO' #(lf)    END AS STATUS,#(lf)#(lf)#(tab)CASE WHEN A1_ULTCOM = '' THEN ''#(lf)#(tab)ELSE TRIM(CONVERT(VARCHAR(8),DATEADD(DAY, 90, A1_ULTCOM),112)) END AS MES_INATIVO,#(lf)#(tab)'P |01|SA3010|' + COALESCE(NULLIF(RTRIM(COALESCE(A3_FILIAL, ' ')) + '|' + RTRIM(COALESCE(A3_COD, ' ')), ' '), '|') AS PK_VENDEDOR,#(lf)#(tab)A1_MUN MUNICIPIO,#(lf)#(tab)A1_BAIRROE BAIRRO#(lf)FROM #(lf)    SA1010 SA1 #(lf)LEFT JOIN SA3010 SA3 ON A3_FILIAL = A1_FILIAL#(lf)AND A1_VEND = A3_COD#(lf)AND SA3.D_E_L_E_T_ = ''#(lf)WHERE  #(lf)    SA1.D_E_L_E_T_ = ' '  #(lf)#(lf)#(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"ULTIMA_COMPRA", type date}, {"PRIMEIRA_COMPRA", type date}, {"MES_INATIVO", type date}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"BAIRRO", "Bairro"}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"COD_SEGMENTO", Int64.Type}}),
+				    #"Coluna Mesclada Inserida" = Table.AddColumn(#"Tipo Alterado1", "Codigo-Nome Cliente", each Text.Combine({[COD_CLIENTE], [NOME_CLIENTE]}, "-"), type text)
+				in
+				    #"Coluna Mesclada Inserida"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

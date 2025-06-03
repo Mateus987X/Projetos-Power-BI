@@ -1,0 +1,16 @@
+EVALUATE
+
+ SUMMARIZE(
+        dCalendario,
+        dCalendario[AnoMês],
+        "Taxa", [TaxaRetencao]
+ )
+    
+
+		
+
+			
+			
+
+
+        

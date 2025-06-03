@@ -1,0 +1,207 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 650.89867793796111,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1132.0042739919395,
+            "y": 732.05982447576866
+          },
+          "nodeIndex": "dCalendario",
+          "nodeLineageTag": "8cc8d479-a160-424e-9be5-d36be8e17d64",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 2053.5396854378118,
+            "y": 436.22359242796722
+          },
+          "nodeIndex": "Medidas - Marketing",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 2337.5396854378118,
+            "y": 436.22359242796722
+          },
+          "nodeIndex": "Medidas - Faturamento",
+          "nodeLineageTag": "bda78542-c213-4352-933d-81b3b59087c4",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2621.5396854378118,
+            "y": 436.22359242796722
+          },
+          "nodeIndex": "Medidas - Temporais",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 2905.5396854378118,
+            "y": 436.22359242796722
+          },
+          "nodeIndex": "Medidas - Impostos",
+          "nodeLineageTag": "43e034d9-b956-454f-8b04-4bb3d75e6ea3",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1290.1813426326858,
+            "y": 358.33592431736633
+          },
+          "nodeIndex": "Investimentos",
+          "nodeLineageTag": "fb1df387-7126-44c4-96c0-bf58b7d3ea1f",
+          "size": {
+            "height": 283.65873033986327,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 910.08424891704942,
+            "y": 8.9157510829506883
+          },
+          "nodeIndex": "dCliente",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 871,
+            "y": 503
+          },
+          "nodeIndex": "dProduto",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 35.397435604836289,
+            "y": 505.4957260080605
+          },
+          "nodeIndex": "dTES",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 46
+          },
+          "nodeIndex": "dVendedor",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 497.51404148617496,
+            "y": 384.97191702765019
+          },
+          "nodeIndex": "fDevolucoes",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 480,
+            "y": 0
+          },
+          "nodeIndex": "fctFaturamento",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 389.33090952779941,
+            "y": 776.44718485593444
+          },
+          "nodeIndex": "dFilial",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1271.4994073618986,
+            "y": 82.313950308182768
+          },
+          "nodeIndex": "dSegmentos",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 1605.693549147634,
+            "y": 124.53006610310197
+          },
+          "nodeIndex": "Leads",
+          "nodeLineageTag": "a280b6c2-f9e6-4f01-afa9-292e79f55edf",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 15
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 79.553182037699784,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

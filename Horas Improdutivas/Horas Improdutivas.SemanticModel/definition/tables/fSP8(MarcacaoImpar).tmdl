@@ -1,0 +1,116 @@
+table fSP8(MarcacaoImpar)
+	lineageTag: c6825b3b-15fd-42f8-8715-e357cfed1f71
+
+	measure HorasSP8(MarcacaoImpar) =
+			
+			
+			VAR _Total = SUM('fSP8(MarcacaoImpar)'[Segundos_referencia])
+			-- Calcula a soma total de segundos da coluna Segundos_referencia
+			
+			VAR _Horas = INT(DIVIDE(_Total, 3600))
+			-- Converte o total de segundos em horas (dividindo por 3600 segundos/hora)
+			-- A função INT pega apenas a parte inteira
+			
+			VAR _Modulo = MOD(_Total, 3600)
+			-- Calcula o restante dos segundos após extrair as horas completas
+			
+			VAR _Minutos = INT(DIVIDE(_Modulo, 60))
+			-- Converte o restante em minutos (dividindo por 60 segundos/minuto)
+			-- Novamente usando INT para pegar apenas minutos completos
+			
+			VAR _Segundos = MOD(_Total, 60)
+			-- Calcula os segundos restantes após extrair horas e minutos
+			
+			RETURN
+			_Horas * 10000 +
+			_Minutos * 100 +
+			_Segundos
+			-- Combina horas, minutos e segundos em um número no formato HHMMSS
+			-- Exemplo: 2 horas, 30 minutos e 15 segundos → 2*10000 + 30*100 + 15 = 23015
+		formatString: 00:00:00
+		lineageTag: cda3b6d8-74d6-488e-9930-02f3efe0a3cb
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column P8_MAT
+		dataType: string
+		lineageTag: b1fd5967-1e0c-4513-a52c-ada287d6cbb4
+		summarizeBy: none
+		sourceColumn: P8_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segundos_referencia
+		dataType: int64
+		lineageTag: 5d36eedb-52b1-4d80-8f01-8032c74b4110
+		summarizeBy: sum
+		sourceColumn: Segundos_referencia
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column P8_DATAAPO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 22b4bf8d-f6af-4ffb-9d78-cd63c4357cfe
+		summarizeBy: none
+		sourceColumn: P8_DATAAPO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FK_MAT
+		dataType: string
+		lineageTag: a3d9314e-62ae-4074-802c-aaac37673f70
+		summarizeBy: none
+		sourceColumn: FK_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status = "DENTRO"
+		lineageTag: ae86aec8-600d-4b1b-b73f-8748627a29aa
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Marcacoes
+		dataType: int64
+		formatString: 0
+		lineageTag: 6aaaf2dd-d3dd-40f9-ac52-b6a38717e289
+		summarizeBy: sum
+		sourceColumn: Total_Marcacoes
+
+		annotation SummarizationSetBy = Automatic
+
+	column HORAS_TRABALHADAS_SEGUNDOS
+		dataType: double
+		lineageTag: 1a2dc858-c8c5-43ab-b921-f236094f3f9b
+		summarizeBy: sum
+		sourceColumn: HORAS_TRABALHADAS_SEGUNDOS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fSP8(MarcacaoImpar) = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="WITH Ponto AS (#(lf)    SELECT #(lf)        CAST(P8_DATA AS varchar)  + '|' + FORMAT(P8_HORA, '00') ORDENADOR,#(lf)        P8_CC,#(lf)        P8_MOTIVRG,#(lf)        P8_MAT,#(lf)        P8_DATAAPO,#(lf)        P8_HORA,#(lf)        -- Convertendo P8_HORA para segundos#(lf)        (FLOOR(P8_HORA) * 3600) + ((P8_HORA - FLOOR(P8_HORA)) * 100 * 60) AS P8_HORA_SEGUNDOS,#(lf)        P8_FILIAL,#(lf)        P8_ORDEM,#(lf)        P8_TPMARCA,#(lf)        LAG((FLOOR(P8_HORA) * 3600) + ((P8_HORA - FLOOR(P8_HORA)) * 100 * 60)) #(lf)            OVER (PARTITION BY P8_MAT, P8_DATAAPO ORDER BY CAST(P8_DATA AS varchar)  + '|' + FORMAT(P8_HORA, '00')) #(lf)        AS Hora_Anterior_Segundos, -- Convertendo Hora_Anterior para segundos#(lf)        ROW_NUMBER() OVER (PARTITION BY P8_MAT, P8_DATAAPO ORDER BY CAST(P8_DATA AS varchar)  + '|' + FORMAT(P8_HORA, '00')) #(lf)        AS Numero_Linha,#(lf)        COUNT(*) OVER (PARTITION BY P8_MAT, P8_DATAAPO) AS Total_Marcacoes#(lf)    FROM #(lf)        SP8010#(lf)    WHERE #(lf)        D_E_L_E_T_ = '' #(lf)        AND P8_DATAAPO >= '20230101' #(lf)        AND P8_MOTIVRG NOT IN ('REJEICAO AUTOMATICA', 'EXCLUSAO MANUAL')#(lf)),#(lf)#(lf)Temp AS (#(lf)    SELECT #(lf)        ORDENADOR,#(lf)        P8_CC,#(lf)        P8_MOTIVRG,#(lf)        P8_FILIAL,#(lf)        P8_MAT,#(lf)        P8_DATAAPO,#(lf)        P8_HORA,#(lf)        P8_HORA_SEGUNDOS,#(lf)        Hora_Anterior_Segundos,#(lf)        -- Cálculo correto de horas trabalhadas usando segundos#(lf)        CASE #(lf)            WHEN P8_HORA_SEGUNDOS < Hora_Anterior_Segundos #(lf)            THEN Hora_Anterior_Segundos - P8_HORA_SEGUNDOS#(lf)            ELSE P8_HORA_SEGUNDOS - Hora_Anterior_Segundos#(lf)        END AS HORAS_TRABALHADAS_SEGUNDOS,#(lf)        P8_ORDEM,#(lf)        P8_TPMARCA,#(lf)        Numero_Linha,#(lf)        Total_Marcacoes#(lf)    FROM Ponto#(lf)),#(lf)#(lf)Temp2 AS (#(lf)    SELECT #(lf)        ORDENADOR,#(lf)        P8_CC,#(lf)        P8_FILIAL,#(lf)        P8_MOTIVRG,#(lf)        P8_MAT,#(lf)        P8_DATAAPO,#(lf)        P8_HORA,#(lf)        P8_HORA_SEGUNDOS,#(lf)        Hora_Anterior_Segundos,#(lf)        -- Ajustando erro de cálculo caso seja maior que 10 horas (convertido para segundos)#(lf)        CASE #(lf)            WHEN HORAS_TRABALHADAS_SEGUNDOS > (10 * 3600) #(lf)            THEN (24 * 3600) - HORAS_TRABALHADAS_SEGUNDOS #(lf)            ELSE HORAS_TRABALHADAS_SEGUNDOS #(lf)        END AS HORAS_TRABALHADAS_SEGUNDOS,#(lf)        P8_ORDEM,#(lf)        P8_TPMARCA,#(lf)        Numero_Linha,#(lf)        Total_Marcacoes#(lf)    FROM Temp#(lf))#(lf)#(lf)SELECT #(lf)    P8_CC,#(lf)    P8_MAT,#(lf)    P8_DATAAPO, #(lf)    P8_FILIAL,#(lf)    P8_HORA, -- Mantendo o formato original#(lf)    P8_HORA_SEGUNDOS, -- Agora em segundos#(lf)    Hora_Anterior_Segundos, -- Agora em segundos#(lf)    HORAS_TRABALHADAS_SEGUNDOS, -- Agora em segundos#(lf)    P8_ORDEM,#(lf)    Numero_Linha,#(lf)    CASE#(lf)        WHEN Numero_Linha % 2 = 0 THEN 'DENTRO'#(lf)        WHEN Numero_Linha = 1 THEN 'INICIO'#(lf)        ELSE 'FORA'#(lf)    END AS STATUS,#(lf)    Total_Marcacoes,#(lf)    P8_FILIAL + '|' + P8_MAT AS FK_MAT,#(lf)    ORDENADOR,#(lf)    P8_MOTIVRG#(lf)FROM Temp2#(lf)WHERE #(lf)    P8_DATAAPO >= '20241101' AND Total_Marcacoes % 2 > 0 AND P8_DATAAPO <> CONVERT(VARCHAR,GETDATE(), 112)#(lf)#(lf)   #(lf)"]),
+				    #"Linhas Agrupadas" = Table.Group(Fonte, {"P8_MAT", "P8_DATAAPO", "FK_MAT", "Total_Marcacoes"}, {{"Soma", each List.Sum([HORAS_TRABALHADAS_SEGUNDOS]), type nullable number}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Linhas Agrupadas",{{"P8_DATAAPO", type date}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"Soma", "HORAS_TRABALHADAS_SEGUNDOS"}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"HORAS_TRABALHADAS_SEGUNDOS", Int64.Type}, {"P8_DATAAPO", type text}}),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Tipo Alterado1", "Personalizar", each if [Total_Marcacoes] = 3 then 34560 else if [Total_Marcacoes] = 5 then [HORAS_TRABALHADAS_SEGUNDOS] else null),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Coluna Condicional Adicionada",{{"HORAS_TRABALHADAS_SEGUNDOS", "Segundos_referencia"}, {"Personalizar", "HORAS_TRABALHADAS_SEGUNDOS"}}),
+				    #"Subtraído da coluna" = Table.TransformColumns(#"Colunas Renomeadas1", {{"HORAS_TRABALHADAS_SEGUNDOS", each _ - 4032, type number}}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Subtraído da coluna",{{"P8_DATAAPO", type date}})
+				in
+				    #"Tipo Alterado2"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

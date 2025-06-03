@@ -1,0 +1,53 @@
+table dFilial
+	lineageTag: 206bd1e3-6d54-4607-bd00-c06a6898ebed
+
+	column COD_FILIAL
+		dataType: string
+		lineageTag: b74e64a0-9543-40d5-81f1-2dc5e74c5d36
+		summarizeBy: none
+		sourceColumn: COD_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_FILIAL
+		dataType: string
+		lineageTag: 119e11ab-a65f-401a-a605-893ca29bf544
+		summarizeBy: none
+		sourceColumn: DESC_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column COD_UNINEG
+		dataType: string
+		lineageTag: 2ee54587-f74a-4d31-9db9-4803cd646463
+		summarizeBy: none
+		sourceColumn: COD_UNINEG
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_UNINEG
+		dataType: string
+		lineageTag: c57f44ac-f48e-460a-8fad-37b60c88ef06
+		summarizeBy: none
+		sourceColumn: DESC_UNINEG
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_FILIAL
+		dataType: string
+		lineageTag: f184811e-6dd9-43c4-a58b-ac7e4bb0c0ce
+		summarizeBy: none
+		sourceColumn: PK_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dFilial = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)    'P |01|0101IN01' AS PK_FILIAL,#(lf)    '01IN01' AS COD_FILIAL,#(lf)    'LINCON - MATRIZ' AS DESC_FILIAL,#(lf)    'IN' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0101IN02' AS PK_FILIAL,#(lf)    '01IN02' AS COD_FILIAL,#(lf)    'LINCON - FILIAL' AS DESC_FILIAL,#(lf)    'IN' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0101IN03' AS PK_FILIAL,#(lf)    '01IN03' AS COD_FILIAL,#(lf)    'LINCON - FILIAL' AS DESC_FILIAL,#(lf)    'IN' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0101IN04' AS PK_FILIAL,#(lf)    '01IN04' AS COD_FILIAL,#(lf)    'LINCON - CD' AS DESC_FILIAL,#(lf)    'IN' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG #(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0101IN05' AS PK_FILIAL,#(lf)    '01IN05' AS COD_FILIAL,#(lf)    'VAREJO' AS DESC_FILIAL,#(lf)    'IN' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0101IN06' AS PK_FILIAL,#(lf)    '01IN06' AS COD_FILIAL,#(lf)    'LINCON ADM' AS DESC_FILIAL,#(lf)    'IN' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0102AP01' AS PK_FILIAL,#(lf)    '02AP01' AS COD_FILIAL,#(lf)    'BRADO - MATRIZ' AS DESC_FILIAL,#(lf)    'AP' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0103AR05' AS PK_FILIAL,#(lf)    '03AR05' AS COD_FILIAL,#(lf)    'BRG - JARDIM RIACHO' AS DESC_FILIAL,#(lf)    'AR' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0103FZ01' AS PK_FILIAL,#(lf)    '03FZ01' AS COD_FILIAL,#(lf)    'BRG - MATRIZ' AS DESC_FILIAL,#(lf)    'FZ' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0103FZ02' AS PK_FILIAL,#(lf)    '03FZ02' AS COD_FILIAL,#(lf)    'BRG - JABOTICATUBAS' AS DESC_FILIAL,#(lf)    'FZ' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0103FZ03' AS PK_FILIAL,#(lf)    '03FZ03' AS COD_FILIAL,#(lf)    'BRG - VILA COCO' AS DESC_FILIAL,#(lf)    'FZ' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0103FZ04' AS PK_FILIAL,#(lf)    '03FZ04' AS COD_FILIAL,#(lf)    'BRG - BRUMADINHO' AS DESC_FILIAL,#(lf)    'FZ' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0104AP01' AS PK_FILIAL,#(lf)    '04AP01' AS COD_FILIAL,#(lf)    'AMPLUS - MATRIZ' AS DESC_FILIAL,#(lf)    'AP' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0104FZ02' AS PK_FILIAL,#(lf)    '04FZ02' AS COD_FILIAL,#(lf)    'AMPLUS - FILIAL' AS DESC_FILIAL,#(lf)    'FZ' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0105TR01' AS PK_FILIAL,#(lf)    '05TR01' AS COD_FILIAL,#(lf)    'TRANSFIPE - MATRIZ' AS DESC_FILIAL,#(lf)    'TR' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0106FZ01' AS PK_FILIAL,#(lf)    '06FZ01' AS COD_FILIAL,#(lf)    'B & D - MATRIZ' AS DESC_FILIAL,#(lf)    'FZ' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0107GE01' AS PK_FILIAL,#(lf)    '07GE01' AS COD_FILIAL,#(lf)    'GAVIANT - MATRIZ' AS DESC_FILIAL,#(lf)    'GE' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0108GE01' AS PK_FILIAL,#(lf)    '08GE01' AS COD_FILIAL,#(lf)    'BRAGUES - MATRIZ' AS DESC_FILIAL,#(lf)    'GE' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0109GE01' AS PK_FILIAL,#(lf)    '09GE01' AS COD_FILIAL,#(lf)    'GIFF - MATRIZ' AS DESC_FILIAL,#(lf)    'GE' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0110CS01' AS PK_FILIAL,#(lf)    '10CS01' AS COD_FILIAL,#(lf)    'GABRIELA MARTINS CONSULTORIA EIRELI' AS DESC_FILIAL,#(lf)    'CS' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0111CS01' AS PK_FILIAL,#(lf)    '11CS01' AS COD_FILIAL,#(lf)    'PEDRO BRAGA CONSULTORIA EIRELI' AS DESC_FILIAL,#(lf)    'CS' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0112CD01' AS PK_FILIAL,#(lf)    '12CD01' AS COD_FILIAL,#(lf)    'T2 ENERGIA IMPORTACAO E DISTRIBUICAO LTDA' AS DESC_FILIAL,#(lf)    'CD' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0113CS01' AS PK_FILIAL,#(lf)    '13CS01' AS COD_FILIAL,#(lf)    'VINICIUS BRAGA CONSULTORIA LTDA' AS DESC_FILIAL,#(lf)    'CS' AS COD_UNINEG,#(lf)    'EMPRESA' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0114GE01' AS PK_FILIAL,#(lf)    '14GE01' AS COD_FILIAL,#(lf)    'BRAGDOM LTD. - MATRIZ' AS DESC_FILIAL,#(lf)    'GE' AS COD_UNINEG,#(lf)    'EMPRESA' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0115GE01' AS PK_FILIAL,#(lf)    '15GE01' AS COD_FILIAL,#(lf)    'GALIVIANT LTD. - MATRIZ' AS DESC_FILIAL,#(lf)    'GE' AS COD_UNINEG,#(lf)    'EMPRESA' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|0116GE01' AS PK_FILIAL,#(lf)    '16GE01' AS COD_FILIAL,#(lf)    'MARTON PARTICIPACOES S/A - MATRIZ' AS DESC_FILIAL,#(lf)    'GE' AS COD_UNINEG,#(lf)    'EMPRESA' AS DESC_UNINEG#(lf)#(lf)UNION #(lf)#(lf)SELECT #(lf)    'P |01|01      ' AS PK_FILIAL,#(lf)    '01      ' AS COD_FILIAL,#(lf)    'TROPEIRA - COMPARTILHADA' AS DESC_FILIAL,#(lf)    '' AS COD_UNINEG,#(lf)    '' AS DESC_UNINEG#(lf);#(lf)"])
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table
+

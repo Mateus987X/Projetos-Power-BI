@@ -1,0 +1,40 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+
+annotation PBI_QueryOrder = ["dVendedor","dProduto","dCliente","fctFaturamento","fDevolucoes","dTES","dFilial","Medidas - Marketing","Medidas - Faturamento","dSegmentos","Medidas - Temporais","Medidas - Impostos","Investimentos","Leads"]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table DateTableTemplate_f24a3b91-5d4a-4d4b-8509-89fe259aa53d
+ref table dVendedor
+ref table dProduto
+ref table dCliente
+ref table fctFaturamento
+ref table fDevolucoes
+ref table LocalDateTable_0986e182-ff95-4e39-bea5-0f47f9a158c8
+ref table dTES
+ref table dCalendario
+ref table dFilial
+ref table LocalDateTable_c4b1984b-84e1-4ba1-83c2-9fc00788a2f6
+ref table LocalDateTable_1a815bb7-00dc-403d-be57-11dc8e9c0a5a
+ref table 'Medidas - Marketing'
+ref table 'Medidas - Faturamento'
+ref table dSegmentos
+ref table 'Medidas - Temporais'
+ref table 'Medidas - Impostos'
+ref table Investimentos
+ref table LocalDateTable_e09104ee-a796-4011-850c-c09907b81805
+ref table Leads
+
+ref cultureInfo pt-BR
+

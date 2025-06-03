@@ -1,0 +1,10 @@
+Esse projeto teve como objetivo principal de olhar as horas improdutivas de cada colaborador dentro do chão de fábrica de uma empresa.
+Mostrando as horas em aberto (Antes do Departamento Pessoal fechar), destacando quais são os que estão certo "HorasSP8(Marcacaopar)" e os que estão possivelmente erradas ("HorasSP8(MarcacaoImpar))
+
+
+SPG - Horas Fechadas (Pós análise do DP)
+SP8 - Horas abertas (pré análise do DP)
+
+
+Esse projeto teve uma grande particularidade, já que tive que fazer diversas transformações e cálculos de horas/minutos/segundos.
+Vale a pena dar uma olhada nas medidas.

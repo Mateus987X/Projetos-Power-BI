@@ -1,0 +1,377 @@
+table fctFaturamento
+	lineageTag: 3c7170d5-a079-479d-ac87-6202df476faa
+
+	column SERIE_DA_NOTA_FISCAL
+		dataType: string
+		lineageTag: e784e937-5cce-4bc6-b6ae-bd58de69bdf3
+		summarizeBy: none
+		sourceColumn: SERIE_DA_NOTA_FISCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_DA_NOTA_FISCAL
+		dataType: string
+		lineageTag: fde8eb38-4db7-4e53-8c78-fb9f55270550
+		summarizeBy: none
+		sourceColumn: NUMERO_DA_NOTA_FISCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_PEDIDO_VENDA
+		dataType: string
+		lineageTag: 547c54ac-c437-4d97-90d0-9d17cb57d76f
+		summarizeBy: none
+		sourceColumn: NUMERO_PEDIDO_VENDA
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERO_ITEM
+		dataType: string
+		lineageTag: e7e96925-7817-4f56-b547-d073d2cf34ec
+		summarizeBy: none
+		sourceColumn: NUMERO_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA_DE_EMISSAO
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 117f4a5e-dc6f-4fda-a482-a8f5948e68ea
+		summarizeBy: none
+		sourceColumn: DATA_DE_EMISSAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DATA_SAIDA_NF
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5e323b98-4ab2-4a09-a7a5-b6e21f98e732
+		summarizeBy: none
+		sourceColumn: DATA_SAIDA_NF
+
+		variation Variation
+			isDefault
+			relationship: 0c24f9c1-fb33-4071-88a9-77abe1e9ab13
+			defaultHierarchy: LocalDateTable_0986e182-ff95-4e39-bea5-0f47f9a158c8.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMPRAS_DIFERENCA_DIA
+		dataType: int64
+		formatString: 0
+		lineageTag: 99bd692b-eda1-4272-a48a-778f25f7c870
+		summarizeBy: sum
+		sourceColumn: COMPRAS_DIFERENCA_DIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIPO_DE_FRETE
+		dataType: string
+		lineageTag: 88f197a6-5587-431a-ac37-84d75da04fa1
+		summarizeBy: none
+		sourceColumn: TIPO_DE_FRETE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIPO_DE_NOTA_FISCAL
+		dataType: string
+		lineageTag: e31201b3-23ca-41cf-8bb0-b2a9ae5295cd
+		summarizeBy: none
+		sourceColumn: TIPO_DE_NOTA_FISCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGEM_DO_LANCAMENTO
+		dataType: string
+		lineageTag: cb95edf1-6f3c-4422-92df-af23832f0691
+		summarizeBy: none
+		sourceColumn: ORIGEM_DO_LANCAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_PRODUTO
+		dataType: string
+		lineageTag: a7859b0a-a113-47bf-a931-5891e83f77ce
+		summarizeBy: none
+		sourceColumn: PK_PRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_VENDEDOR
+		dataType: string
+		lineageTag: 694401ab-a2a2-446f-b511-0bf782f00f39
+		summarizeBy: none
+		sourceColumn: PK_VENDEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_TES
+		dataType: string
+		lineageTag: c75e1e0b-3f5d-4d62-8fe2-dde3376d1dd5
+		summarizeBy: none
+		sourceColumn: PK_TES
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_CLIENTE
+		dataType: string
+		lineageTag: 2bccc959-81c6-4e9e-ad9c-ed5ed890e7eb
+		summarizeBy: none
+		sourceColumn: PK_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_REGIAO
+		dataType: string
+		lineageTag: 043bb134-b657-41ae-888d-676d2686f990
+		summarizeBy: none
+		sourceColumn: PK_REGIAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_CONDICAO_DE_PAGAMENTO
+		dataType: string
+		lineageTag: dd56508d-92ff-4a6f-be55-1529efec6ace
+		summarizeBy: none
+		sourceColumn: PK_CONDICAO_DE_PAGAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column VL_FATURAMENTO_TOTAL
+		dataType: double
+		lineageTag: 4497eec2-0180-40f0-80eb-0c246a8fdb4e
+		summarizeBy: sum
+		sourceColumn: VL_FATURAMENTO_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_ICMS_FATURAMENTO
+		dataType: double
+		lineageTag: 88253812-fd81-408a-be32-d6f195af25de
+		summarizeBy: sum
+		sourceColumn: VL_ICMS_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_IPI_FATURAMENTO
+		dataType: double
+		lineageTag: fe1b2144-b8d0-4d38-bf4e-0e911d10863e
+		summarizeBy: sum
+		sourceColumn: VL_IPI_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_FRETE_NF
+		dataType: double
+		lineageTag: 97a3d26f-7b48-4180-902d-2c090b9ae3af
+		summarizeBy: sum
+		sourceColumn: VL_FRETE_NF
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_DESPESA
+		dataType: double
+		lineageTag: fe29b61b-753a-43c1-8051-6ab37d7dadb6
+		summarizeBy: sum
+		sourceColumn: VL_DESPESA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_FATURAMENTO_MERCADORIA
+		dataType: double
+		lineageTag: f7bfca06-656c-43d3-83cd-cf7c60e68f2d
+		summarizeBy: sum
+		sourceColumn: VL_FATURAMENTO_MERCADORIA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_PIS_FATURAMENTO
+		dataType: double
+		lineageTag: 7e223df6-c02f-41ab-9536-7b1f60094316
+		summarizeBy: sum
+		sourceColumn: VL_PIS_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_COFINS_FATURAMENTO
+		dataType: double
+		lineageTag: 0ec9f47e-d0a8-446a-b275-18ed6b380a72
+		summarizeBy: sum
+		sourceColumn: VL_COFINS_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QTD_FATURADA_ITEM
+		dataType: double
+		lineageTag: 2c0d9d5a-3535-4d90-9a34-480db3c75833
+		summarizeBy: sum
+		sourceColumn: QTD_FATURADA_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_ISS_FATURAMENTO
+		dataType: double
+		lineageTag: 7b35bcb3-d703-4409-8953-7f15f63a535c
+		summarizeBy: sum
+		sourceColumn: VL_ISS_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_ICMS_SUBST_FATURAMENTO
+		dataType: double
+		lineageTag: 87a8fc09-8bb3-4d6b-908a-99f4f88b4ffa
+		summarizeBy: sum
+		sourceColumn: VL_ICMS_SUBST_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_DESCONTO_FATURAMENTO
+		dataType: double
+		lineageTag: da58d1ca-212d-4e7e-9f65-749094ea709b
+		summarizeBy: sum
+		sourceColumn: VL_DESCONTO_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_IRF_FATURAMENTO
+		dataType: double
+		lineageTag: 5af1dab0-4c39-4e58-8914-bbf758fa4d1a
+		summarizeBy: sum
+		sourceColumn: VL_IRF_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_INSS_FATURAMENTO
+		dataType: double
+		lineageTag: 105e0a71-8d6d-421f-9774-90906f381ae2
+		summarizeBy: sum
+		sourceColumn: VL_INSS_FATURAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PESO_LIQUIDO
+		dataType: double
+		lineageTag: 85a5a7f0-b176-4690-9c9d-7559017e323f
+		summarizeBy: sum
+		sourceColumn: PESO_LIQUIDO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PESO_BRUTO
+		dataType: double
+		lineageTag: 4268c44d-145b-4877-a728-259f6374c657
+		summarizeBy: sum
+		sourceColumn: PESO_BRUTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QTD
+		dataType: int64
+		formatString: 0
+		lineageTag: da112cd4-58f2-4890-b029-875767ff02b2
+		summarizeBy: sum
+		sourceColumn: QTD
+
+		annotation SummarizationSetBy = Automatic
+
+	column VL_UNITARIO
+		dataType: double
+		lineageTag: 36749ad2-e955-47bd-9da2-c9a499ced511
+		summarizeBy: sum
+		sourceColumn: VL_UNITARIO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VL_SEGURO
+		dataType: double
+		lineageTag: 89d4575e-906a-43ae-99e4-d0a343e3540d
+		summarizeBy: sum
+		sourceColumn: VL_SEGURO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PK_FILIAL
+		dataType: string
+		lineageTag: 453a76b3-11fb-47ed-9497-0f12281b2fde
+		summarizeBy: none
+		sourceColumn: PK_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column UltimoPreco = ```
+			
+			CALCULATE(
+			    MAX(fctFaturamento[VL_UNITARIO]),
+			    FILTER(
+			        fctFaturamento,
+			        fctFaturamento[DATA_DE_EMISSAO] = 
+			            CALCULATE(
+			                MAX(fctFaturamento[DATA_DE_EMISSAO]),
+			                ALLEXCEPT(fctFaturamento, fctFaturamento[PK_PRODUTO], fctFaturamento[PK_TABGEN])
+			            ) &&
+			        Fact_Faturamento[PK_PRODUTO] = EARLIER(Fact_Faturamento[PK_PRODUTO]) &&
+			        Fact_Faturamento[PK_TABGEN] = EARLIER(Fact_Faturamento[PK_TABGEN])
+			    )
+			)
+			
+			```
+		lineageTag: 73b06db5-f7d3-4724-8322-f2363416eadb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fctFaturamento = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)    CASE#(lf)        WHEN D2_FILIAL IS NULL THEN 'P |01||'#(lf)        ELSE 'P |01|01' + CAST(D2_FILIAL AS CHAR(6))#(lf)    END AS PK_FILIAL,#(lf)    F2_SERIE AS SERIE_DA_NOTA_FISCAL,#(lf)    F2_DOC AS NUMERO_DA_NOTA_FISCAL,#(lf)    D2_PEDIDO AS NUMERO_PEDIDO_VENDA,#(lf)    D2_ITEM AS NUMERO_ITEM,#(lf)    CASE#(lf)    WHEN LTRIM(RTRIM(F2_EMISSAO)) = ' ' THEN ' '#(lf)    ELSE F2_EMISSAO#(lf)    END AS DATA_DE_EMISSAO,#(lf)    CASE#(lf)    WHEN LTRIM(RTRIM(F2_EMINFE)) = ' ' THEN ' '#(lf)    ELSE F2_EMINFE#(lf)    END AS DATA_SAIDA_NF,#(lf)    DATEDIFF(DAY,CAST(LEAD(F2_EMISSAO, 1) OVER (PARTITION BY F2_CLIENTE ORDER BY CAST(F2_EMISSAO AS DATE) DESC) AS DATE) , CAST(F2_EMISSAO AS DATE)) COMPRAS_DIFERENCA_DIA,#(lf)    F2_TPFRETE AS TIPO_DE_FRETE,#(lf)    D2_TIPO AS TIPO_DE_NOTA_FISCAL,#(lf)    D2_ORIGLAN AS ORIGEM_DO_LANCAMENTO,#(lf)    'P |01|SB1010|' + COALESCE(NULLIF(RTRIM(COALESCE(B1_FILIAL, ' ')) + '|' + RTRIM(COALESCE(D2_COD, ' ')), ' '), '|') AS PK_PRODUTO,#(lf)    'P |01|SA3010|' + COALESCE(NULLIF(RTRIM(COALESCE(A3_FILIAL, ' ')) + '|' + RTRIM(COALESCE(F2_VEND1, ' ')), ' '), '|') AS PK_VENDEDOR,#(lf)    'P |01|SF4010|' + COALESCE(NULLIF(RTRIM(COALESCE(F4_FILIAL, ' ')) + '|' + RTRIM(COALESCE(D2_TES, ' ')), ' '), '|') AS PK_TES,#(lf)    'P |01|SA1010|' + COALESCE(NULLIF(RTRIM(COALESCE(A1_FILIAL, ' ')) + '|' + RTRIM(COALESCE(D2_CLIENTE, ' ')) + RTRIM(COALESCE(D2_LOJA, ' ')), ' '), '|') AS PK_CLIENTE,#(lf)    CASE#(lf)        WHEN A1_COD_MUN = ' ' THEN 'P |01|CC2010|' + COALESCE(NULLIF(RTRIM(COALESCE(A1_EST, ' ')), ' '), '|')#(lf)        ELSE 'P |01|CC2010|' + COALESCE(NULLIF(RTRIM(COALESCE(A1_EST, ' ')) + RTRIM(COALESCE(A1_COD_MUN, ' ')), ' '), '|')#(lf)    END AS PK_REGIAO,#(lf)    'P |01|SE4010|' + COALESCE(NULLIF(RTRIM(COALESCE(E4_FILIAL, ' ')) + '|' + RTRIM(COALESCE(F2_COND, ' ')), ' '), '|') AS PK_CONDICAO_DE_PAGAMENTO,#(lf)    CAST(COALESCE(D2_VALBRUT, 0) AS DECIMAL(14, 2)) AS VL_FATURAMENTO_TOTAL,#(lf)    CAST(COALESCE(D2_VALICM, 0) AS DECIMAL(14, 2)) AS VL_ICMS_FATURAMENTO,#(lf)    CAST(COALESCE(D2_VALIPI, 0) AS DECIMAL(14, 2)) AS VL_IPI_FATURAMENTO,#(lf)    CAST(COALESCE(D2_VALFRE, 0) AS DECIMAL(14, 2)) AS VL_FRETE_NF,#(lf)    CAST(COALESCE(D2_DESPESA, 0) AS DECIMAL(14, 2)) AS VL_DESPESA,#(lf)    CAST(COALESCE(D2_TOTAL, 0) AS DECIMAL(14, 2)) AS VL_FATURAMENTO_MERCADORIA,#(lf)    CAST(COALESCE(D2_VALIMP6, 0) AS DECIMAL(14, 2)) AS VL_PIS_FATURAMENTO,#(lf)    CAST(COALESCE(D2_VALIMP5, 0) AS DECIMAL(14, 2)) AS VL_COFINS_FATURAMENTO,#(lf)    CAST(COALESCE(D2_QUANT, 0) AS DECIMAL(12, 4)) AS QTD_FATURADA_ITEM,#(lf)    CAST(COALESCE(D2_VALISS, 0) AS DECIMAL(14, 2)) AS VL_ISS_FATURAMENTO,#(lf)    CAST(COALESCE(D2_ICMSRET, 0) AS DECIMAL(14, 2)) AS VL_ICMS_SUBST_FATURAMENTO,#(lf)    CAST(COALESCE(D2_DESCON, 0) AS DECIMAL(12, 2)) AS VL_DESCONTO_FATURAMENTO,#(lf)    CAST(COALESCE(D2_VALIRRF, 0) AS DECIMAL(14, 2)) AS VL_IRF_FATURAMENTO,#(lf)    CAST(COALESCE(D2_VALINS, 0) AS DECIMAL(14, 2)) AS VL_INSS_FATURAMENTO,#(lf)    CAST(COALESCE(D2_PESO * D2_QUANT, 0) AS DECIMAL(12, 4)) AS PESO_LIQUIDO,#(lf)    CAST(COALESCE(B1_PESBRU * D2_QUANT, 0) AS DECIMAL(12, 4)) AS PESO_BRUTO,#(lf)    1 AS QTD,#(lf)    CAST(COALESCE(D2_PRUNIT, 0) AS DECIMAL(14, 4)) AS VL_UNITARIO,#(lf)    CAST(COALESCE(D2_SEGURO, 0) AS DECIMAL(14, 2)) AS VL_SEGURO#(lf)FROM SD2010 SD2#(lf)INNER JOIN SF2010 SF2 ON F2_FILIAL = D2_FILIAL#(lf)    AND F2_CLIENTE = D2_CLIENTE#(lf)    AND F2_LOJA = D2_LOJA#(lf)    AND F2_DOC = D2_DOC#(lf)    AND F2_SERIE = D2_SERIE#(lf)    AND SF2.D_E_L_E_T_ = ' '#(lf)INNER JOIN SB1010 SB1 ON B1_FILIAL = SUBSTRING(D2_FILIAL, 1, 2)#(lf)    AND SB1.B1_COD = SD2.D2_COD#(lf)    AND SB1.D_E_L_E_T_ = ' '#(lf)INNER JOIN SF4010 SF4 ON F4_FILIAL = SUBSTRING(D2_FILIAL, 1, 2)#(lf)    AND SF4.F4_CODIGO = SD2.D2_TES#(lf)    AND SF4.D_E_L_E_T_ = ' '#(lf)LEFT JOIN SA1010 SA1 ON A1_FILIAL = SUBSTRING(D2_FILIAL, 1, 2)#(lf)    AND SA1.A1_COD = SF2.F2_CLIENTE#(lf)    AND SA1.A1_LOJA = SF2.F2_LOJA#(lf)    AND SA1.D_E_L_E_T_ = ' '#(lf)LEFT JOIN SA3010 SA3 ON A3_FILIAL = SUBSTRING(D2_FILIAL, 1, 2)#(lf)    AND A3_COD = F2_VEND1#(lf)    AND SA3.D_E_L_E_T_ = ' '#(lf)LEFT JOIN SE4010 SE4 ON E4_FILIAL = SUBSTRING(D2_FILIAL, 1, 2)#(lf)    AND E4_CODIGO = F2_COND#(lf)    AND SE4.D_E_L_E_T_ = ' '#(lf)WHERE A1_SATIV8 = '000907' AND D2_EMISSAO >= '20230101'#(lf)    AND D2_TIPO NOT IN ('B', 'D')#(lf)    AND SD2.D_E_L_E_T_ = ' '#(lf)ORDER BY F2_DOC;#(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"DATA_DE_EMISSAO", type date}, {"DATA_SAIDA_NF", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

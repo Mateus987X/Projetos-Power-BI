@@ -1,0 +1,68 @@
+table Leads
+	lineageTag: a280b6c2-f9e6-4f01-afa9-292e79f55edf
+
+	column Contato
+		dataType: string
+		lineageTag: 598539a2-3363-4b73-a2eb-d964310041f9
+		summarizeBy: none
+		sourceColumn: Contato
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cliente
+		dataType: string
+		lineageTag: 929facf7-4470-46ef-aa88-17137a1a9bb0
+		summarizeBy: none
+		sourceColumn: Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Atendente
+		dataType: string
+		lineageTag: 7097ac15-23ad-4b5f-a809-8693425f2d08
+		summarizeBy: none
+		sourceColumn: Atendente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Setor
+		dataType: string
+		lineageTag: dca82e85-d1cb-4c55-b2f4-90aa97886da8
+		summarizeBy: none
+		sourceColumn: Setor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 001d20db-aca1-49da-bfbe-ae3919b24621
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Leads = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("\\TROP-FS1\tropintranet$\Setores\Comunicacao\16 - B.I Tráfego pago\Planilhas\Leads.xlsx"), null, true),
+				    #"Tallos Chat - Relatório de Aten_Sheet" = Fonte{[Item="Tallos Chat - Relatório de Aten",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tallos Chat - Relatório de Aten_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Contato", Int64.Type}, {"Cliente", type text}, {"Atendente", type text}, {"Setor", type text}, {"Inicio do atendimento", type text}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"Contato", type text}, {"Inicio do atendimento", type text}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Tipo Alterado1", "Personalizar", each Text.BeforeDelimiter([Inicio do atendimento], " - ")),
+				    #"Colunas Removidas1" = Table.RemoveColumns(#"Personalização Adicionada",{"Inicio do atendimento"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Colunas Removidas1",{{"Personalizar", "Data"}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colunas Renomeadas","Comercial","Clientes da Região Metropolitana",Replacer.ReplaceText,{"Setor"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Marketing","Clientes de Interior",Replacer.ReplaceText,{"Setor"}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Valor Substituído1",{{"Data", type date}})
+				in
+				    #"Tipo Alterado2"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

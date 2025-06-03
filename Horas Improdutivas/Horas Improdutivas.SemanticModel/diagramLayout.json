@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 2,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 936,
+            "y": 0
+          },
+          "nodeIndex": "dMatricula",
+          "nodeLineageTag": "95176119-6c4e-477e-962f-31b14b8e2181",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 668,
+            "y": 2
+          },
+          "nodeIndex": "dCalendario",
+          "nodeLineageTag": "fa5728b8-3aba-4813-a7d0-c0c65921bf1c",
+          "size": {
+            "height": 145,
+            "width": 235
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 35,
+            "y": 180
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "f243e3e5-6227-4899-908f-2d28ea5a94f7",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 869,
+            "y": 384
+          },
+          "nodeIndex": "fSP8",
+          "nodeLineageTag": "2d77a21c-ce20-4011-b627-a70a20cddbe7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 548,
+            "y": 383
+          },
+          "nodeIndex": "fSPG",
+          "nodeLineageTag": "1a9a27c6-e317-4f68-9e65-ece79070c755",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 307,
+            "y": 21
+          },
+          "nodeIndex": "dStatus",
+          "nodeLineageTag": "99e039e8-2951-4030-8b42-4b8ff2354530",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 250,
+            "y": 386
+          },
+          "nodeIndex": "fSP8(MarcacaoImpar)",
+          "nodeLineageTag": "c6825b3b-15fd-42f8-8715-e357cfed1f71",
+          "size": {
+            "height": 148,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

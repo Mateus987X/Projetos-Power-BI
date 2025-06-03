@@ -1,0 +1,37 @@
+table Medidas
+	isHidden
+	lineageTag: f243e3e5-6227-4899-908f-2d28ea5a94f7
+
+	measure SPGXSP8 = [HorasSP8(MarcacaoPar)] + [HorasSP8(MarcacaoImpar)] + [HorasSPG (hh:mm:ss)]
+		formatString: 00:00:00
+		isHidden
+		lineageTag: 8c19cd19-12f4-4170-ae6e-7d61be38e10d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'Coluna 1'
+		dataType: string
+		isHidden
+		lineageTag: 71bebd91-08db-4ab1-bb6b-58cd0d9d10d8
+		summarizeBy: none
+		sourceColumn: Coluna 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}})
+				in
+				    #"Tipo Alterado"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

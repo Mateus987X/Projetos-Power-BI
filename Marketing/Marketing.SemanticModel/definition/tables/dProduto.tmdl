@@ -1,0 +1,73 @@
+table dProduto
+	lineageTag: 813cb54a-9eb6-4628-b326-80d855795b9c
+
+	column PK_PRODUTO
+		dataType: string
+		lineageTag: c7bbf990-a1a8-40e0-a921-fb6ee33a01a3
+		summarizeBy: none
+		sourceColumn: PK_PRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column COD_ITEM
+		dataType: string
+		lineageTag: 169cfb08-55e3-46d4-964c-474ec1b98e92
+		summarizeBy: none
+		sourceColumn: COD_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_ITEM
+		dataType: string
+		lineageTag: 042db75f-d8ac-4242-bba3-11b7192c4283
+		summarizeBy: none
+		sourceColumn: DESC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLASSIFICACAO_FISCAL
+		dataType: string
+		lineageTag: 994dc5b5-9b73-47d2-a26b-4e404e1a4021
+		summarizeBy: none
+		sourceColumn: CLASSIFICACAO_FISCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_BLOQ
+		dataType: string
+		lineageTag: d54545e0-4234-40f4-8175-8e91fb4035be
+		summarizeBy: none
+		sourceColumn: ITEM_BLOQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMISSAO
+		dataType: double
+		lineageTag: 2cf38629-0612-42bc-a954-1ed8c29547bd
+		summarizeBy: sum
+		sourceColumn: COMISSAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AJUDA_CUSTO
+		dataType: double
+		lineageTag: 5ba45ed4-3983-4374-8a2e-9cc3d69e03e2
+		summarizeBy: sum
+		sourceColumn: AJUDA_CUSTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dProduto = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)'P |01|SB1010|'+ COALESCE(NULLIF(RTRIM( COALESCE(B1_FILIAL,' ') )+'|'+RTRIM( COALESCE(B1_COD,' ') ),' '),'|') AS PK_PRODUTO#(lf),SB1.B1_COD AS COD_ITEM#(lf),SB1.B1_DESC AS DESC_ITEM#(lf),SB1.B1_POSIPI AS CLASSIFICACAO_FISCAL#(lf),SB1.B1_COMIS AS COMISSAO,#(lf)SB1.B1_AJCUSTO AS AJUDA_CUSTO#(lf),CASE #(lf)WHEN SB1.B1_MSBLQL = 2 THEN 'NAO'#(lf)WHEN SB1.B1_MSBLQL = 1 THEN 'SIM'#(lf)END AS ITEM_BLOQ#(lf)FROM SB1010 SB1 #(lf)WHERE SB1.D_E_L_E_T_ = ''#(lf)UNION #(lf)SELECT #(lf)'P |01|SB1010||'#(lf),'01 - INDEFINIDO'#(lf),'01 - INDEFINIDO'#(lf),'01 - INDEFINIDO'#(lf),0#(lf),0#(lf),'01 - INDEFINIDO'#(lf)"])
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table
+
