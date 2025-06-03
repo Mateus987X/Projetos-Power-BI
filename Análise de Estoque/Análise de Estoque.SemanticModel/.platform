@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Análise de Estoque"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d684e5a1-c5ec-4956-ac5a-443bc5c60621"
+  }
+}

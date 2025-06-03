@@ -1,0 +1,47 @@
+table dArmazem
+	lineageTag: e9cff52a-20c1-468b-9be2-e997611c721d
+
+	column B2_FILIAL
+		dataType: string
+		lineageTag: 26710bc0-fdbc-4364-bf6a-0a816df83de7
+		summarizeBy: none
+		sourceColumn: B2_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column NNR_CODIGO
+		dataType: string
+		lineageTag: ca313ee9-a925-49f9-bcd2-747e3505f50c
+		summarizeBy: none
+		sourceColumn: NNR_CODIGO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NNR_DESCRI
+		dataType: string
+		lineageTag: 5b520098-1b5a-4577-b990-0fd1cf107d74
+		summarizeBy: none
+		sourceColumn: NNR_DESCRI
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_ARMAZEM
+		dataType: string
+		lineageTag: bfd0d503-7797-4478-ae46-83157311de54
+		summarizeBy: none
+		sourceColumn: PK_ARMAZEM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dArmazem = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT DISTINCT#(lf)B2_FILIAL,#(lf)NNR_CODIGO,#(lf)NNR_DESCRI,#(lf)TRIM(B2_FILIAL) + '|' + TRIM(B2_LOCAL) AS PK_ARMAZEM#(lf)FROM NNR010 NNR#(lf)INNER JOIN SB2010 SB2 ON SUBSTRING(B2_FILIAL,1,2) = NNR_FILIAL AND B2_LOCAL = NNR_CODIGO AND SB2.D_E_L_E_T_ = ''#(lf)WHERE NNR.D_E_L_E_T_ = ''"])
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

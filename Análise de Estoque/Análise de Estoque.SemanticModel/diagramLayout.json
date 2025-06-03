@@ -1,0 +1,126 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 605,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 676,
+            "y": 4
+          },
+          "nodeIndex": "dArmazem",
+          "nodeLineageTag": "e9cff52a-20c1-468b-9be2-e997611c721d",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 346,
+            "y": 0
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "8e40614c-2e55-4db9-96bd-74bbcb80affb",
+          "size": {
+            "height": 228,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1606,
+            "y": 355
+          },
+          "nodeIndex": "fMediaConsumo",
+          "nodeLineageTag": "9ba9971c-0a72-467b-9c8e-eafa54745209",
+          "size": {
+            "height": 186,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1314,
+            "y": 0
+          },
+          "nodeIndex": "dCalendario",
+          "nodeLineageTag": "a2aeeee3-5d8d-42f8-addc-a19cfd1ae2bb",
+          "size": {
+            "height": 290,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 727,
+            "y": 357
+          },
+          "nodeIndex": "fEstoqueMatriz",
+          "nodeLineageTag": "a7e157ad-1f24-4e58-9161-48b0e638d6a2",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1019,
+            "y": 356
+          },
+          "nodeIndex": "fEstoqueTransfipe",
+          "nodeLineageTag": "a97b3ffa-be5a-45ed-806d-ab1aa571e97e",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1320,
+            "y": 355
+          },
+          "nodeIndex": "fEstoqueTerceiro",
+          "nodeLineageTag": "f58ca26d-82d5-4139-a74d-b4b908194c43",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 947,
+            "y": 4
+          },
+          "nodeIndex": "dProduto",
+          "nodeLineageTag": "1344de5b-93c7-4dba-a196-08f932d19402",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

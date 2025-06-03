@@ -1,0 +1,98 @@
+table fMediaConsumo
+	lineageTag: 9ba9971c-0a72-467b-9c8e-eafa54745209
+
+	measure Meeeedia = CALCULATE(AVERAGE(fMediaConsumo[D3_QUANT]), fMediaConsumo[D3_EMISSAO] >= DATE(2024,11,30))
+		lineageTag: 777f31b3-ad41-4beb-821f-611a2c24d6d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column D3_COD
+		dataType: string
+		lineageTag: ff2a8bc4-6ff3-4611-ab5c-88c7acb7b0b0
+		summarizeBy: none
+		sourceColumn: D3_COD
+
+		annotation SummarizationSetBy = Automatic
+
+	column D3_LOCAL
+		dataType: string
+		lineageTag: f1f9621d-6425-4255-aaca-7ac1bcfe11db
+		summarizeBy: none
+		sourceColumn: D3_LOCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column D3_QUANT
+		dataType: double
+		lineageTag: 8375da60-db61-410e-928d-de007f82e13e
+		summarizeBy: sum
+		sourceColumn: D3_QUANT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column D3_EMISSAO
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7565d8a7-33fe-48cd-bc0d-11b941eac04d
+		summarizeBy: none
+		sourceColumn: D3_EMISSAO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column D3_TIPO
+		dataType: string
+		lineageTag: 147f91eb-cd74-4258-9fe2-d431923e956d
+		summarizeBy: none
+		sourceColumn: D3_TIPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column D3_CF
+		dataType: string
+		lineageTag: 31278dc6-2d75-42b3-b526-116ad015ea4f
+		summarizeBy: none
+		sourceColumn: D3_CF
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_D3
+		dataType: string
+		lineageTag: 88c5bd60-fcdf-4693-bbea-f0919916ab2a
+		summarizeBy: none
+		sourceColumn: FK_D3
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_ARMAZEM
+		dataType: string
+		lineageTag: 9b2b71df-4947-484f-900a-d9b23a3f1007
+		summarizeBy: none
+		sourceColumn: FK_ARMAZEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_PRODUTO
+		dataType: string
+		lineageTag: 9300ba5b-a6d8-4148-b833-d0c752e48da1
+		summarizeBy: none
+		sourceColumn: FK_PRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMediaConsumo = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)D3_COD,#(lf)D3_LOCAL,#(lf)D3_QUANT,#(lf)D3_EMISSAO,#(lf)D3_TIPO,#(lf)D3_CF,#(lf)TRIM(D3_COD) + '|' + D3_LOCAL AS FK_D3,#(lf)D3_FILIAL + '|' + D3_LOCAL AS FK_ARMAZEM,#(lf)TRIM(D3_COD) AS FK_PRODUTO#(lf)FROM SD3010#(lf)WHERE D_E_L_E_T_ = '' AND D3_EMISSAO >= DATEADD(YEAR,-1,GETDATE()) AND D3_CF IN ('RE1', 'RE0', 'RE7')#(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"D3_EMISSAO", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

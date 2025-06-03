@@ -1,0 +1,20 @@
+
+EVALUATE
+
+VAR _CodigoProduto = "01700101008572" --SELECTEDVALUE(fMediaConsumo[D3_COD]) //Pega o código do contexto Atual
+
+VAR _TabelaFiltrada = 
+    FILTER(
+        SUMMARIZE(fMediaConsumo, fMediaConsumo[D3_COD], fMediaConsumo[D3_EMISSAO], "ConsumoDiario", SUM(fMediaConsumo[D3_QUANT])),
+        fMediaConsumo[D3_COD] = _CodigoProduto
+    ) //Cria uma tabela somando todo a quantidade usada no dia para o produto do contexto atual
+
+VAR UltimosRegistros = 
+    TOPN(
+        3,
+        _TabelaFiltrada,
+        fMediaConsumo[D3_EMISSAO], DESC
+    ) // Pega os últimos 3 registros, ou seja, 3 dias para cada produto no contexto, podendo assim, fazer uma média consistente dos 3 dias de uso, independente se deixou de usar um dia.
+
+RETURN UltimosRegistros
+

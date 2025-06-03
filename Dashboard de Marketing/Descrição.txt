@@ -1,1 +1,2 @@
-Esse projeto foi o meu primeiro projeto como Analista de Dados, um dashboard com todas as métricas pertinentes a área de Marketing (Churning, ROI, CPL, CaC, Leads), etc.
+*Dados antigos*
+Esse projeto foi um dashboard com todas as métricas pertinentes a área de Marketing (Churning, ROI, CPL, CaC, Leads), etc.

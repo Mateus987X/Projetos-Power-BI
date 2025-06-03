@@ -1,0 +1,50 @@
+table dProduto
+	lineageTag: 1344de5b-93c7-4dba-a196-08f932d19402
+
+	column COD_ITEM
+		dataType: string
+		lineageTag: 3338131f-873f-4a6a-87f0-eb45002c67ac
+		summarizeBy: none
+		sourceColumn: COD_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_ITEM
+		dataType: string
+		lineageTag: 576e0237-f77d-4d84-9e2a-eef20731fc57
+		summarizeBy: none
+		sourceColumn: DESC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_PRODUTO
+		dataType: string
+		lineageTag: 898ea817-78bb-4630-a4e1-d47bce5ec7aa
+		summarizeBy: none
+		sourceColumn: PK_PRODUTO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ARMAZEM
+		dataType: string
+		lineageTag: 9e697292-187d-4254-b6c6-9816382e9591
+		summarizeBy: none
+		sourceColumn: ARMAZEM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProduto = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)B1_COD AS COD_ITEM,#(lf)B1_DESC AS DESC_ITEM,#(lf)B1_LOCPAD AS ARMAZEM,#(lf)TRIM(B1_COD) AS PK_PRODUTO#(lf)FROM SB1010 SB1 #(lf)WHERE SB1.D_E_L_E_T_ = '' AND B1_FILIAL = '01' AND B1_LOCPAD IN ('03', '05')"]),
+				    #"Duplicatas Removidas" = Table.Distinct(Fonte, {"PK_PRODUTO"})
+				in
+				    #"Duplicatas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

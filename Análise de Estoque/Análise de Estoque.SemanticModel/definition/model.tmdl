@@ -1,0 +1,31 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dArmazem","Medidas","fMediaConsumo","dCalendario","fEstoqueMatriz","fEstoqueTransfipe","fEstoqueTerceiro","dProduto"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table dArmazem
+ref table Medidas
+ref table fMediaConsumo
+ref table DateTableTemplate_df89eaf9-1281-4083-9118-3786442df3b8
+ref table dCalendario
+ref table LocalDateTable_06c92ffe-c234-4f3a-a566-26549d11cec4
+ref table fEstoqueMatriz
+ref table fEstoqueTransfipe
+ref table fEstoqueTerceiro
+ref table LocalDateTable_108d69c1-2c8b-4242-bff2-d28196f68ddc
+ref table dProduto
+ref table LocalDateTable_ae78f6ef-1fb3-416f-a8b0-da71e0702a91
+
+ref cultureInfo pt-BR
+

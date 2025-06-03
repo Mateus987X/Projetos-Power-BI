@@ -1,0 +1,56 @@
+relationship 91eae191-ef92-4b56-9a96-1ec2b98c260d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendario.Data
+	toColumn: LocalDateTable_06c92ffe-c234-4f3a-a566-26549d11cec4.Date
+
+relationship d9f678f3-7282-c5a9-cb9c-a70c662c7ecc
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: fEstoqueMatriz.FK_ESTOQUES
+	toColumn: fEstoqueTransfipe.FK_ESTOQUES
+
+relationship AutoDetected_e4c33b6d-4ac0-4b53-8d63-bbc631068512
+	toCardinality: many
+	fromColumn: fEstoqueTerceiro.FK_ESTOQUES
+	toColumn: fEstoqueMatriz.FK_ESTOQUES
+
+relationship 6747f139-2b10-4e2f-b14c-6a56fcf96eda
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fEstoqueTransfipe.DATA
+	toColumn: LocalDateTable_108d69c1-2c8b-4242-bff2-d28196f68ddc.Date
+
+relationship e5c1624d-2aef-e856-ccb0-1f9cdb86360e
+	fromColumn: fEstoqueMatriz.FK_ARMAZEM
+	toColumn: dArmazem.PK_ARMAZEM
+
+relationship 99106602-11d3-be07-ae68-336c932fcca0
+	crossFilteringBehavior: bothDirections
+	fromColumn: fEstoqueMatriz.FK_PRODUTO
+	toColumn: dProduto.PK_PRODUTO
+
+relationship be289227-c39d-d6ee-7fc2-a965bc507a09
+	fromColumn: fEstoqueTransfipe.FK_PRODUTO
+	toColumn: dProduto.PK_PRODUTO
+
+relationship 284283d2-72dd-0015-30af-116781c5ae24
+	fromColumn: fEstoqueTerceiro.FK_PRODUTO
+	toColumn: dProduto.PK_PRODUTO
+
+relationship bd08e3cd-271f-879c-2d1e-cef20a09dc62
+	fromColumn: fMediaConsumo.FK_PRODUTO
+	toColumn: dProduto.PK_PRODUTO
+
+relationship 0de22cc0-ee99-b8b9-7149-3aac9955df04
+	isActive: false
+	fromColumn: fMediaConsumo.D3_EMISSAO
+	toColumn: dCalendario.Data
+
+relationship 59358560-6afc-4d12-a54b-62ec69bd6a17
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fEstoqueTerceiro.DATA
+	toColumn: LocalDateTable_ae78f6ef-1fb3-416f-a8b0-da71e0702a91.Date
+
+relationship 3a8e6350-dd49-e9a9-b69d-a54b2110c963
+	fromColumn: fEstoqueMatriz.DATA
+	toColumn: dCalendario.Data
+

@@ -1,0 +1,111 @@
+table fEstoqueMatriz
+	lineageTag: a7e157ad-1f24-4e58-9161-48b0e638d6a2
+
+	column FILIAL_ARM
+		dataType: string
+		lineageTag: a1bce7da-2261-4cb6-afd9-204f577e2758
+		summarizeBy: none
+		sourceColumn: FILIAL_ARM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FILIAL
+		dataType: string
+		lineageTag: fd7e604c-b52f-4b3a-8034-e7f916d8ce66
+		summarizeBy: none
+		sourceColumn: FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODIGO_PRODUTO
+		dataType: string
+		lineageTag: dae5a780-ae6a-4a83-b694-f2291e7d588a
+		summarizeBy: none
+		sourceColumn: CODIGO_PRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALDO
+		dataType: double
+		lineageTag: f3cb9c47-c956-40cb-88ec-bd374b63105a
+		summarizeBy: sum
+		sourceColumn: SALDO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTO_MEDIO
+		dataType: double
+		lineageTag: 0bd1f640-c6c8-4f4e-9e4d-fbd0a63a938e
+		summarizeBy: sum
+		sourceColumn: CUSTO_MEDIO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ARMAZEM
+		dataType: string
+		lineageTag: 940219fe-845e-4f54-b6bc-20cc9a4682e7
+		summarizeBy: none
+		sourceColumn: ARMAZEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FORNECEDOR
+		dataType: string
+		lineageTag: bd96eeb4-56aa-4494-9219-78d97508589d
+		summarizeBy: none
+		sourceColumn: FORNECEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 549c0c2b-6ffa-42e8-9623-cbbeab5218b7
+		summarizeBy: none
+		sourceColumn: DATA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FK_ARMAZEM
+		dataType: string
+		lineageTag: 05895884-32b0-4498-be39-4f6ff7be0283
+		summarizeBy: none
+		sourceColumn: FK_ARMAZEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_ESTOQUES
+		dataType: string
+		lineageTag: 0c940a39-d2bb-4cf4-81ff-16f159667f7d
+		summarizeBy: none
+		sourceColumn: FK_ESTOQUES
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_PRODUTO
+		dataType: string
+		lineageTag: 43fb6a0a-b393-4083-a6c2-7280b2ded636
+		summarizeBy: none
+		sourceColumn: FK_PRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fEstoqueMatriz = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "Data Warehouse", [Query="SELECT#(lf)*,#(lf)FILIAL + '|' + ARMAZEM AS FK_ARMAZEM,#(lf)TRIM(CODIGO_PRODUTO) + '|' + ARMAZEM + '|' + DATA AS FK_ESTOQUES,#(lf)TRIM(CODIGO_PRODUTO) AS FK_PRODUTO#(lf)FROM Estoque#(lf)WHERE FILIAL_ARM = 'MATRIZ' AND DATA = '20250301'"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"DATA", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

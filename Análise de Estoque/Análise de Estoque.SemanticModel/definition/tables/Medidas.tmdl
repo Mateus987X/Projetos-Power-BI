@@ -1,0 +1,206 @@
+table Medidas
+	lineageTag: 8e40614c-2e55-4db9-96bd-74bbcb80affb
+
+	measure Media5dias = ```
+			
+			
+			VAR _CodigoProduto = SELECTEDVALUE(fMediaConsumo[D3_COD]) //Pega o código do contexto Atual
+			
+			VAR _TabelaFiltrada = 
+			    FILTER(
+			        SUMMARIZE(fMediaConsumo, fMediaConsumo[D3_COD], fMediaConsumo[D3_EMISSAO], "ConsumoDiario", SUM(fMediaConsumo[D3_QUANT])),
+			        fMediaConsumo[D3_COD] = _CodigoProduto
+			    ) //Cria uma tabela somando todo a quantidade usada no dia para o produto do contexto atual
+			
+			VAR UltimosRegistros = 
+			    TOPN(
+			        5,
+			        _TabelaFiltrada,
+			        fMediaConsumo[D3_EMISSAO], DESC
+			    ) // Pega os últimos 5 registros, ou seja, últimos 5 dias para cada produto no contexto, podendo assim, fazer uma média consistente dos 5 dias de uso, independente se deixou de usar um dia.
+			
+			RETURN
+			IF(
+			    COUNTROWS(UltimosRegistros) > 0,
+			    AVERAGEX(
+			        UltimosRegistros,
+			        [ConsumoDiario]
+			    ),
+			    BLANK()
+			)
+			```
+		displayFolder: Medias
+		lineageTag: 83613724-3596-47fd-b440-4956556ff3d7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Media3dias = ```
+			
+			
+			VAR _CodigoProduto = SELECTEDVALUE(fMediaConsumo[D3_COD]) //Pega o código do contexto Atual
+			
+			VAR _TabelaFiltrada = 
+			    FILTER(
+			        SUMMARIZE(fMediaConsumo, fMediaConsumo[D3_COD], fMediaConsumo[D3_EMISSAO], "ConsumoDiario", SUM(fMediaConsumo[D3_QUANT])),
+			        fMediaConsumo[D3_COD] = _CodigoProduto
+			    ) //Cria uma tabela somando todo a quantidade usada no dia para o produto do contexto atual
+			
+			VAR UltimosRegistros = 
+			    TOPN(
+			        3,
+			        _TabelaFiltrada,
+			        fMediaConsumo[D3_EMISSAO], DESC
+			    ) // Pega os últimos 3 registros, ou seja, 3 dias para cada produto no contexto, podendo assim, fazer uma média consistente dos 3 dias de uso, independente se deixou de usar um dia.
+			
+			RETURN AVERAGEX(UltimosRegistros, [ConsumoDiario])
+			// IF(
+			//     COUNTROWS(UltimosRegistros) > 0,
+			//     AVERAGEX(
+			//         UltimosRegistros,
+			//         [ConsumoDiario]
+			//     ),
+			//     BLANK()
+			// )
+			```
+		displayFolder: Medias
+		lineageTag: dbdae9b8-3142-413b-b1a6-5b781fdb86b2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MediaAnual =
+			
+			
+			VAR _Media = FILTER(SUMMARIZE(
+					fMediaConsumo, fMediaConsumo[D3_COD], fMediaConsumo[D3_EMISSAO],
+					"MediaConsumoDia", SUM(fMediaConsumo[D3_QUANT])),
+			        fMediaConsumo[D3_EMISSAO] >= TODAY() -360
+				)
+			
+			    RETURN AVERAGEX(_Media, [MediaConsumoDia])
+		isHidden
+		displayFolder: Medias
+		lineageTag: 1933fbf7-51ee-48d2-a99b-ccdc8463adbc
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Media2MES =
+			
+			
+			VAR _Media = FILTER(SUMMARIZE(
+					fMediaConsumo, fMediaConsumo[D3_COD], fMediaConsumo[D3_EMISSAO],
+					"MediaConsumoDia", SUM(fMediaConsumo[D3_QUANT])),
+			        fMediaConsumo[D3_EMISSAO] >= TODAY() -60
+				)
+			
+			    RETURN AVERAGEX(_Media, [MediaConsumoDia])
+		isHidden
+		displayFolder: Medias
+		lineageTag: e4d49a58-a57b-41cd-a33a-66124790ea30
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Media30dias = ```
+			
+			
+			VAR _CodigoProduto = SELECTEDVALUE(fMediaConsumo[D3_COD]) //Pega o código do contexto Atual
+			
+			VAR _TabelaFiltrada = 
+			    FILTER(
+			        SUMMARIZE(fMediaConsumo, fMediaConsumo[D3_COD], fMediaConsumo[D3_EMISSAO], "ConsumoDiario", SUM(fMediaConsumo[D3_QUANT])),
+			        fMediaConsumo[D3_COD] = _CodigoProduto
+			    ) //Cria uma tabela somando todo a quantidade usada no dia para o produto do contexto atual
+			
+			VAR UltimosRegistros = 
+			    TOPN(
+			        30,
+			        _TabelaFiltrada,
+			        fMediaConsumo[D3_EMISSAO], DESC
+			    ) // Pega os últimos 30 registros, ou seja, 30 dias para cada produto no contexto, podendo assim, fazer uma média consistente dos 30 dias de uso, independente se deixou de usar um dia.
+			
+			RETURN
+			IF(
+			    COUNTROWS(UltimosRegistros) > 0,
+			    AVERAGEX(
+			        UltimosRegistros,
+			        [ConsumoDiario]
+			    ),
+			    BLANK()
+			)
+			```
+		displayFolder: Medias
+		lineageTag: bc9489d0-1246-4e08-9821-32217629040a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure SaldoTerceiro = SUM(fEstoqueTerceiro[SALDO])
+		displayFolder: Saldos
+		lineageTag: 6b918325-f396-4286-a317-819a85bf7e2e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure SaldoCD = SUM(fEstoqueTransfipe[SALDO])
+		displayFolder: Saldos
+		lineageTag: ee718ddb-af4e-44fb-ad6e-960d238d0601
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure SaldoMatriz = CALCULATE(SUM(fEstoqueMatriz[SALDO]))
+		displayFolder: Saldos
+		lineageTag: 0717bba4-1d69-442e-8d53-39ec11bd2f7b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure SaldoTotal = [SaldoMatriz] + [SaldoCD] + [SaldoTerceiro]
+		displayFolder: Saldos
+		lineageTag: d57fa19b-0632-4604-84c5-84fbc5596090
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DuracaoDiasEstoque = DIVIDE([SaldoTotal], [Media3dias])
+		lineageTag: f01552e7-0234-4291-ad2e-300bbfbfa7bc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DuracaoEstoqueMes = DIVIDE([DuracaoDiasEstoque], 30)
+		lineageTag: 6a46ba8a-523e-4148-b177-c4b410b429ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TituloDetalhe = "Detalhando o produto: " & SELECTEDVALUE(dProduto[DESC_ITEM])
+		lineageTag: ea5b090d-c2f8-4272-98b1-5553e502350f
+
+	measure TotalQuantidadeUsada =
+			
+			CALCULATE(
+			    SUM(fMediaConsumo[D3_QUANT]),
+			    KEEPFILTERS(fMediaConsumo[D3_EMISSAO]),
+			    KEEPFILTERS(dProduto[COD_ITEM])
+			)
+		lineageTag: 7a163c34-116a-4edf-9442-e9497479a01b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Hoje =
+			
+			VAR _Ontem = MAX(fEstoqueMatriz[DATA]) -- A procedure só carrega os DataWareHouse às 9 horas da noite, ou seja, o max o dia inteiro, vai ser apenas ontem
+			
+			RETURN IF(_Ontem == TODAY() -1, 1,0) -- Aqui eu uso este filtro para que apareça apenas a data de ontem no relatório, sem que precise ficar usando filtro, mas se caso ter necessidade, há os dados em
+		formatString: 0
+		lineageTag: c30f288a-8a3f-45b8-a6e3-10ec055ddbb3
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

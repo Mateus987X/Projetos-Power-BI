@@ -1,0 +1,2 @@
+Esse relatório ajudou a ter um controle mais eficiente das compras de matérias primas, reduzindo compras excessivas significativamente, já que a empresa em questão
+não tinha acesso a este tipo de análise, com média de estoque, duração de estoque em dias e mês.
