@@ -32,7 +32,6 @@ Comecei minha jornada como **Desossador**, evolui para **Almoxarife**, depois **
 3. **Visualização Estratégica**  
    - Dashboards interativos
    - Alertas em tempo real
-   - Análises preditivas simples
 
 ## 🌟 Diferenciais
 
