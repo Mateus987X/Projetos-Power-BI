@@ -1,0 +1,4 @@
+Obs: Deixei apenas a visão de apenas um dos vendedores(DistribuidoreS)
+Este distribuidor do cliente já foi desativado, os dados não são mais pertinentes, não correndo risco de exposição de dados.
+
+Esse relatório trás a visão dos títulos NCR's de cada distribuidor da empresa, detalhando os créditos librerados, bloqueados e os débitos para cada vendedor(distribuidor)

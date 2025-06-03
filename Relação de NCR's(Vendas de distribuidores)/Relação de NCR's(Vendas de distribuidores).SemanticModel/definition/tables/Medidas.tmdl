@@ -1,0 +1,86 @@
+table Medidas
+	lineageTag: c32abdf1-7b3b-4da2-a10d-9e7e2f206204
+
+	measure 'A Liquidar' =
+			
+			VAR _Soma = SUM(fNotas[F2_REPRSAL])
+			RETURN
+			IF(
+			    NOT ISBLANK([A Receber]),
+			    IF(ISBLANK(_Soma), 0, _Soma),
+			    BLANK()
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 30fdde17-74b8-4865-9d23-055eaab142b2
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'A Receber' = SUM(dTituloNCR[E1_SALDO])
+		lineageTag: 26dcba8a-8fa6-4012-986b-162ef9ed0213
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TituloDrill = "Notas do Vendedor:  " & SELECTEDVALUE(dCliente[A1_NOME])
+		lineageTag: c4b097bb-1b74-4db5-9881-03758a71f36b
+
+	measure StatusVencimento = ```
+			
+			VAR _Calculo = IF(SELECTEDVALUE('dTituloNF'[VENCIMENTO]) < TODAY(), "VENCIDO", "A VENCER") 
+			RETURN
+			IF(
+			    NOT ISBLANK(SUM(fNotas[F2_REPRSAL])) && HASONEVALUE(fNotas[F2_DOC]) && NOT ISBLANK(SELECTEDVALUE('dTituloNF'[VENCIMENTO])),
+			    _Calculo
+			)
+			```
+		lineageTag: 39b2f8c1-4683-4bf7-a344-981a021eb2d0
+
+	measure FiltroLateral = ```
+			
+			VAR _valuesStatus = VALUES('Status'[Status])
+			
+			VAR _TextoStatus = 
+			CONCATENATEX(
+			    _valuesStatus,
+			    'Status'[Status],
+			    UNICHAR(10)
+			)
+			VAR _Resultado = 
+			IF([StatusVencimento] IN _valuesStatus,1)
+			
+			RETURN _Resultado
+			```
+		formatString: 0
+		lineageTag: 92f52666-17d2-44f9-a1d1-4179f28c76a4
+
+	measure Valor_Pagar = ```
+			
+			VAR _TabelaFiltrada = FILTER(
+			    fNCRDevolucao,
+			    fNCRDevolucao[VL_PAGAR] > 0
+			)
+			RETURN 
+			IF(ISBLANK(CALCULATE(SUMX(_TabelaFiltrada, fNCRDevolucao[VL_PAGAR]), ALLEXCEPT(fNCRDevolucao, fNCRDevolucao[D1_DTDIGIT]))), 0,CALCULATE(SUMX(_TabelaFiltrada, fNCRDevolucao[VL_PAGAR]), ALLEXCEPT(fNCRDevolucao, fNCRDevolucao[D1_DTDIGIT])))
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 63f3f249-fbe9-4478-bc32-309f55d6e7b1
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure TotalPAgar = SUM(dTituloNCR[E1_SALDO]) - [Valor_Pagar]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: a8aa544c-d65e-4eed-a259-64e4d539ef30
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

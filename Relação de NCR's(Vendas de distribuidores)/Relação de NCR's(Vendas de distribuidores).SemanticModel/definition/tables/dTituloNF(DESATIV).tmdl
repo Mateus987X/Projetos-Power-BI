@@ -1,0 +1,112 @@
+table dTituloNF(DESATIV)
+	lineageTag: 7e434c71-c037-4b83-8df9-24e7e561e557
+
+	column E1_NUM
+		dataType: string
+		lineageTag: fdce5710-d647-4f5a-9b44-457681eeca25
+		summarizeBy: none
+		sourceColumn: E1_NUM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column E1_VALOR
+		dataType: double
+		lineageTag: 4ef78902-69f0-449a-86a1-7c285c766c99
+		summarizeBy: sum
+		sourceColumn: E1_VALOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column E1_SALDO
+		dataType: double
+		lineageTag: 0b2032bf-02dc-45b9-b072-9ab34ab9c5b9
+		summarizeBy: sum
+		sourceColumn: E1_SALDO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STATUS_LIQUID
+		dataType: string
+		lineageTag: 9ae7be9d-ffea-4090-bb68-0e937b995e4d
+		summarizeBy: none
+		sourceColumn: STATUS_LIQUID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_TITULONCR
+		dataType: string
+		lineageTag: fc851eda-9b76-439c-8719-756e3b0210dd
+		summarizeBy: none
+		sourceColumn: FK_TITULONCR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_CLIENTE
+		dataType: string
+		lineageTag: e89e455f-45d9-48a6-9858-52745644fa78
+		summarizeBy: none
+		sourceColumn: FK_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENCIMENTO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 83cb25c8-e8cf-4472-a4ab-d4c9ee096a50
+		summarizeBy: none
+		sourceColumn: VENCIMENTO
+
+		variation Variation
+			isDefault
+			relationship: 8c6eea99-6ddd-4b86-b1e0-08baef606772
+			defaultHierarchy: LocalDateTable_406e023a-07b1-4e01-984b-a4592dee29c9.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EMISSAO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 318bd555-8b2a-4c60-8b80-e75d5ae4e538
+		summarizeBy: none
+		sourceColumn: EMISSAO
+
+		variation Variation
+			isDefault
+			relationship: 9b1e71b0-f109-4e6e-b778-b2214a5d4c7e
+			defaultHierarchy: LocalDateTable_e206fc97-c799-4bff-bf60-4ffe867a0491.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dTituloNF(DESATIV) = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="#(lf)DECLARE @DATE datetime = DATEADD(YEAR, -1, GETDATE())#(lf)#(lf)SELECT#(lf)E1_NUM,#(lf)SUM(E1_VALOR) E1_VALOR,#(lf)SUM(E1_SALDO) E1_SALDO,#(lf)MAX(E1_VENCREA) OVER (PARTITION BY E1_FILIAL, E1_NUM, E1_PREFIXO ORDER BY E1_EMISSAO DESC) AS VENCIMENTO,#(lf)MIN(E1_EMISSAO) OVER (PARTITION BY E1_FILIAL, E1_NUM, E1_PREFIXO ORDER BY E1_EMISSAO DESC) AS EMISSAO,#(lf)CASE WHEN SUM(E1_SALDO) > 0 THEN 'A LIQUIDAR' ELSE 'LIQUIDADO' END AS STATUS_LIQUID, --VERIFICANDO SE O CLIENTE JÁ PODE USAR O CRÉDITO#(lf)TRIM(E1_FILIAL) + '|' + TRIM(E1_NUM) AS FK_TITULONCR,#(lf)TRIM(A3_CLIENTE) + '|' + TRIM(A3_LOJACLI) AS FK_CLIENTE#(lf)FROM SE1010 SE1#(lf)INNER JOIN SA3010 SA3 ON A3_COD = E1_VEND1  AND SA3.D_E_L_E_T_ = ''#(lf)WHERE SE1.D_E_L_E_T_ = '' AND E1_EMISSAO >= @DATE AND E1_TIPO = 'NF' AND LEFT(E1_FILIAL,2) = '01'#(lf)GROUP BY E1_NUM, E1_FILIAL, E1_CLIENTE, E1_LOJA, E1_PREFIXO, A3_CLIENTE, A3_LOJACLI, E1_EMISSAO, E1_VENCREA#(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"VENCIMENTO", type date}, {"EMISSAO", type date}})
+				in
+				    #"Tipo Alterado"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

@@ -1,0 +1,55 @@
+relationship 8c6eea99-6ddd-4b86-b1e0-08baef606772
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dTituloNF(DESATIV).VENCIMENTO
+	toColumn: LocalDateTable_406e023a-07b1-4e01-984b-a4592dee29c9.Date
+
+relationship 9b1e71b0-f109-4e6e-b778-b2214a5d4c7e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dTituloNF(DESATIV).EMISSAO
+	toColumn: LocalDateTable_e206fc97-c799-4bff-bf60-4ffe867a0491.Date
+
+relationship 7bcd2b92-22c5-300c-7e91-a3bf3ce2f173
+	fromColumn: fNotas.FK_TITULO
+	toColumn: dTituloNF.PK_TITULO
+
+relationship c00c1b72-fc07-3890-4d22-61562bbcd4e6
+	fromColumn: fNotas.FK_CLIENTE
+	toColumn: dCliente.PK_CLIENTE
+
+relationship f4f0aaf9-847e-e7a5-10e1-bb406b4de9dc
+	fromColumn: dTituloNCR.FK_CLIENTE
+	toColumn: dCliente.PK_CLIENTE
+
+relationship f627a1e7-9ea5-482b-a7c5-4bcc25e709a3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dTituloNF.VENCIMENTO
+	toColumn: LocalDateTable_b40ec559-6c89-4c8a-b3a5-0b2bb2db2f7e.Date
+
+relationship a1817950-f7a1-4a2e-8045-b68021ee1680
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dTituloNCR.E1_EMISSAO
+	toColumn: LocalDateTable_29388b52-c3e2-444d-8e42-78dc69527b63.Date
+
+relationship aec911b8-1b8f-960d-fa10-59a2a593fbfe
+	fromColumn: fNCRDevolucao.FK_CLI_VEND
+	toColumn: dCliente.PK_CLIENTE
+
+relationship aacee326-f6a7-85f7-0aba-c305fbacbff5
+	fromColumn: fNCRDevolucao.FK_TITULONCC
+	toColumn: dTituloNCC.PK_TITULO
+
+relationship a946d114-9cc2-4d90-9121-614d72ec9704
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fNCRDevolucao.D1_EMISSAO
+	toColumn: LocalDateTable_f711e27c-50a7-4246-bd65-1e6ce607c310.Date
+
+relationship afe62fba-783d-4cd8-9d0f-51c83b7bdb9b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dTituloNCC.EMISSAO
+	toColumn: LocalDateTable_ecf29102-d54e-4392-8b67-1175c24465d4.Date
+
+relationship 9a0cd44f-edac-45ce-8cc2-918243f430c4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fNCRDevolucao.D1_DTDIGIT
+	toColumn: LocalDateTable_f5a91a84-3168-4be9-aa69-5fe847e9518b.Date
+

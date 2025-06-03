@@ -1,0 +1,36 @@
+relationship c00ec2b5-67ca-4a5d-afc0-bb5356197fde
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fSFT.Data_Entrada
+	toColumn: LocalDateTable_81d8a2de-85ca-4119-9195-ef27f8806821.Date
+
+relationship 0748f0e8-c531-892f-a30e-35a4c61a9cbe
+	fromColumn: fSFT.PK_PRECOTABELA
+	toColumn: TabelaPreco.PK_PRECOTABELA
+
+relationship 25ffaf2a-5961-4882-b47e-218503cbcd34
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendario.Date
+	toColumn: LocalDateTable_b224b767-32aa-4770-93d5-7f505fde2dbd.Date
+
+relationship AutoDetected_e406b465-a02a-4d06-be9d-8050aea84f0f
+	fromColumn: fSFT.TABELA1
+	toColumn: Tabela1.PK_TABELA1
+
+relationship b9d32f80-ad19-4817-81d5-9664d89f433d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Tabela1.DATA
+	toColumn: LocalDateTable_b242e3f3-dd52-4db2-9ac3-3bae24274188.Date
+
+relationship 11dcb57f-0397-4431-8b99-2f5f6f832559
+	joinOnDateBehavior: datePartOnly
+	fromColumn: TabelaPreco.DATA
+	toColumn: LocalDateTable_21ba62f4-f4cd-452b-a07d-fe7f9fbb701d.Date
+
+relationship 2c79e6dc-4cdd-b1cd-804c-d83d7ae38801
+	fromColumn: fSFT.PK_CTH_SINTETICO
+	toColumn: dCTH.PK_CTH_SINTETICO
+
+relationship 2525ca1c-5f8a-cc22-8faf-f10c27c6e961
+	fromColumn: fSFT.PK_CTH_SINTETICO
+	toColumn: tabelaCTHFiltrada.PK_CTH_SINTETICO
+

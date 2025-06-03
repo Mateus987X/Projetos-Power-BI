@@ -1,0 +1,69 @@
+table TabelaPreco
+	lineageTag: eb156a44-46ed-4a6e-a803-38761caef1e0
+
+	column CODIGO_TABELA
+		dataType: string
+		lineageTag: c66c9e05-e381-4f78-b082-9f2dcb36afcb
+		summarizeBy: none
+		sourceColumn: CODIGO_TABELA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODIGO_PRODUTO
+		dataType: string
+		lineageTag: 2832b176-edd6-49e1-9a3e-87912c7f8a9b
+		summarizeBy: none
+		sourceColumn: CODIGO_PRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2b5eb70d-c2f0-4101-b803-5472156ae4ef
+		summarizeBy: none
+		sourceColumn: DATA
+
+		variation Variation
+			isDefault
+			relationship: 11dcb57f-0397-4431-8b99-2f5f6f832559
+			defaultHierarchy: LocalDateTable_21ba62f4-f4cd-452b-a07d-fe7f9fbb701d.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PRECO_TABELA
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 722a4fc5-e1be-4e14-8b25-066c0dc10ae3
+		summarizeBy: sum
+		sourceColumn: PRECO_TABELA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column PK_PRECOTABELA
+		dataType: string
+		lineageTag: 6e610f3d-762a-4166-bf89-fdd9c165ba1c
+		summarizeBy: none
+		sourceColumn: PK_PRECOTABELA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TabelaPreco = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "Data Warehouse", [Query="SELECT CODIGO_TABELA + '|' +  CODIGO_PRODUTO + '|' + PrecoTabela.DATA as PK_PRECOTABELA,#(lf)CODIGO_TABELA,#(lf)RIGHT(CODIGO_PRODUTO,5) CODIGO_PRODUTO,#(lf)DATA,#(lf)PRECO_TABELA#(lf)FROM PrecoTabela#(lf)"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"DATA", type date}}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Tipo Alterado", {"PK_PRECOTABELA"}),
+				    #"Linhas Classificadas" = Table.Sort(#"Duplicatas Removidas",{{"DATA", Order.Descending}})
+				in
+				    #"Linhas Classificadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

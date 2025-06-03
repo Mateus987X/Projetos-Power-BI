@@ -1,0 +1,39 @@
+table dCTH
+	lineageTag: d7850311-ef61-4ace-a42d-ceea611389e9
+
+	column CTH_CLVL
+		dataType: string
+		lineageTag: aa4ee549-cec8-4c4b-9192-e8d82bf82b92
+		summarizeBy: none
+		sourceColumn: CTH_CLVL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CTH_DESC01
+		dataType: string
+		lineageTag: 65a2edb8-ebb6-4130-a162-8b1047810948
+		summarizeBy: none
+		sourceColumn: CTH_DESC01
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_CTH_SINTETICO
+		dataType: string
+		lineageTag: f1658c5c-8460-4d0d-97cd-34d61b752b6f
+		summarizeBy: none
+		sourceColumn: PK_CTH_SINTETICO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCTH = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT#(lf)CTH_CLVL,#(lf)CTH_DESC01,#(lf)TRIM(CTH_FILIAL) + '|' + CTH_CLVL AS PK_CTH_SINTETICO#(lf)FROM CTH010#(lf)WHERE D_E_L_E_T_ = '' AND LEN(CTH_CLVL) > 3 AND LEN(CTH_CLVL) < 6"])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

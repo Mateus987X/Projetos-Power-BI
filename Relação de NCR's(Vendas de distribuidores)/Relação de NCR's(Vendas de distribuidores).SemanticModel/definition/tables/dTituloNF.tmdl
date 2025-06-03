@@ -1,0 +1,80 @@
+table dTituloNF
+	lineageTag: 1f603770-2041-4f35-bd9f-825a49e5fca9
+
+	column E1_NUM
+		dataType: string
+		lineageTag: 044a3171-8f11-46b6-a443-676088459a9c
+		summarizeBy: none
+		sourceColumn: E1_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_TITULO
+		dataType: string
+		lineageTag: 2b8a4012-9c38-49d2-8812-bcbfe75a4895
+		summarizeBy: none
+		sourceColumn: PK_TITULO
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_CLIENTE
+		dataType: string
+		lineageTag: 96675811-33e3-43b3-905a-6107483f0705
+		summarizeBy: none
+		sourceColumn: FK_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENCIMENTO
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 9511088d-2e4e-4512-8543-58cbf22b2491
+		summarizeBy: none
+		sourceColumn: VENCIMENTO
+
+		variation Variation
+			isDefault
+			relationship: f627a1e7-9ea5-482b-a7c5-4bcc25e709a3
+			defaultHierarchy: LocalDateTable_b40ec559-6c89-4c8a-b3a5-0b2bb2db2f7e.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EMISSAO
+		dataType: string
+		lineageTag: 05dfc9f0-a6e5-475a-b2cc-36fae46118fe
+		summarizeBy: none
+		sourceColumn: EMISSAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_TITULONCR
+		dataType: string
+		lineageTag: 61343fde-6c02-49ec-96d7-390961e021db
+		summarizeBy: none
+		sourceColumn: PK_TITULONCR
+
+		annotation SummarizationSetBy = Automatic
+
+	column A3_COD
+		dataType: string
+		lineageTag: 572efd5a-a089-4ab7-b5c2-a4b279e8ec17
+		summarizeBy: none
+		sourceColumn: A3_COD
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dTituloNF = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="DECLARE @DATE datetime = DATEADD(YEAR, -1, GETDATE())#(lf)#(lf)SELECT DISTINCT#(lf)E1_NUM,#(lf)MAX(E1_VENCREA) OVER (PARTITION BY E1_FILIAL, E1_NUM) AS VENCIMENTO,#(lf)MIN(E1_EMISSAO) OVER (PARTITION BY E1_FILIAL, E1_NUM) AS EMISSAO,#(lf)TRIM(E1_FILIAL) + '|' + TRIM(E1_NUM) + '|' + TRIM(E1_PREFIXO) + '|' + TRIM(E1_CLIENTE) + '|' + TRIM(E1_LOJA) AS PK_TITULO,#(lf)TRIM(E1_FILIAL) + '|' + TRIM(E1_NUM) AS PK_TITULONCR,#(lf)TRIM(A3_CLIENTE) + '|' + TRIM(A3_LOJACLI) AS FK_CLIENTE,#(lf)A3_COD#(lf)FROM SE1010 SE1#(lf)INNER JOIN SA3010 SA3 ON A3_COD = E1_VEND1 AND A3_FILIAL = '01'  AND SA3.D_E_L_E_T_ = ''  AND E1_SALDO > 0#(lf)WHERE SE1.D_E_L_E_T_ = '' AND E1_EMISSAO >= @DATE AND LEFT(E1_FILIAL,2) = '01' "]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"VENCIMENTO", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,37 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fNotas","dTituloNF(DESATIV)","Medidas","dTituloNCR","dVendedor","dCliente","dTituloNF","fNCRDevolucao","dTituloNCC"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fNotas
+ref table dTituloNF(DESATIV)
+ref table Medidas
+ref table dTituloNCR
+ref table dVendedor
+ref table dCliente
+ref table dTituloNF
+ref table DateTableTemplate_74b49a28-9149-4abb-8350-492ea1f11447
+ref table LocalDateTable_406e023a-07b1-4e01-984b-a4592dee29c9
+ref table LocalDateTable_e206fc97-c799-4bff-bf60-4ffe867a0491
+ref table LocalDateTable_b40ec559-6c89-4c8a-b3a5-0b2bb2db2f7e
+ref table LocalDateTable_29388b52-c3e2-444d-8e42-78dc69527b63
+ref table Status
+ref table fNCRDevolucao
+ref table dTituloNCC
+ref table LocalDateTable_f711e27c-50a7-4246-bd65-1e6ce607c310
+ref table LocalDateTable_ecf29102-d54e-4392-8b67-1175c24465d4
+ref table LocalDateTable_f5a91a84-3168-4be9-aa69-5fe847e9518b
+
+ref cultureInfo pt-BR
+

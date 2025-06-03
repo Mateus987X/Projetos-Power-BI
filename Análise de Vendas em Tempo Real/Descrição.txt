@@ -1,0 +1,4 @@
+*Dados antigos, sem risco de exposição de dados da empresa*
+
+Esse relatório tem como objetivo analisar as vendas diárias em tempo real, fazendo a comparação de valores dos preços(tabela de preço) estabelecidos previamente,
+dando ao gestor uma visão se os produtos estão sendo vendidos como acordados, a diferença entre preço da tabela de Custo, preço da tabela acordada e preço vendido.

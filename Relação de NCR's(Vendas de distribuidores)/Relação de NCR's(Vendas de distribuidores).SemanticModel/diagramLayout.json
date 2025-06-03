@@ -1,0 +1,152 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 42,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "fNotas",
+          "nodeLineageTag": "e3bb1c6b-1bbd-4151-877e-32371c8932a7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1044,
+            "y": 25
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "c32abdf1-7b3b-4da2-a10d-9e7e2f206204",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 708,
+            "y": 41
+          },
+          "nodeIndex": "dTituloNCR",
+          "nodeLineageTag": "cb63ec5f-ffc8-4583-a8a8-dbb46f3fe7be",
+          "size": {
+            "height": 251,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 602
+          },
+          "nodeIndex": "dVendedor",
+          "nodeLineageTag": "9770b2b3-1b4f-4519-bcc3-ade5130ec709",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 369,
+            "y": 71
+          },
+          "nodeIndex": "dCliente",
+          "nodeLineageTag": "324ad621-a189-4c58-abd7-ff689d1cca94",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1284,
+            "y": 298.5
+          },
+          "nodeIndex": "Status",
+          "nodeLineageTag": "bf316e54-94a9-4e81-83c4-0346183566b8",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 718,
+            "y": 339.5
+          },
+          "nodeIndex": "fNCRDevolucao",
+          "nodeLineageTag": "1b89d435-22cb-43eb-914b-b6228f92f184",
+          "size": {
+            "height": 353,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1292,
+            "y": 0
+          },
+          "nodeIndex": "dTituloNF(DESATIV)",
+          "nodeLineageTag": "7e434c71-c037-4b83-8df9-24e7e561e557",
+          "size": {
+            "height": 245,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 380,
+            "y": 485.25
+          },
+          "nodeIndex": "dTituloNCC",
+          "nodeLineageTag": "0f6310c6-b914-40b6-9e19-7bdcbfbcd562",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 28,
+            "y": 332.5
+          },
+          "nodeIndex": "dTituloNF",
+          "nodeLineageTag": "1f603770-2041-4f35-bd9f-825a49e5fca9",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

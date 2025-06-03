@@ -1,0 +1,55 @@
+table dCliente
+	lineageTag: 324ad621-a189-4c58-abd7-ff689d1cca94
+
+	column A1_FILIAL
+		dataType: string
+		lineageTag: dd773a59-ed1e-4295-a758-8e0ac2b8302a
+		summarizeBy: none
+		sourceColumn: A1_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column A1_COD
+		dataType: string
+		lineageTag: b5bcbf30-45de-440c-b047-0b1969c23e1f
+		summarizeBy: none
+		sourceColumn: A1_COD
+
+		annotation SummarizationSetBy = Automatic
+
+	column A1_NOME
+		dataType: string
+		lineageTag: 8eca4aac-a5b3-4cd5-b33d-8aa484f428e4
+		summarizeBy: none
+		sourceColumn: A1_NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column A1_LOJA
+		dataType: string
+		lineageTag: e7381913-811b-4c55-9ebd-8a0d4ef6ab9c
+		summarizeBy: none
+		sourceColumn: A1_LOJA
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_CLIENTE
+		dataType: string
+		lineageTag: 9440a3b7-8347-418c-99a6-397d4251df5d
+		summarizeBy: none
+		sourceColumn: PK_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCliente = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)A1_FILIAL,#(lf)A1_COD,#(lf)A1_NOME,#(lf)A1_LOJA,#(lf)TRIM(A1_COD) + '|' + TRIM(A1_LOJA) AS PK_CLIENTE#(lf)FROM SA1010#(lf)WHERE D_E_L_E_T_ = '' AND A1_FILIAL = '01' AND A1_COD = '211430'"])
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

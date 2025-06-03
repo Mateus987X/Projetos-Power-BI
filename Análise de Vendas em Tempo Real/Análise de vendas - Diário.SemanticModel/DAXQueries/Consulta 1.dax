@@ -1,0 +1,9 @@
+EVALUATE
+SUMMARIZE(
+        FILTER(
+            fSFT,
+            NOT(ISBLANK(C))  // Evita valores em branco
+        ),
+        dCTH[CTH_DESC01], 
+        dCTH[PK_CTH_SINTETICO]
+    )

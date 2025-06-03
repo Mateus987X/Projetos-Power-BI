@@ -1,0 +1,39 @@
+table dVendedor
+	lineageTag: 9770b2b3-1b4f-4519-bcc3-ade5130ec709
+
+	column COD_VENDEDOR
+		dataType: string
+		lineageTag: 1cfdb46c-e880-43f7-b814-a1f8de606305
+		summarizeBy: none
+		sourceColumn: COD_VENDEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME
+		dataType: string
+		lineageTag: dc9bf26a-1f33-4f6d-9825-808c42c8dfda
+		summarizeBy: none
+		sourceColumn: NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_VENDEDOR
+		dataType: string
+		lineageTag: 3cb6bbf9-7c85-4b03-90c3-ade02681b51f
+		summarizeBy: none
+		sourceColumn: PK_VENDEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dVendedor = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT #(lf)    A3_COD AS COD_VENDEDOR,#(lf)    A3_NOME AS NOME,#(lf)    TRIM(A3_COD) AS PK_VENDEDOR#(lf)FROM SA3010 SA3 #(lf)WHERE  #(lf)    SA3.D_E_L_E_T_ = ' ' AND A3_FILIAL = '01'"])
+				in
+				    Fonte
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

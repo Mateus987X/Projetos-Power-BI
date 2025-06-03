@@ -1,0 +1,342 @@
+table fSFT
+	lineageTag: cca66a58-384d-4b9b-97b9-ad19ee270328
+
+	measure 'Desc Cliente teste'
+		lineageTag: dbe05f01-d7ad-4036-b43f-91b0fb4cf73d
+
+	measure 'Total teste'
+		isHidden
+		lineageTag: b3b6e7ef-775e-4c47-a8a0-e3b199d4cb28
+
+		changedProperty = IsHidden
+
+	column Cod_Produto
+		dataType: string
+		lineageTag: 1bb5c603-f60f-4b7f-97b9-f37303475f89
+		summarizeBy: none
+		sourceColumn: Cod_Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Desc_Produto
+		dataType: string
+		lineageTag: aa8389ad-8887-4a4a-bd82-77601b91a141
+		summarizeBy: none
+		sourceColumn: Desc_Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nota_Fiscal
+		dataType: string
+		lineageTag: 6bfb8f30-d183-469d-8e53-bf1ac38c390d
+		summarizeBy: none
+		sourceColumn: Nota_Fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cod_Cliente
+		dataType: string
+		lineageTag: cc718074-e0eb-4ca5-b27d-9e43e186abe7
+		summarizeBy: none
+		sourceColumn: Cod_Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome_Cliente
+		dataType: string
+		lineageTag: 8d143835-1447-400c-9be8-e9c46462eac9
+		summarizeBy: none
+		sourceColumn: Nome_Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Loja
+		dataType: string
+		lineageTag: 99f5af39-d718-4190-8de8-f50cd84c32b6
+		summarizeBy: none
+		sourceColumn: Loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Entrada
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2d46e739-ea5e-45e9-8238-2e97af6e9bd5
+		summarizeBy: none
+		sourceColumn: Data_Entrada
+
+		variation Variation
+			isDefault
+			relationship: c00ec2b5-67ca-4a5d-afc0-bb5356197fde
+			defaultHierarchy: LocalDateTable_81d8a2de-85ca-4119-9195-ef27f8806821.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Vendedor
+		dataType: string
+		lineageTag: 213dbb90-b7bf-4752-8d6b-a52e3abd6544
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome_Vendedor
+		dataType: string
+		lineageTag: b8bf8768-bd66-4000-8c98-164e2f2e2c6e
+		summarizeBy: none
+		sourceColumn: Nome_Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prc_unitario
+		dataType: double
+		lineageTag: 56ce411f-5eaf-4fd7-b202-c63af7096999
+		summarizeBy: sum
+		sourceColumn: Prc_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantidade
+		dataType: double
+		lineageTag: da0a7a2c-2272-4e85-ab4d-d4c70d951f17
+		summarizeBy: sum
+		sourceColumn: Quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_NF
+		dataType: double
+		lineageTag: 669ddd6c-2b99-4aa8-b348-12f29abb90df
+		summarizeBy: sum
+		sourceColumn: Total_NF
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Desconto
+		dataType: double
+		lineageTag: c3d7e72e-b6f9-4670-aa12-0639f5706b0a
+		summarizeBy: sum
+		sourceColumn: Desconto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ICMS_ST
+		dataType: double
+		lineageTag: 39f28015-f8af-47f4-96a5-4493fbc69167
+		summarizeBy: sum
+		sourceColumn: ICMS_ST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total_Mercadoria
+		dataType: double
+		lineageTag: b0513aea-a58c-4049-81bf-edda1c466e71
+		summarizeBy: sum
+		sourceColumn: Total_Mercadoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cliente_TabPrec
+		dataType: string
+		lineageTag: 5ba74666-5f75-4d61-a79a-b567e8b9fb87
+		summarizeBy: none
+		sourceColumn: Cliente_TabPrec
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prc_Tabela
+		dataType: double
+		lineageTag: 8ad9e664-4880-485f-98d9-23b48a244c9f
+		summarizeBy: sum
+		sourceColumn: Prc_Tabela
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Desc_TabelaPrc
+		dataType: string
+		lineageTag: 802dff84-3eb1-4f0a-a81d-dd28a7a549a6
+		summarizeBy: none
+		sourceColumn: Desc_TabelaPrc
+
+		annotation SummarizationSetBy = Automatic
+
+	column TabelaPreco1 = ADDCOLUMNS(TabelaPreco1, "Tabela1", TabelaPreco1[Prc_Venda])
+		lineageTag: a1108302-1594-46d8-a12f-2ec914455c0a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag = IF(fSFT[PrcUnitSemDescon] < RELATED(Tabela1[PRECO_TABELA]), 1, 0)
+		formatString: 0
+		lineageTag: 5c576da2-cc1c-4ce1-a71d-f1a1fe6bff3b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Desconto %' = (DIVIDE(fSFT[PrcUnitSemDescon], RELATED(TabelaPreco[PRECO_TABELA]))) -1
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d41a462d-9f61-42c9-badc-287743479622
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Classe_valor
+		dataType: string
+		lineageTag: 2296cfe8-3abd-49ca-923d-0d251300bfca
+		summarizeBy: none
+		sourceColumn: Classe_valor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segmento
+		dataType: string
+		lineageTag: 8c2377d4-fc1c-45f8-82da-e445f1fd9bfc
+		summarizeBy: none
+		sourceColumn: Segmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Classe_Desc
+		dataType: string
+		lineageTag: 0bb52ddc-150c-4a70-81d9-f28ed278add8
+		summarizeBy: none
+		sourceColumn: Classe_Desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Diff PV - Tab1' = fSFT[Prc_unitario] * fSFT[Quantidade] - RELATED(Tabela1[PRECO_TABELA]) * fSFT[Quantidade]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: a80029da-cfe7-4eaf-bf81-bebf919ed442
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column PK_PRECOTABELA
+		dataType: string
+		lineageTag: 35f5a1dd-99fa-4e35-9fc8-7fbc06546b02
+		summarizeBy: none
+		sourceColumn: PK_PRECOTABELA
+
+		annotation SummarizationSetBy = Automatic
+
+	column TABELA1
+		dataType: string
+		lineageTag: ea04989d-cbbf-4c68-ac8f-1514495fd9d2
+		summarizeBy: none
+		sourceColumn: TABELA1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Flag  teste' = IF(fSFT[Prc_unitario] < RELATED(Tabela1[PRECO_TABELA]), 1, 0)
+		formatString: 0
+		lineageTag: 745fde28-6977-458d-81b3-7c852432cee3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Desconto % TESTE' = (DIVIDE(fSFT[Prc_unitario], RELATED(TabelaPreco[PRECO_TABELA]))) -1
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7f808200-a941-4139-af4a-d7ebd63fce9c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Diff TESTE PV - Tab1' = fSFT[Prc_unitario] * fSFT[Quantidade] - RELATED(Tabela1[PRECO_TABELA]) * fSFT[Quantidade]
+		lineageTag: b13e8997-ab28-4f89-a3bc-3af522258b7f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Supervisor
+		dataType: string
+		lineageTag: 9439d36a-6ccf-4ca4-b2f5-1e71a45e4b0f
+		summarizeBy: none
+		sourceColumn: Supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Desconto_Cliente
+		dataType: double
+		lineageTag: 94d3fec0-1426-47ba-8959-208a0855775a
+		summarizeBy: sum
+		sourceColumn: Desconto_Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ValorDesconCliente =
+			
+			VAR ValorDesconto = fSFT[Prc_unitario] * fSFT[Desconto_Cliente]
+			RETURN
+			    ValorDesconto
+		lineageTag: e7084631-2957-43bd-bd40-167d281819a8
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrcUnitSemDescon = fSFT[Prc_unitario] - fSFT[Desconto_Cliente]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: b40f0551-b5b1-4f4f-9675-3aa7d152c85a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CFOP
+		dataType: string
+		lineageTag: 46af807b-175a-4260-b955-7a3372d0b9a9
+		summarizeBy: none
+		sourceColumn: CFOP
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_CTH_SINTETICO
+		dataType: string
+		lineageTag: e8b5c4d5-e6b8-4a14-b798-a90d7d4ce391
+		summarizeBy: none
+		sourceColumn: PK_CTH_SINTETICO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fSFT = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="SELECT RIGHT(FT_PRODUTO,5) Cod_Produto,#(lf)B1_DESC Desc_Produto, #(lf)B1_CLVL Classe_valor,#(lf)A1_SATIV5 Segmento,#(lf)COALESCE(CTH_DESC01, 'SEM CLASSE') Classe_Desc,#(lf)FT_NFISCAL Nota_Fiscal, #(lf)FT_CLIEFOR Cod_Cliente, #(lf)A1_NOME Nome_Cliente,#(lf)A1_LOJA  Loja,#(lf)A1_TABELA Cliente_TabPrec,#(lf)FT_ENTRADA Data_Entrada,#(lf)F2_VEND1 Vendedor,#(lf)A3_NOME Nome_Vendedor,#(lf)CAST(FT_PRCUNIT+FT_DESCONT/NULLIF(FT_QUANT,0) AS DECIMAL(14,2)) Prc_unitario,#(lf)DA1_PRCVEN Prc_Tabela,#(lf)DA0_DESCRI Desc_TabelaPrc,#(lf)FT_QUANT Quantidade,#(lf)FT_VALCONT Total_NF,#(lf)FT_DESCONT Desconto,#(lf)FT_ALIQSOL ICMS_ST,#(lf)FT_TOTAL Total_Mercadoria, #(lf)X5_DESCRI Supervisor,#(lf)A1_DESCONT Desconto_Cliente,#(lf)FT_CFOP CFOP,#(lf)A1_TABELA + '|' + FT_PRODUTO  + '|' + FT_ENTRADA as PK_PRECOTABELA,#(lf)FT_PRODUTO + '|' + FT_ENTRADA as TABELA1,#(lf)TRIM(B1_FILIAL) + '|' + SUBSTRING(COALESCE(B1_CLVL, ''),1,5) AS PK_CTH_SINTETICO#(lf)FROM SFT010 SFT#(lf)INNER JOIN SB1010 SB1 ON B1_COD = FT_PRODUTO#(lf)#(tab)AND B1_FILIAL = SUBSTRING(FT_FILIAL,1,2)#(lf)#(tab)AND SB1.D_E_L_E_T_ = ''#(lf)INNER JOIN SA1010 SA1 ON  A1_FILIAL = SUBSTRING(FT_FILIAL,1,2)#(lf)#(tab)AND A1_COD = FT_CLIEFOR#(lf)#(tab)AND A1_LOJA = FT_LOJA#(lf)#(tab)AND SA1.D_E_L_E_T_ = ''#(lf)LEFT JOIN SF2010 SF2 ON F2_FILIAL = FT_FILIAL#(lf)#(tab)AND F2_DOC = FT_NFISCAL#(lf)#(tab)AND F2_CLIENTE = FT_CLIEFOR#(lf)#(tab)AND F2_LOJA = FT_LOJA#(lf)#(tab)AND FT_SERIE = F2_SERIE#(lf)#(tab)AND SF2.D_E_L_E_T_ = ''#(lf)INNER JOIN SA3010 SA3 ON A3_FILIAL = SUBSTRING(FT_FILIAL,1,2)#(lf)#(tab)AND A3_COD = F2_VEND1#(lf)#(tab)AND SA3.D_E_L_E_T_ = ''#(lf)INNER JOIN DA1010 DA1 ON DA1_CODPRO = FT_PRODUTO#(lf)#(tab)AND SUBSTRING(FT_FILIAL,1,2) = DA1_FILIAL#(lf)#(tab)AND DA1_CODTAB = A1_TABELA#(lf)#(tab)AND DA1.D_E_L_E_T_ = ''#(lf)LEFT JOIN DA0010 DA0 ON DA0.DA0_CODTAB = DA1_CODTAB#(lf)#(tab)AND DA0.DA0_FILIAL = DA1_FILIAL #(lf)#(tab)AND DA0.D_E_L_E_T_ = ''#(lf)INNER JOIN SF4010 SF4 ON F4_FILIAL = SUBSTRING(FT_FILIAL, 1, 2)#(lf)    AND SF4.F4_CODIGO = SFT.FT_TES#(lf)    AND SF4.D_E_L_E_T_ = ' '#(lf)LEFT JOIN CTH010 CTH ON CTH_FILIAL = B1_FILIAL#(lf)#(tab)AND CTH_CLVL = B1_CLVL#(lf)#(tab)AND CTH.D_E_L_E_T_ = ''#(lf)LEFT JOIN SX5010 SX5 ON X5_CHAVE = A3_SUPER #(lf)#(tab)AND X5_FILIAL = '01IN01' #(lf)#(tab)AND SX5.D_E_L_E_T_ = '' #(lf)#(tab)AND X5_TABELA = 'Z6'#(lf)WHERE SFT.D_E_L_E_T_ = '' AND FT_TIPOMOV = 'S' AND FT_ENTRADA >= '20241111' AND FT_ENTRADA <= '20241130'  AND F4_DUPLIC = 'S' "]),
+				    #"Últimos caracteres extraídos" = Table.TransformColumns(Fonte, {{"Cod_Produto", each Text.End(_, 5), type text}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Últimos caracteres extraídos",{{"Data_Entrada", type date}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","000801","Rede",Replacer.ReplaceText,{"Segmento"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","000802","Varejo",Replacer.ReplaceText,{"Segmento"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","000803","Telemarketing",Replacer.ReplaceText,{"Segmento"}),
+				    #"Coluna dividida" = Table.TransformColumns(#"Valor Substituído2", {{"Desconto_Cliente", each _ / 100, type number}})
+				in
+				    #"Coluna dividida"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

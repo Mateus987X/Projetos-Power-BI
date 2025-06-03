@@ -1,3 +1,5 @@
+os dados apresentados são antigos, não representando os dados reais da empresa.
+
 Esse projeto teve como objetivo principal de olhar as horas improdutivas de cada colaborador dentro do chão de fábrica de uma empresa.
 Mostrando as horas em aberto (Antes do Departamento Pessoal fechar), destacando quais são os que estão certo "HorasSP8(Marcacaopar)" e os que estão possivelmente erradas ("HorasSP8(MarcacaoImpar))
 

@@ -1,0 +1,30 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fSFT","TabelaPreco","Tabela1","dCTH"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table fSFT
+ref table DateTableTemplate_22cfcc14-e176-4653-b8e6-92da73f0a18b
+ref table LocalDateTable_81d8a2de-85ca-4119-9195-ef27f8806821
+ref table TabelaPreco
+ref table dCalendario
+ref table LocalDateTable_b224b767-32aa-4770-93d5-7f505fde2dbd
+ref table Tabela1
+ref table LocalDateTable_b242e3f3-dd52-4db2-9ac3-3bae24274188
+ref table LocalDateTable_21ba62f4-f4cd-452b-a07d-fe7f9fbb701d
+ref table dCTH
+ref table tabelaCTHFiltrada
+
+ref cultureInfo pt-BR
+

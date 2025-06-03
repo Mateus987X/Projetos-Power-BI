@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Relação de NCR's(Vendas de distribuidores)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "250f091e-7e82-41f7-91ca-748b3066db39"
+  }
+}

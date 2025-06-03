@@ -1,0 +1,168 @@
+table fNCRDevolucao
+	lineageTag: 1b89d435-22cb-43eb-914b-b6228f92f184
+
+	column D1_DOC
+		dataType: string
+		lineageTag: d8c973e1-b9de-4c50-8629-0e354ebbddc9
+		summarizeBy: none
+		sourceColumn: D1_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column D1_EMISSAO
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 3284966a-e933-40dc-84ce-46c4f9f4758f
+		summarizeBy: none
+		sourceColumn: D1_EMISSAO
+
+		variation Variation
+			isDefault
+			relationship: a946d114-9cc2-4d90-9121-614d72ec9704
+			defaultHierarchy: LocalDateTable_f711e27c-50a7-4246-bd65-1e6ce607c310.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COD_CLI
+		dataType: string
+		lineageTag: e63fe902-3ebb-44b8-9ac8-9de77382b218
+		summarizeBy: none
+		sourceColumn: COD_CLI
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOJA_CLI
+		dataType: string
+		lineageTag: a664d523-eddb-4040-959b-3a2ec5392d9a
+		summarizeBy: none
+		sourceColumn: LOJA_CLI
+
+		annotation SummarizationSetBy = Automatic
+
+	column VLR_TotalNota
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: f8ea626a-487a-4b90-8419-6d65c7ef066d
+		summarizeBy: sum
+		sourceColumn: VLR_TotalNota
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Vlr_Merc
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: a56b41c6-15c6-418c-8ecc-bca3b4dc1e34
+		summarizeBy: sum
+		sourceColumn: Vlr_Merc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Vlr_desconto
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 737b6997-18aa-4ac9-9ca5-a252db0f2e0e
+		summarizeBy: sum
+		sourceColumn: Vlr_desconto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column VLR_CRED
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 0a3047c7-1e17-4669-bef3-fe4635ca2cf5
+		summarizeBy: sum
+		sourceColumn: VLR_CRED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column VL_PAGAR
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: f01d2c71-f1c7-40bc-b63a-685bf7f661bc
+		summarizeBy: sum
+		sourceColumn: VL_PAGAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column FK_CLI_VEND
+		dataType: string
+		lineageTag: 994033de-1e0d-4716-85e1-b084bbdcac3a
+		summarizeBy: none
+		sourceColumn: FK_CLI_VEND
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_TITULONCC
+		dataType: string
+		lineageTag: 7eedb44d-1f26-4ff5-8c1f-85768d8394b0
+		summarizeBy: none
+		sourceColumn: FK_TITULONCC
+
+		annotation SummarizationSetBy = Automatic
+
+	column D1_LOCAL
+		dataType: string
+		lineageTag: f39f562a-c8b0-4c4a-a2cb-51c24604cbf9
+		summarizeBy: none
+		sourceColumn: D1_LOCAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLIENTE_NOME
+		dataType: string
+		lineageTag: c27c81c8-6cd4-48fd-8790-59c3a479c342
+		summarizeBy: none
+		sourceColumn: CLIENTE_NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLIENTE_SEGMENTACAO
+		dataType: string
+		lineageTag: e85fa3f7-a4f1-4390-b518-7437cdf1c8d8
+		summarizeBy: none
+		sourceColumn: CLIENTE_SEGMENTACAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column D1_DTDIGIT
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d9ecc383-6a3e-463e-818e-d93fb9fb20ac
+		summarizeBy: none
+		sourceColumn: D1_DTDIGIT
+
+		variation Variation
+			isDefault
+			relationship: 9a0cd44f-edac-45ce-8cc2-918243f430c4
+			defaultHierarchy: LocalDateTable_f5a91a84-3168-4be9-aa69-5fe847e9518b.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fNCRDevolucao = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="#(lf)DECLARE @DATA as datetime = DATEADD(MONTH, -6, GETDATE())#(lf)#(lf)#(lf)SELECT #(lf)D1_DOC,#(lf)D1_EMISSAO,#(lf)D1_DTDIGIT,#(lf)D1_FORNECE COD_CLI,#(lf)A1_LOJA LOJA_CLI,#(lf)A1_NOME CLIENTE_NOME,#(lf)A1_SATIV5 CLIENTE_SEGMENTACAO,#(lf)F1_VALBRUT VLR_TotalNota,#(lf)D1_LOCAL,#(lf)SUM(D1_TOTAL) Vlr_Merc,#(lf)ROUND((F1_VALBRUT) * A1_DESCON/100,2) Vlr_desconto,#(lf)CASE #(lf)WHEN D1_LOCAL = '17' AND A3_CLIENTE IN ('200027') THEN SUM(D2_PRUNIT * D1_QUANT) --CALCULA CRÉDITO PARA CLIENTES ISENTOS#(lf)WHEN D1_LOCAL = '01' THEN SUM(D2_PRUNIT * D1_QUANT) --CALCULA CRÉDITO#(lf)WHEN D1_LOCAL = '17' AND A1_SATIV5 <> '000801' THEN 0 -- CLIENTE NORMAL E ARMAZÉM 17, NÃO DÁ CRÉDITO#(lf)WHEN D1_LOCAL = '17' AND A1_SATIV5 = '000801' THEN SUM(D2_PRUNIT * D1_QUANT) #(lf)END AS VLR_CRED, --CALCULA CRÉDITO#(lf)CASE #(lf)WHEN D1_LOCAL = '17' AND A3_CLIENTE IN ('200027') THEN ROUND(SUM(D1_TOTAL - D2_PRUNIT * D1_QUANT) - (F1_VALBRUT * A1_DESCON/100),2) --CALCULA CRÉDITO PARA CLIENTES ISENTOS#(lf)WHEN D1_LOCAL = '01' THEN ROUND(SUM(D1_TOTAL - D2_PRUNIT * D1_QUANT) - (F1_VALBRUT * A1_DESCON/100),2) --CALCULA CRÉDITO#(lf)WHEN D1_LOCAL = '17' AND A1_SATIV5 <> '000801' THEN SUM(D1_TOTAL) -- SEM CRÉDITO#(lf)WHEN D1_LOCAL = '17' AND A1_SATIV5 = '000801' THEN ROUND(SUM(D1_TOTAL - D2_PRUNIT * D1_QUANT) - (F1_VALBRUT * A1_DESCON/100),2) --CALCULA CRÉDITO PARA REDES#(lf)END AS VL_PAGAR,#(lf)TRIM(A3_CLIENTE) + '|' + TRIM('01') AS FK_CLI_VEND,#(lf)TRIM(D1_FILIAL) + '|' + TRIM(D1_DOC) + '|' + TRIM(D1_SERIE) + '|' + TRIM(D1_FORNECE) + '|' + TRIM(D1_LOJA) AS FK_TITULONCC#(lf)FROM SD1010 SD1#(lf)INNER JOIN SF1010 SF1 ON F1_DOC = D1_DOC AND F1_SERIE = D1_SERIE AND D1_FORNECE = F1_FORNECE AND F1_LOJA = D1_LOJA AND SF1.D_E_L_E_T_ = ''#(lf)INNER JOIN SD2010 SD2 ON D1_NFORI = D2_DOC AND D1_SERIORI = D2_SERIE AND D2_CLIENTE = D1_FORNECE AND D1_LOJA = D2_LOJA AND SD2.D_E_L_E_T_ = '' AND D2_COD = D1_COD#(lf)INNER JOIN SA1010 SA1 ON A1_COD = D1_FORNECE AND A1_LOJA = D1_LOJA AND A1_FILIAL = '01'#(lf)INNER JOIN SF2010 SF2 ON D1_FILIAL = F2_FILIAL AND D1_NFORI = F2_DOC AND D1_SERIORI = F2_SERIE AND D1_FORNECE = F2_CLIENTE AND D1_LOJA = F2_LOJA AND SF2.D_E_L_E_T_ = ''#(lf)INNER JOIN SA3010 SA3 ON A3_COD = F2_VEND1 AND SA3.D_E_L_E_T_ = '' AND A3_FILIAL = SUBSTRING(F2_FILIAL,1,2)#(lf)WHERE  D1_EMISSAO >= @DATA AND SD1.D_E_L_E_T_ = '' AND F1_ORDPAGO <> 'PG' AND D1_FORMUL = '' AND A3_CLIENTE <> F1_FORNECE AND F2_REPRNCC <> '0' #(lf)GROUP BY D1_DOC, D1_EMISSAO, D1_FORNECE, D1_LOJA, F1_VALBRUT, A1_DESCON, A1_COD, A1_LOJA, A1_NOME, A3_CLIENTE, A3_LOJA, D1_FILIAL, D1_SERIE, D1_LOCAL, A1_SATIV5, D1_DTDIGIT"]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"D1_EMISSAO", type date}, {"D1_DTDIGIT", type date}}),
+				    #"Linhas Classificadas" = Table.Sort(#"Tipo Alterado",{{"D1_EMISSAO", Order.Ascending}})
+				in
+				    #"Linhas Classificadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,36 @@
+table tabelaCTHFiltrada
+	lineageTag: 23d7895e-c618-43b1-8fac-2d386e94a74e
+
+	column CTH_DESC01
+		lineageTag: 466841a7-858a-48b3-b5ff-19412d372516
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: dCTH[CTH_DESC01]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK_CTH_SINTETICO
+		lineageTag: 6f2a7981-6d38-473b-8465-2452c3d9be9d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: dCTH[PK_CTH_SINTETICO]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tabelaCTHFiltrada = calculated
+		mode: import
+		source = ```
+				
+				    SUMMARIZE(
+				        FILTER(
+				            fSFT,
+				            NOT(ISBLANK(fSFT[PK_CTH_SINTETICO]))  // Evita valores em branco
+				        ),
+				        dCTH[CTH_DESC01], 
+				        dCTH[PK_CTH_SINTETICO]
+				    )
+				
+				```
+
+	annotation PBI_Id = 02a82be64d22478e9932d644adefedbf
+

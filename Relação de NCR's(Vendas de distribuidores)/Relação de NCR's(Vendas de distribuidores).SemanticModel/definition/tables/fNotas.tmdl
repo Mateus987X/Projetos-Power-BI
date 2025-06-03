@@ -1,0 +1,108 @@
+table fNotas
+	lineageTag: e3bb1c6b-1bbd-4151-877e-32371c8932a7
+
+	column F2_DOC
+		dataType: string
+		lineageTag: e5760028-2f5d-4013-8da7-81b7292df028
+		summarizeBy: none
+		sourceColumn: F2_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column F2_REPRNCC
+		dataType: double
+		lineageTag: d5f3452a-6496-4777-8de6-0cc103f8a6a1
+		summarizeBy: sum
+		sourceColumn: F2_REPRNCC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column F2_REPRSAL
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 4759371e-a1d0-4fba-8023-9771aef25027
+		summarizeBy: sum
+		sourceColumn: F2_REPRSAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column F2_EMISSAO
+		dataType: string
+		lineageTag: 36b24cf1-6b3e-4ec1-9f68-4ed125afd1cb
+		summarizeBy: none
+		sourceColumn: F2_EMISSAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_CLIENTE
+		dataType: string
+		lineageTag: b2b861d8-86a8-4741-a6c2-fe1fe70abed4
+		summarizeBy: none
+		sourceColumn: FK_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_VENDEDOR
+		dataType: string
+		lineageTag: 4d4aee0a-ed1c-4ff2-bf06-86145f54910e
+		summarizeBy: none
+		sourceColumn: FK_VENDEDOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column F2_FILIAL
+		dataType: string
+		lineageTag: 3b247afe-a522-4798-a7bb-e6475e477aa7
+		summarizeBy: none
+		sourceColumn: F2_FILIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_TITULONCR
+		dataType: string
+		lineageTag: 8572a04c-8d2c-4b61-99e0-1ed48eccb2bb
+		summarizeBy: none
+		sourceColumn: FK_TITULONCR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK_TITULO
+		dataType: string
+		lineageTag: 1d1083a0-e6a0-4939-a13a-5bf7d055ff5c
+		summarizeBy: none
+		sourceColumn: FK_TITULO
+
+		annotation SummarizationSetBy = Automatic
+
+	column COD_CLIENTE
+		dataType: string
+		lineageTag: 139def83-5738-493d-8483-84fd052cfc2e
+		summarizeBy: none
+		sourceColumn: COD_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME_CLIENTE
+		dataType: string
+		lineageTag: c1be106a-8e5f-4f26-a9e9-19df607a0db7
+		summarizeBy: none
+		sourceColumn: NOME_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fNotas = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Database("192.168.0.244", "DADOSP12", [Query="DECLARE @DATE datetime = DATEADD(YEAR, -1, GETDATE())#(lf)#(lf)SELECT DISTINCT#(lf)F2_FILIAL,#(lf)F2_DOC,#(lf)F2_REPRNCC,#(lf)F2_REPRSAL,#(lf)F2_EMISSAO,#(lf)A1_COD + '|' + A1_LOJA  AS COD_CLIENTE,#(lf)A1_NOME AS NOME_CLIENTE,#(lf)TRIM(A3_CLIENTE) + '|' +  TRIM(A3_LOJACLI) AS FK_CLIENTE, -- É NECESSÁRIO PEGAR O CLIENTE DO CADASTRO DE VENDEDOR DA NOTA FISCAL, JÁ QUE A NCR VAI SER GERADA NO CÓDIGO DESTE CLIENTE#(lf)TRIM(F2_VEND1) AS FK_VENDEDOR,#(lf)TRIM(F2_FILIAL) + '|' + TRIM(F2_DOC) + '|' + TRIM(F2_SERIE) + '|' + TRIM(F2_CLIENTE) + '|' + TRIM(F2_LOJA) AS FK_TITULO,#(lf)TRIM(F2_FILIAL) + '|' + TRIM(F2_DOC) AS FK_TITULONCR#(lf)FROM SF2010 SF2 #(lf)INNER JOIN SA3010 SA3 ON A3_COD = F2_VEND1 AND A3_FILIAL = '01'#(lf)INNER JOIN SA1010 SA1 ON A1_COD = F2_CLIENTE AND F2_LOJA = A1_LOJA AND A1_FILIAL = '01'#(lf)LEFT JOIN SFT010 SFT ON FT_NFORI = F2_DOC AND FT_SERORI = F2_SERIE AND SFT.D_E_L_E_T_ = '' #(lf)WHERE SF2.D_E_L_E_T_ = '' AND F2_REPRNCC > 0 AND F2_EMISSAO  >= @DATE  AND FT_NFISCAL IS NULL --REMOVENDO NOTAS QUE CONTEM REGISTROS NA SFT, PORTANTO, TENDO DEVOLUÇÃO#(lf)#(lf)#(lf)"])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

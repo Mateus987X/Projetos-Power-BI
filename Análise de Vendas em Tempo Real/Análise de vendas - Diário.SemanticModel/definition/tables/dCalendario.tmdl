@@ -1,0 +1,23 @@
+table dCalendario
+	lineageTag: 881cc62b-0fe6-49f7-9b49-fedb7fc0847a
+
+	column Date
+		formatString: General Date
+		lineageTag: a1547d20-a0e3-41c2-8d63-db29f1335cfb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 25ffaf2a-5961-4882-b47e-218503cbcd34
+			defaultHierarchy: LocalDateTable_b224b767-32aa-4770-93d5-7f505fde2dbd.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = calculated
+		mode: import
+		source = CALENDAR(MIN(fSFT[Data_Entrada]), MAX(fSFT[Data_Entrada]))
+
+	annotation PBI_Id = 3a44be2d9d1b49978d8969005b48ab3f
+

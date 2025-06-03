@@ -1,0 +1,25 @@
+table Status
+	lineageTag: bf316e54-94a9-4e81-83c4-0346183566b8
+
+	column Status
+		lineageTag: bd132e64-d6b8-42c2-87ef-af0648077e49
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Status]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Status = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Status", STRING,
+				    {
+				        {"A VENCER"},
+				        {"VENCIDO"}
+				    }
+				)
+
+	annotation PBI_Id = 4a0b443d49ef4991a36c80f5b4594564
+
